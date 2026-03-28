@@ -29,14 +29,21 @@ const Root = React.forwardRef<HTMLButtonElement, RootProps>(
           data-state={checked ? 'checked' : 'unchecked'}
           onClick={() => onCheckedChange?.(!checked)}
           className={className}
-          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', padding: 0, ...style }}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            padding: 0,
+            ...style,
+          }}
           {...props}
         >
           {children}
         </button>
       </CheckboxContext.Provider>
     );
-  }
+  },
 );
 Root.displayName = 'WebCheckboxRoot';
 
@@ -59,12 +66,12 @@ const Indicator = React.forwardRef<HTMLSpanElement, IndicatorProps>(
         {children}
       </span>
     );
-  }
+  },
 );
 Indicator.displayName = 'WebCheckboxIndicator';
 
 type RootRef = HTMLButtonElement;
 type IndicatorRef = HTMLSpanElement;
 
-export { Root, Indicator };
-export type { RootProps, IndicatorProps, RootRef, IndicatorRef };
+export type { IndicatorProps, IndicatorRef, RootProps, RootRef };
+export { Indicator, Root };

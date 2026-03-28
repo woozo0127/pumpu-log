@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
+import { BarChart3, Calendar, Home, LayoutGrid } from '~/lib/icons';
 import { Tab } from './index';
-import { Home, LayoutGrid, Calendar, BarChart3 } from '~/lib/icons';
 
 const meta: Meta<typeof Tab> = {
   title: 'Navigation/Tab',

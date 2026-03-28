@@ -1,7 +1,8 @@
-import * as React from 'react';
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';
-import { cn } from '~/lib/utils';
+import * as React from 'react';
+import { colors } from '~/lib/colors';
 import { Check } from '~/lib/icons';
+import { cn } from '~/lib/utils';
 
 export interface CheckboxProps extends CheckboxPrimitive.RootProps {
   className?: string;
@@ -18,16 +19,16 @@ const Checkbox = React.forwardRef<CheckboxPrimitive.RootRef, CheckboxProps>(
           'h-6 w-6 rounded-[6px] items-center justify-center border-2 border-border bg-transparent',
           checked && 'bg-lime border-lime',
           disabled && 'opacity-50',
-          className
+          className,
         )}
         {...props}
       >
         <CheckboxPrimitive.Indicator className="items-center justify-center">
-          <Check size={14} color="#0d1117" strokeWidth={3} />
+          <Check size={14} color={colors['foreground-on-color']} strokeWidth={3} />
         </CheckboxPrimitive.Indicator>
       </CheckboxPrimitive.Root>
     );
-  }
+  },
 );
 
 Checkbox.displayName = 'Checkbox';

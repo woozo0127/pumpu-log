@@ -1,5 +1,5 @@
-import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import * as React from 'react';
 import { View } from 'react-native';
 import { NumberStepper } from './index';
 
@@ -29,28 +29,13 @@ export const Default: Story = {
 export const WithMinMax: Story = {
   render: () => {
     const [value, setValue] = React.useState(5);
-    return (
-      <NumberStepper
-        value={value}
-        onValueChange={setValue}
-        min={0}
-        max={10}
-      />
-    );
+    return <NumberStepper value={value} onValueChange={setValue} min={0} max={10} />;
   },
 };
 
 export const CustomStep: Story = {
   render: () => {
     const [value, setValue] = React.useState(70);
-    return (
-      <NumberStepper
-        value={value}
-        onValueChange={setValue}
-        min={0}
-        max={300}
-        step={0.5}
-      />
-    );
+    return <NumberStepper value={value} onValueChange={setValue} min={0} max={300} step={0.5} />;
   },
 };

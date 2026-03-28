@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
-import { ListItem } from './index';
-import { Dumbbell, Trophy, Timer } from '~/lib/icons';
+import { Dumbbell, Timer, Trophy } from '~/lib/icons';
 import { Text } from '../text';
+import { ListItem } from './index';
 
 const meta: Meta<typeof ListItem> = {
   title: 'Components/ListItem',
@@ -24,10 +24,7 @@ export const Default: Story = {
 export const WithIcon: Story = {
   render: () => (
     <View className="bg-background w-80">
-      <ListItem
-        icon={<Dumbbell size={20} color="#a3e635" />}
-        title="Bench Press"
-      />
+      <ListItem icon={<Dumbbell size={20} color="#a3e635" />} title="Bench Press" />
     </View>
   ),
 };
@@ -51,7 +48,11 @@ export const WithCustomRight: Story = {
         icon={<Timer size={20} color="#a3e635" />}
         title="Rest Timer"
         subtitle="90 seconds"
-        rightElement={<Text variant="small" className="text-lime">On</Text>}
+        rightElement={
+          <Text variant="small" className="text-lime">
+            On
+          </Text>
+        }
       />
     </View>
   ),
@@ -60,11 +61,7 @@ export const WithCustomRight: Story = {
 export const NoRightElement: Story = {
   render: () => (
     <View className="bg-background w-80">
-      <ListItem
-        title="No Chevron"
-        subtitle="rightElement set to null"
-        rightElement={null}
-      />
+      <ListItem title="No Chevron" subtitle="rightElement set to null" rightElement={null} />
     </View>
   ),
 };
@@ -77,16 +74,8 @@ export const ListGroup: Story = {
         title="Bench Press"
         subtitle="Chest"
       />
-      <ListItem
-        icon={<Dumbbell size={20} color="#a3e635" />}
-        title="Squat"
-        subtitle="Legs"
-      />
-      <ListItem
-        icon={<Trophy size={20} color="#fbbf24" />}
-        title="Deadlift"
-        subtitle="Back"
-      />
+      <ListItem icon={<Dumbbell size={20} color="#a3e635" />} title="Squat" subtitle="Legs" />
+      <ListItem icon={<Trophy size={20} color="#fbbf24" />} title="Deadlift" subtitle="Back" />
     </View>
   ),
 };

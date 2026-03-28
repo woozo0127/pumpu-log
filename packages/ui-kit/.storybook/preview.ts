@@ -6,9 +6,7 @@ const preview: Preview = {
     layout: 'centered',
     backgrounds: {
       default: 'dark',
-      values: [
-        { name: 'dark', value: '#0d1117' },
-      ],
+      values: [{ name: 'dark', value: '#0d1117' }],
     },
   },
 };

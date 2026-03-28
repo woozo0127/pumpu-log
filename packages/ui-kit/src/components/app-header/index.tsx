@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Text } from '../text';
 import { cn } from '~/lib/utils';
+import { Text } from '../text';
 
 export interface AppHeaderProps {
   title?: string | React.ReactNode;
@@ -22,9 +22,7 @@ const AppHeader = React.forwardRef<React.ComponentRef<typeof View>, AppHeaderPro
         );
       }
       if (typeof title === 'string') {
-        return (
-          <Text className="text-lg font-bold text-foreground">{title}</Text>
-        );
+        return <Text className="text-lg font-bold text-foreground">{title}</Text>;
       }
       return title;
     };
@@ -39,7 +37,7 @@ const AppHeader = React.forwardRef<React.ComponentRef<typeof View>, AppHeaderPro
         <View className="min-w-[44px] items-end">{right}</View>
       </View>
     );
-  }
+  },
 );
 
 AppHeader.displayName = 'AppHeader';

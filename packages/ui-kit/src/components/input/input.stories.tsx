@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
-import { Input } from './index';
 import { Search } from '~/lib/icons';
+import { Input } from './index';
 
 const meta: Meta<typeof Input> = {
   title: 'Components/Input',

@@ -11,7 +11,17 @@ interface RootProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Root = React.forwardRef<HTMLDivElement, RootProps>(
-  ({ orientation = 'horizontal', decorative = true, className, style, asChild: _asChild, ...props }, ref) => {
+  (
+    {
+      orientation = 'horizontal',
+      decorative = true,
+      className,
+      style,
+      asChild: _asChild,
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <div
         ref={ref}
@@ -22,11 +32,11 @@ const Root = React.forwardRef<HTMLDivElement, RootProps>(
         {...props}
       />
     );
-  }
+  },
 );
 Root.displayName = 'WebSeparatorRoot';
 
 type RootRef = HTMLDivElement;
 
-export { Root };
 export type { RootProps, RootRef };
+export { Root };

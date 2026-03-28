@@ -12,32 +12,32 @@ const Trigger = RadixDialog.Trigger;
 const Close = RadixDialog.Close;
 const Portal = RadixDialog.Portal;
 
-// Overlay with className support
+// Overlay with className support — acts as a centering container
 const Overlay = React.forwardRef<
   React.ComponentRef<typeof RadixDialog.Overlay>,
   React.ComponentPropsWithoutRef<typeof RadixDialog.Overlay>
 >(({ className, ...props }, ref) => (
-  <RadixDialog.Overlay ref={ref} className={className} {...props} />
+  <RadixDialog.Overlay
+    ref={ref}
+    className={className}
+    style={{
+      position: 'fixed',
+      inset: 0,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}
+    {...props}
+  />
 ));
 Overlay.displayName = 'WebDialogOverlay';
 
-// Content with className support — fixes RN-style transform array to CSS string
+// Content with className support
 const Content = React.forwardRef<
   React.ComponentRef<typeof RadixDialog.Content>,
   React.ComponentPropsWithoutRef<typeof RadixDialog.Content> & { style?: Record<string, unknown> }
->(({ className, style, ...props }, ref) => {
-  // Convert RN transform array to CSS transform string if needed
-  const cssStyle: React.CSSProperties = style ? {
-    ...style,
-    transform: Array.isArray(style.transform)
-      ? style.transform.map((t: Record<string, number>) => {
-          const [[key, val]] = Object.entries(t);
-          return `${key}(${val}px)`;
-        }).join(' ')
-      : (style.transform as string | undefined),
-  } as React.CSSProperties : {};
-
-  return <RadixDialog.Content ref={ref} className={className} style={cssStyle} {...props} />;
+>(({ className, style: _style, ...props }, ref) => {
+  return <RadixDialog.Content ref={ref} className={className} {...props} />;
 });
 Content.displayName = 'WebDialogContent';
 
@@ -63,4 +63,4 @@ function useRootContext() {
   return { open: false, onOpenChange: () => {} };
 }
 
-export { Root, Trigger, Close, Portal, Overlay, Content, Title, Description, useRootContext };
+export { Close, Content, Description, Overlay, Portal, Root, Title, Trigger, useRootContext };

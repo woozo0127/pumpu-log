@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
-import { Separator } from './index';
 import { Text } from '../text';
+import { Separator } from './index';
 
 const meta: Meta<typeof Separator> = {
   title: 'Components/Separator',

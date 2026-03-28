@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
-import { EmptyState } from './index';
 import { Dumbbell } from '~/lib/icons';
+import { EmptyState } from './index';
 
 const meta: Meta<typeof EmptyState> = {
   title: 'Components/EmptyState',

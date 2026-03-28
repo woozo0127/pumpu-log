@@ -1,3 +1,43 @@
+# Dependencies
 node_modules/
-docs
-.omc
+
+# Build
+dist/
+build/
+
+# Expo
+.expo/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# Storybook
+storybook-static/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.*
+!.env.example
+
+# OMC
+.omc/
+
+# Docs (generated)
+docs/
+
+# Pencil
+.pencil/

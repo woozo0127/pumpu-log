@@ -1,5 +1,5 @@
-import * as React from 'react';
 import * as SeparatorPrimitive from '@rn-primitives/separator';
+import * as React from 'react';
 import { cn } from '~/lib/utils';
 
 export interface SeparatorProps extends SeparatorPrimitive.RootProps {
@@ -15,12 +15,12 @@ const Separator = React.forwardRef<SeparatorPrimitive.RootRef, SeparatorProps>(
         className={cn(
           'bg-border-subtle',
           orientation === 'vertical' ? 'w-[1px] h-full' : 'h-[1px] w-full',
-          className
+          className,
         )}
         {...props}
       />
     );
-  }
+  },
 );
 
 Separator.displayName = 'Separator';

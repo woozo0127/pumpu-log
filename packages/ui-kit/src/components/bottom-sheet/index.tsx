@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Pressable, ScrollView } from 'react-native';
+import { Pressable, ScrollView, View } from 'react-native';
 import { cn } from '~/lib/utils';
 import { Text } from '../text';
 
@@ -18,13 +18,7 @@ const BottomSheet = React.forwardRef<React.ComponentRef<typeof View>, BottomShee
     return (
       <View className="absolute inset-0 bg-black/50 justify-end items-center">
         <Pressable className="absolute inset-0" onPress={onClose} />
-        <View
-          ref={ref}
-          className={cn(
-            'max-w-[402px] w-full bg-card rounded-t-md',
-            className
-          )}
-        >
+        <View ref={ref} className={cn('max-w-[402px] w-full bg-card rounded-t-md', className)}>
           {/* Drag handle */}
           <View className="w-10 h-1 bg-foreground-tertiary rounded-full mx-auto mt-sm mb-md" />
 
@@ -42,7 +36,7 @@ const BottomSheet = React.forwardRef<React.ComponentRef<typeof View>, BottomShee
         </View>
       </View>
     );
-  }
+  },
 );
 
 BottomSheet.displayName = 'BottomSheet';

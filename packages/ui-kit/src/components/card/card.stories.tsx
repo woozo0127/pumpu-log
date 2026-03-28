@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
-import { Card } from './index';
 import { Text } from '../text';
+import { Card } from './index';
 
 const meta: Meta<typeof Card> = {
   title: 'Components/Card',
@@ -30,7 +30,9 @@ export const WithMultipleItems: Story = {
     <View className="p-lg bg-background w-72 gap-sm">
       <Card>
         <Text variant="h4">Workout Summary</Text>
-        <Text variant="muted" className="mt-xs">Monday, March 23</Text>
+        <Text variant="muted" className="mt-xs">
+          Monday, March 23
+        </Text>
         <View className="mt-md gap-xs">
           <Text variant="small">Bench Press — 3 sets × 10 reps</Text>
           <Text variant="small">Squat — 4 sets × 8 reps</Text>
@@ -39,7 +41,9 @@ export const WithMultipleItems: Story = {
       </Card>
       <Card>
         <Text variant="h4">Rest Day</Text>
-        <Text variant="muted" className="mt-xs">No workout scheduled</Text>
+        <Text variant="muted" className="mt-xs">
+          No workout scheduled
+        </Text>
       </Card>
     </View>
   ),

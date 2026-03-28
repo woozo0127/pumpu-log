@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
-import { Dot } from './index';
 import { Text } from '../text';
+import { Dot } from './index';
 
 const meta: Meta<typeof Dot> = {
   title: 'Components/Dot',
@@ -32,7 +32,9 @@ export const Default: Story = {
 export const AllSizes: Story = {
   render: () => (
     <View className="p-lg bg-background gap-md">
-      <Text variant="small" className="text-foreground-secondary">Sizes</Text>
+      <Text variant="small" className="text-foreground-secondary">
+        Sizes
+      </Text>
       <View className="flex-row items-center gap-md">
         <Dot size="sm" />
         <Dot size="md" />
@@ -45,7 +47,9 @@ export const AllSizes: Story = {
 export const AllColors: Story = {
   render: () => (
     <View className="p-lg bg-background gap-md">
-      <Text variant="small" className="text-foreground-secondary">Colors</Text>
+      <Text variant="small" className="text-foreground-secondary">
+        Colors
+      </Text>
       <View className="flex-row items-center gap-md">
         <Dot color="lime" size="lg" />
         <Dot color="destructive" size="lg" />

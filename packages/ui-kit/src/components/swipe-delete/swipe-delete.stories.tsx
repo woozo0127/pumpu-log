@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
-import { SwipeDelete } from './index';
 import { Text } from '../text';
+import { SwipeDelete } from './index';
 
 const meta: Meta<typeof SwipeDelete> = {
   title: 'Components/SwipeDelete',

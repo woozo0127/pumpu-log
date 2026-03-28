@@ -1,6 +1,6 @@
+import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 import { Text as RNText, type TextProps as RNTextProps } from 'react-native';
-import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '~/lib/utils';
 
 const textVariants = cva('', {
@@ -29,14 +29,8 @@ export interface TextProps extends RNTextProps, VariantProps<typeof textVariants
 
 const Text = React.forwardRef<React.ComponentRef<typeof RNText>, TextProps>(
   ({ className, variant, ...props }, ref) => {
-    return (
-      <RNText
-        ref={ref}
-        className={cn(textVariants({ variant }), className)}
-        {...props}
-      />
-    );
-  }
+    return <RNText ref={ref} className={cn(textVariants({ variant }), className)} {...props} />;
+  },
 );
 
 Text.displayName = 'Text';

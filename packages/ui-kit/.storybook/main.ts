@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import type { StorybookConfig } from '@storybook/react-native-web-vite';
 
 const config: StorybookConfig = {
@@ -15,9 +15,7 @@ const config: StorybookConfig = {
         '@rn-primitives/slot',
         '@rn-primitives/checkbox',
         '@rn-primitives/dialog',
-        '@rn-primitives/toast',
         '@rn-primitives/separator',
-        '@rn-primitives/portal',
         '@rn-primitives/hooks',
         '@rn-primitives/types',
         'lucide-react-native',
@@ -36,18 +34,9 @@ const config: StorybookConfig = {
         alias: {
           ...(config.resolve?.alias as Record<string, string> | undefined),
           // Force web versions of @rn-primitives packages that have them
-          '@rn-primitives/checkbox': path.resolve(
-            __dirname,
-            '../src/web-overrides/checkbox.tsx'
-          ),
-          '@rn-primitives/dialog': path.resolve(
-            __dirname,
-            '../src/web-overrides/dialog.tsx'
-          ),
-          '@rn-primitives/separator': path.resolve(
-            __dirname,
-            '../src/web-overrides/separator.tsx'
-          ),
+          '@rn-primitives/checkbox': path.resolve(__dirname, '../src/web-overrides/checkbox.tsx'),
+          '@rn-primitives/dialog': path.resolve(__dirname, '../src/web-overrides/dialog.tsx'),
+          '@rn-primitives/separator': path.resolve(__dirname, '../src/web-overrides/separator.tsx'),
         },
         extensions: [
           '.web.tsx',
@@ -74,8 +63,6 @@ const config: StorybookConfig = {
         },
         include: [
           ...(config.optimizeDeps?.include ?? []),
-          '@rn-primitives/portal',
-          '@rn-primitives/toast',
           '@rn-primitives/hooks',
           '@rn-primitives/types',
         ],

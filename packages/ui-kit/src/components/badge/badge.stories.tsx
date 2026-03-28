@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
-import { Badge } from './index';
 import { Text } from '../text';
+import { Badge } from './index';
 
 const meta: Meta<typeof Badge> = {
   title: 'Components/Badge',
@@ -33,17 +33,27 @@ export const Default: Story = {
 export const AllVariants: Story = {
   render: () => (
     <View className="p-lg bg-background gap-md">
-      <Text variant="small" className="text-foreground-secondary mb-xs">Default size</Text>
+      <Text variant="small" className="text-foreground-secondary mb-xs">
+        Default size
+      </Text>
       <View className="flex-row gap-sm flex-wrap">
         <Badge variant="default">Active</Badge>
         <Badge variant="secondary">Warning</Badge>
         <Badge variant="destructive">Error</Badge>
       </View>
-      <Text variant="small" className="text-foreground-secondary mb-xs mt-sm">Small size</Text>
+      <Text variant="small" className="text-foreground-secondary mb-xs mt-sm">
+        Small size
+      </Text>
       <View className="flex-row gap-sm flex-wrap">
-        <Badge variant="default" size="sm">Active</Badge>
-        <Badge variant="secondary" size="sm">Warning</Badge>
-        <Badge variant="destructive" size="sm">Error</Badge>
+        <Badge variant="default" size="sm">
+          Active
+        </Badge>
+        <Badge variant="secondary" size="sm">
+          Warning
+        </Badge>
+        <Badge variant="destructive" size="sm">
+          Error
+        </Badge>
       </View>
     </View>
   ),

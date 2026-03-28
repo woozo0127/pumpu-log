@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import * as React from 'react';
 import { View } from 'react-native';
-import { BottomSheet } from './index';
-import { Text } from '../text';
 import { Separator } from '../separator';
+import { Text } from '../text';
+import { BottomSheet } from './index';
 
 const meta: Meta<typeof BottomSheet> = {
   title: 'Components/BottomSheet',
@@ -55,9 +54,7 @@ export const StaticDisplay: Story = {
     <View className="h-[600px] bg-background relative">
       <BottomSheet open={true} title="세트 추가">
         <View className="gap-md">
-          <Text className="text-sm text-foreground-secondary">
-            원하는 세트 수를 선택해주세요.
-          </Text>
+          <Text className="text-sm text-foreground-secondary">원하는 세트 수를 선택해주세요.</Text>
           {[1, 2, 3, 4, 5].map((n) => (
             <View key={n} className="p-md bg-card-hover rounded-md">
               <Text className="text-base text-foreground">{n}세트</Text>

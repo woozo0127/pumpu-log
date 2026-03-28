@@ -69,16 +69,9 @@ export const AllVariants: Story = {
           description="네트워크 오류가 발생했습니다."
           onClose={() => {}}
         />
-        <Toast
-          variant="success"
-          title="닫기 버튼 없음"
-        />
+        <Toast variant="success" title="닫기 버튼 없음" />
         {visible && (
-          <Toast
-            variant="error"
-            title="닫을 수 있는 토스트"
-            onClose={() => setVisible(false)}
-          />
+          <Toast variant="error" title="닫을 수 있는 토스트" onClose={() => setVisible(false)} />
         )}
       </View>
     );

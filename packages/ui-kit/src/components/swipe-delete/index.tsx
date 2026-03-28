@@ -1,25 +1,20 @@
 import * as React from 'react';
-import { View, Pressable } from 'react-native';
-import { cn } from '~/lib/utils';
+import { Pressable, View } from 'react-native';
 import { Trash2 } from '~/lib/icons';
+import { cn } from '~/lib/utils';
 
-export interface SwipeDeleteProps {
+export interface DeleteRevealProps {
   onDelete?: () => void;
   children: React.ReactNode;
   className?: string;
   showDelete?: boolean;
 }
 
-const SwipeDelete = React.forwardRef<View, SwipeDeleteProps>(
+const DeleteReveal = React.forwardRef<View, DeleteRevealProps>(
   ({ onDelete, children, className, showDelete = false }, ref) => {
     return (
-      <View
-        ref={ref}
-        className={cn('relative overflow-hidden rounded-md min-h-[56px]', className)}
-      >
-        <View className="w-full">
-          {children}
-        </View>
+      <View ref={ref} className={cn('relative overflow-hidden rounded-md min-h-[56px]', className)}>
+        <View className="w-full">{children}</View>
         {showDelete && (
           <Pressable
             onPress={onDelete}
@@ -30,9 +25,12 @@ const SwipeDelete = React.forwardRef<View, SwipeDeleteProps>(
         )}
       </View>
     );
-  }
+  },
 );
 
-SwipeDelete.displayName = 'SwipeDelete';
+DeleteReveal.displayName = 'DeleteReveal';
 
-export { SwipeDelete };
+/** @deprecated Use DeleteReveal instead */
+const SwipeDelete = DeleteReveal;
+
+export { DeleteReveal, SwipeDelete };

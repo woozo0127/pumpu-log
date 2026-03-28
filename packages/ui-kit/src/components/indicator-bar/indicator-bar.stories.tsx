@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
-import { IndicatorBar } from './index';
 import { Text } from '../text';
+import { IndicatorBar } from './index';
 
 const meta: Meta<typeof IndicatorBar> = {
   title: 'Components/IndicatorBar',
@@ -45,11 +45,17 @@ export const Empty: Story = {
 export const AllColors: Story = {
   render: () => (
     <View className="bg-background p-lg w-80 gap-md">
-      <Text variant="small" className="text-foreground-secondary">Lime (default)</Text>
+      <Text variant="small" className="text-foreground-secondary">
+        Lime (default)
+      </Text>
       <IndicatorBar value={3} max={5} color="lime" />
-      <Text variant="small" className="text-foreground-secondary">Destructive</Text>
+      <Text variant="small" className="text-foreground-secondary">
+        Destructive
+      </Text>
       <IndicatorBar value={3} max={5} color="destructive" />
-      <Text variant="small" className="text-foreground-secondary">Yellow</Text>
+      <Text variant="small" className="text-foreground-secondary">
+        Yellow
+      </Text>
       <IndicatorBar value={3} max={5} color="yellow" />
     </View>
   ),

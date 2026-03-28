@@ -1,5 +1,5 @@
-import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import * as React from 'react';
 import { View } from 'react-native';
 import { Checkbox } from './index';
 
@@ -44,11 +44,6 @@ export const Disabled: Story = {
 export const Interactive: Story = {
   render: () => {
     const [checked, setChecked] = React.useState(false);
-    return (
-      <Checkbox
-        checked={checked}
-        onCheckedChange={setChecked}
-      />
-    );
+    return <Checkbox checked={checked} onCheckedChange={setChecked} />;
   },
 };

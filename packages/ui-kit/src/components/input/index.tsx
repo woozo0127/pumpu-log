@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { TextInput, View } from 'react-native';
+import { colors } from '~/lib/colors';
 import { cn } from '~/lib/utils';
 
 export interface InputProps extends React.ComponentPropsWithoutRef<typeof TextInput> {
@@ -14,20 +15,16 @@ const Input = React.forwardRef<React.ComponentRef<typeof TextInput>, InputProps>
 
     return (
       <View className="relative justify-center">
-        {icon && (
-          <View className="absolute left-3 z-10 items-center justify-center">
-            {icon}
-          </View>
-        )}
+        {icon && <View className="absolute left-3 z-10 items-center justify-center">{icon}</View>}
         <TextInput
           ref={ref}
-          placeholderTextColor="#6b7280"
+          placeholderTextColor={colors['foreground-tertiary']}
           className={cn(
-            'h-12 rounded-md bg-input border border-border px-lg text-base text-foreground',
-            focused && 'border-2 border-lime',
+            'h-12 rounded-md bg-input border-2 border-border px-lg text-base text-foreground',
+            focused && 'border-lime',
             error && 'border-destructive',
             icon && 'pl-12',
-            className
+            className,
           )}
           onFocus={(e) => {
             setFocused(true);
@@ -41,7 +38,7 @@ const Input = React.forwardRef<React.ComponentRef<typeof TextInput>, InputProps>
         />
       </View>
     );
-  }
+  },
 );
 
 Input.displayName = 'Input';

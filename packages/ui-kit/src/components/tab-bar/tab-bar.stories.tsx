@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
-import { TabBar } from './index';
+import { BarChart3, Calendar, Home, LayoutGrid } from '~/lib/icons';
 import { Tab } from '../tab';
-import { Home, LayoutGrid, Calendar, BarChart3 } from '~/lib/icons';
+import { TabBar } from './index';
 
 const meta: Meta<typeof TabBar> = {
   title: 'Navigation/TabBar',

@@ -1,6 +1,6 @@
+import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 import { View } from 'react-native';
-import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '~/lib/utils';
 
 const dotVariants = cva('rounded-full', {
@@ -23,16 +23,16 @@ const dotVariants = cva('rounded-full', {
   },
 });
 
-export interface DotProps extends VariantProps<typeof dotVariants> {
+export interface DotProps
+  extends VariantProps<typeof dotVariants>,
+    Omit<React.ComponentPropsWithoutRef<typeof View>, 'children'> {
   className?: string;
 }
 
 const Dot = React.forwardRef<React.ComponentRef<typeof View>, DotProps>(
-  ({ className, size, color }, ref) => {
-    return (
-      <View ref={ref} className={cn(dotVariants({ size, color }), className)} />
-    );
-  }
+  ({ className, size, color, ...props }, ref) => {
+    return <View ref={ref} {...props} className={cn(dotVariants({ size, color }), className)} />;
+  },
 );
 
 Dot.displayName = 'Dot';

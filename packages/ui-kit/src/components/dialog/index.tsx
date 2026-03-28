@@ -1,5 +1,5 @@
-import * as React from 'react';
 import * as DialogPrimitive from '@rn-primitives/dialog';
+import * as React from 'react';
 import { View } from 'react-native';
 import { cn } from '~/lib/utils';
 import { Button, buttonTextVariants } from '../button';
@@ -16,8 +16,7 @@ const DialogOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Overlay
     ref={ref}
-    className={cn('bg-black/50', className)}
-    style={{ position: 'fixed' as any, top: 0, right: 0, bottom: 0, left: 0 }}
+    className={cn('absolute inset-0 bg-black/50 flex-1 justify-center items-center', className)}
     {...props}
   />
 ));
@@ -28,23 +27,15 @@ const DialogContent = React.forwardRef<
   DialogPrimitive.ContentProps & { className?: string; children?: React.ReactNode }
 >(({ className, children, ...props }, ref) => (
   <DialogPortal>
-    <DialogOverlay />
-    <DialogPrimitive.Content
-      ref={ref}
-      className={cn(
-        'w-[320px] bg-card rounded-md p-2xl border border-border-subtle',
-        className
-      )}
-      style={{
-        position: 'fixed' as any,
-        top: '50%',
-        left: '50%',
-        transform: [{ translateX: -160 }, { translateY: -100 }],
-      }}
-      {...props}
-    >
-      {children}
-    </DialogPrimitive.Content>
+    <DialogOverlay>
+      <DialogPrimitive.Content
+        ref={ref}
+        className={cn('w-[320px] bg-card rounded-md p-2xl border border-border-subtle', className)}
+        {...props}
+      >
+        {children}
+      </DialogPrimitive.Content>
+    </DialogOverlay>
   </DialogPortal>
 ));
 DialogContent.displayName = 'DialogContent';
@@ -53,11 +44,7 @@ const DialogHeader = React.forwardRef<
   React.ComponentRef<typeof View>,
   React.ComponentPropsWithoutRef<typeof View>
 >(({ className, ...props }, ref) => (
-  <View
-    ref={ref}
-    className={cn('gap-sm mb-lg', className)}
-    {...props}
-  />
+  <View ref={ref} className={cn('gap-sm mb-lg', className)} {...props} />
 ));
 DialogHeader.displayName = 'DialogHeader';
 
@@ -65,11 +52,7 @@ const DialogFooter = React.forwardRef<
   React.ComponentRef<typeof View>,
   React.ComponentPropsWithoutRef<typeof View>
 >(({ className, ...props }, ref) => (
-  <View
-    ref={ref}
-    className={cn('flex-row justify-end gap-sm mt-lg', className)}
-    {...props}
-  />
+  <View ref={ref} className={cn('flex-row justify-end gap-sm mt-lg', className)} {...props} />
 ));
 DialogFooter.displayName = 'DialogFooter';
 
@@ -124,9 +107,7 @@ function AlertDialog({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
-          {description ? (
-            <DialogDescription>{description}</DialogDescription>
-          ) : null}
+          {description ? <DialogDescription>{description}</DialogDescription> : null}
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>
@@ -146,7 +127,7 @@ function AlertDialog({
                 buttonTextVariants({
                   variant: variant === 'destructive' ? 'destructive' : 'default',
                 }),
-                'text-sm'
+                'text-sm',
               )}
             >
               {confirmText}
@@ -158,15 +139,15 @@ function AlertDialog({
   );
 }
 
-export {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
-  DialogDescription,
-  DialogClose,
-  AlertDialog,
-};
 export type { AlertDialogProps };
+export {
+  AlertDialog,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+};

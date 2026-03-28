@@ -4,6 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "biome check .",
+    "lint:fix": "biome check --fix .",
+    "format": "biome format --fix .",
+    "typecheck": "pnpm -r run typecheck",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -21,5 +25,8 @@
       "@expo/config-plugins": "~10.1.1",
       "react-native": "0.79.6"
     }
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.9"
   }
 }

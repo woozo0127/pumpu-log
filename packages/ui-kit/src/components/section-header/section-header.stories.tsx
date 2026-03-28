@@ -14,11 +14,7 @@ type Story = StoryObj<typeof SectionHeader>;
 export const Default: Story = {
   render: () => (
     <View className="bg-background p-lg w-80">
-      <SectionHeader
-        title="최근 운동"
-        actionLabel="전체보기"
-        onAction={() => {}}
-      />
+      <SectionHeader title="최근 운동" actionLabel="전체보기" onAction={() => {}} />
     </View>
   ),
 };

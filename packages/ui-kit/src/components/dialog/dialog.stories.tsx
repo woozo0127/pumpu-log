@@ -1,19 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import * as React from 'react';
 import { View } from 'react-native';
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
-  DialogDescription,
-  DialogClose,
-  AlertDialog,
-} from './index';
 import { Button } from '../button';
 import { Text } from '../text';
+import {
+  AlertDialog,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from './index';
 
 const meta: Meta = {
   title: 'Components/Dialog',
@@ -37,9 +37,7 @@ export const BasicDialog: Story = {
           <DialogContent>
             <DialogHeader>
               <DialogTitle>운동 기록 저장</DialogTitle>
-              <DialogDescription>
-                오늘의 운동 기록을 저장하시겠습니까?
-              </DialogDescription>
+              <DialogDescription>오늘의 운동 기록을 저장하시겠습니까?</DialogDescription>
             </DialogHeader>
             <DialogFooter>
               <DialogClose asChild>

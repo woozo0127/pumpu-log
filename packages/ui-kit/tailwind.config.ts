@@ -1,12 +1,12 @@
 import type { Config } from 'tailwindcss';
+
+// nativewind does not export ESM — require() is intentional
 const { hairlineWidth } = require('nativewind/theme');
+const nativewindPreset = require('nativewind/preset');
 
 const config: Config = {
-  presets: [require('nativewind/preset')],
-  content: [
-    './src/**/*.{ts,tsx}',
-    './.storybook/**/*.{ts,tsx}',
-  ],
+  presets: [nativewindPreset],
+  content: ['./src/**/*.{ts,tsx}', './.storybook/**/*.{ts,tsx}'],
   theme: {
     extend: {
       colors: {
@@ -37,20 +37,20 @@ const config: Config = {
       },
       fontSize: {
         '2xl': ['32px', { lineHeight: '40px' }],
-        'xl': ['24px', { lineHeight: '32px' }],
-        'lg': ['18px', { lineHeight: '28px' }],
-        'md': ['16px', { lineHeight: '24px' }],
-        'base': ['14px', { lineHeight: '20px' }],
-        'sm': ['12px', { lineHeight: '16px' }],
-        'xs': ['10px', { lineHeight: '14px' }],
+        xl: ['24px', { lineHeight: '32px' }],
+        lg: ['18px', { lineHeight: '28px' }],
+        md: ['16px', { lineHeight: '24px' }],
+        base: ['14px', { lineHeight: '20px' }],
+        sm: ['12px', { lineHeight: '16px' }],
+        xs: ['10px', { lineHeight: '14px' }],
       },
       spacing: {
         '2xs': '2px',
-        'xs': '4px',
-        'sm': '8px',
-        'md': '12px',
-        'lg': '16px',
-        'xl': '20px',
+        xs: '4px',
+        sm: '8px',
+        md: '12px',
+        lg: '16px',
+        xl: '20px',
         '2xl': '24px',
         '3xl': '32px',
       },

@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { Pressable, type PressableProps, View } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
+import * as React from 'react';
+import { Pressable, type PressableProps, type View } from 'react-native';
 import { cn } from '~/lib/utils';
 
 const iconButtonVariants = cva(
@@ -15,7 +15,7 @@ const iconButtonVariants = cva(
     defaultVariants: {
       variant: 'default',
     },
-  }
+  },
 );
 
 export interface IconButtonProps
@@ -37,7 +37,7 @@ const IconButton = React.forwardRef<React.ComponentRef<typeof View>, IconButtonP
         {icon ?? children}
       </Pressable>
     );
-  }
+  },
 );
 
 IconButton.displayName = 'IconButton';

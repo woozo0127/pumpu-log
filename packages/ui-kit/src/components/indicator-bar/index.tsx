@@ -1,6 +1,6 @@
+import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 import { View } from 'react-native';
-import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '~/lib/utils';
 
 const indicatorBarFillVariants = cva('h-full rounded-full', {
@@ -38,7 +38,7 @@ const IndicatorBar = React.forwardRef<View, IndicatorBarProps>(
         />
       </View>
     );
-  }
+  },
 );
 
 IndicatorBar.displayName = 'IndicatorBar';
