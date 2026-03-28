@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "Pumpu Log",
+    "slug": "pumpu-log",
+    "version": "0.0.1",
+    "orientation": "portrait",
+    "scheme": "pumpu-log",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "ios": {
+      "bundleIdentifier": "com.pumpu.log",
+      "supportsTablet": false
+    },
+    "plugins": [
+      "expo-router"
+    ]
+  }
+}
