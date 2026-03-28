@@ -1,5 +1,5 @@
-import { View } from 'react-native';
 import { Badge, Button, Card, Dot, Text } from '@pumpu-log/ui-kit';
+import { View } from 'react-native';
 
 interface TodayWorkoutCardProps {
   programName: string;

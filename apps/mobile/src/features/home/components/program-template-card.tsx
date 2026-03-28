@@ -1,6 +1,6 @@
-import { Pressable, View } from 'react-native';
-import { Text, colors } from '@pumpu-log/ui-kit';
+import { colors, Text } from '@pumpu-log/ui-kit';
 import { ChevronRight } from 'lucide-react-native';
+import { Pressable, View } from 'react-native';
 
 interface ProgramTemplateCardProps {
   badge: string;

@@ -1,16 +1,24 @@
 import React from 'react';
-import { Text as RNText, View, Pressable } from 'react-native';
+import { Pressable, Text as RNText, View } from 'react-native';
 
 export function Text({ children, ...props }: any) {
   return <RNText {...props}>{children}</RNText>;
 }
 
 export function Badge({ children, ...props }: any) {
-  return <View {...props}><RNText>{children}</RNText></View>;
+  return (
+    <View {...props}>
+      <RNText>{children}</RNText>
+    </View>
+  );
 }
 
 export function Button({ children, onPress, ...props }: any) {
-  return <Pressable onPress={onPress} {...props}>{children}</Pressable>;
+  return (
+    <Pressable onPress={onPress} {...props}>
+      {children}
+    </Pressable>
+  );
 }
 
 export function Card({ children, ...props }: any) {
@@ -25,7 +33,11 @@ export function SectionHeader({ title, actionLabel, onAction, ...props }: any) {
   return (
     <View {...props}>
       <RNText>{title}</RNText>
-      {actionLabel && <Pressable onPress={onAction}><RNText>{actionLabel}</RNText></Pressable>}
+      {actionLabel && (
+        <Pressable onPress={onAction}>
+          <RNText>{actionLabel}</RNText>
+        </Pressable>
+      )}
     </View>
   );
 }
@@ -35,7 +47,11 @@ export function Separator(props: any) {
 }
 
 export function Tab({ label, ...props }: any) {
-  return <View {...props}><RNText>{label}</RNText></View>;
+  return (
+    <View {...props}>
+      <RNText>{label}</RNText>
+    </View>
+  );
 }
 
 export function TabBar({ children, ...props }: any) {
@@ -47,7 +63,11 @@ export function EmptyState({ title, description, actionLabel, onAction, ...props
     <View {...props}>
       <RNText>{title}</RNText>
       {description && <RNText>{description}</RNText>}
-      {actionLabel && <Pressable onPress={onAction}><RNText>{actionLabel}</RNText></Pressable>}
+      {actionLabel && (
+        <Pressable onPress={onAction}>
+          <RNText>{actionLabel}</RNText>
+        </Pressable>
+      )}
     </View>
   );
 }
@@ -65,7 +85,13 @@ export const colors = {
   card: { DEFAULT: '#161b22', hover: '#1c2333' },
   input: '#0d1117',
   border: { DEFAULT: '#21262d', subtle: '#30363d' },
-  lime: { DEFAULT: '#a3e635', hover: '#bef264', active: '#8bc62e', dim: '#1a2e0a', disabled: '#3a4a1a' },
+  lime: {
+    DEFAULT: '#a3e635',
+    hover: '#bef264',
+    active: '#8bc62e',
+    dim: '#1a2e0a',
+    disabled: '#3a4a1a',
+  },
   destructive: '#ef4444',
   yellow: '#fbbf24',
   foreground: '#f0f0f0',

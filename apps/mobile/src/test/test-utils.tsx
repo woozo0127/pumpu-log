@@ -1,4 +1,4 @@
-import { render, type RenderOptions } from '@testing-library/react-native';
+import { type RenderOptions, render } from '@testing-library/react-native';
 import type { ReactElement } from 'react';
 
 function AllProviders({ children }: { children: React.ReactNode }) {

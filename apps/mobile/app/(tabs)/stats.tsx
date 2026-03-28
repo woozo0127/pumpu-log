@@ -1,5 +1,5 @@
-import { View } from 'react-native';
 import { Text } from '@pumpu-log/ui-kit';
+import { View } from 'react-native';
 
 export default function StatsTab() {
   return (

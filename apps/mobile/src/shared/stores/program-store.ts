@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import type { Program, Routine } from '~/shared/types/program';
 import { SEED_PROGRAMS } from '~/shared/data/seed-programs';
+import type { Program, Routine } from '~/shared/types/program';
 
 interface ProgramState {
   programs: Program[];

@@ -1,5 +1,5 @@
-import { View } from 'react-native';
 import { Separator, Text } from '@pumpu-log/ui-kit';
+import { View } from 'react-native';
 
 interface RecentWorkoutItemProps {
   day: string;

@@ -1,12 +1,12 @@
-import { ScrollView, View } from 'react-native';
 import { SectionHeader } from '@pumpu-log/ui-kit';
+import { ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { GreetingSection } from './components/greeting-section';
-import { TodayWorkoutCard } from './components/today-workout-card';
-import { RecentWorkoutItem } from './components/recent-workout-item';
-import { useGreeting } from './hooks/use-greeting';
 import { useProgramStore } from '~/shared/stores/program-store';
 import { useWorkoutHistoryStore } from '~/shared/stores/workout-history-store';
+import { GreetingSection } from './components/greeting-section';
+import { RecentWorkoutItem } from './components/recent-workout-item';
+import { TodayWorkoutCard } from './components/today-workout-card';
+import { useGreeting } from './hooks/use-greeting';
 
 interface RecentSessionView {
   day: string;

@@ -1,7 +1,7 @@
+import { Tab, TabBar } from '@pumpu-log/ui-kit';
 import { Tabs } from 'expo-router';
 import { BarChart3, Dumbbell, History, Home } from 'lucide-react-native';
 import { View } from 'react-native';
-import { Tab, TabBar } from '@pumpu-log/ui-kit';
 
 export default function TabLayout() {
   return (

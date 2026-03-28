@@ -1,10 +1,10 @@
-import { ScrollView, View } from 'react-native';
 import { Button, SectionHeader, Text } from '@pumpu-log/ui-kit';
+import { ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useProgramStore } from '~/shared/stores/program-store';
 import { GreetingSection } from './components/greeting-section';
 import { ProgramTemplateCard } from './components/program-template-card';
 import { QuickStartCard } from './components/quick-start-card';
-import { useProgramStore } from '~/shared/stores/program-store';
 
 interface TemplateView {
   id: string;

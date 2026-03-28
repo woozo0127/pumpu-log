@@ -1,6 +1,6 @@
-import { Pressable } from 'react-native';
-import { Text, colors } from '@pumpu-log/ui-kit';
+import { colors, Text } from '@pumpu-log/ui-kit';
 import { Zap } from 'lucide-react-native';
+import { Pressable } from 'react-native';
 
 interface QuickStartCardProps {
   onPress: () => void;
