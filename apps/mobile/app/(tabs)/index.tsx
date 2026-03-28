@@ -1,10 +1,13 @@
-import { View } from 'react-native';
-import { Text } from '@pumpu-log/ui-kit';
+import { useProgramStore } from '~/shared/stores/program-store';
+import { HomeScreen } from '~/features/home/home-screen';
+import { HomeEmptyScreen } from '~/features/home/home-empty-screen';
 
 export default function HomeTab() {
-  return (
-    <View className="flex-1 bg-background items-center justify-center">
-      <Text variant="h3">홈</Text>
-    </View>
-  );
+  const hasActiveProgram = useProgramStore((s) => s.hasActiveProgram());
+
+  if (!hasActiveProgram) {
+    return <HomeEmptyScreen />;
+  }
+
+  return <HomeScreen />;
 }
