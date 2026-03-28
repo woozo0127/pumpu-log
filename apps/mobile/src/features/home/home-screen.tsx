@@ -1,6 +1,7 @@
 import { SectionHeader } from '@pumpu-log/ui-kit';
 import { ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { getExerciseName } from '~/shared/data/exercise-names';
 import { useProgramStore } from '~/shared/stores/program-store';
 import { useWorkoutHistoryStore } from '~/shared/stores/workout-history-store';
 import { GreetingSection } from './components/greeting-section';
@@ -55,7 +56,7 @@ export function HomeScreenContent({
         <SectionHeader title="최근 운동" actionLabel="전체보기" onAction={onViewAllHistory} />
         {recentSessions.map((session) => (
           <RecentWorkoutItem
-            key={`${session.day}-${session.name}`}
+            key={`${session.month}-${session.day}-${session.name}`}
             day={session.day}
             month={session.month}
             name={session.name}
@@ -76,7 +77,7 @@ export function HomeScreen() {
   const recentSessions = useWorkoutHistoryStore((s) => s.getRecentSessions(2));
 
   const routineExercises = currentRoutine?.exercises ?? [];
-  const exerciseNames = routineExercises.slice(0, 2).map((e) => e.exerciseId);
+  const exerciseNames = routineExercises.slice(0, 2).map((e) => getExerciseName(e.exerciseId));
   if (routineExercises.length > 2) {
     exerciseNames.push(`외 ${routineExercises.length - 2}개`);
   }

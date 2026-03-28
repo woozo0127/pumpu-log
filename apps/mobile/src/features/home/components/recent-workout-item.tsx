@@ -6,7 +6,6 @@ interface RecentWorkoutItemProps {
   month: string;
   name: string;
   detail: string;
-  onPress?: () => void;
 }
 
 export function RecentWorkoutItem({ day, month, name, detail }: RecentWorkoutItemProps) {
