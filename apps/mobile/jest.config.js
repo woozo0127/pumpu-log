@@ -1,0 +1,12 @@
+/** @type {import('jest').Config} */
+module.exports = {
+  preset: 'jest-expo',
+  setupFiles: ['./jest.setup.ts'],
+  roots: ['<rootDir>/__tests__', '<rootDir>/src'],
+  transformIgnorePatterns: [],
+  moduleNameMapper: {
+    '^~/(.*)\\.js$': '<rootDir>/src/$1',
+    '^~/(.*)$': '<rootDir>/src/$1',
+  },
+  testMatch: ['**/__tests__/**/*.test.{ts,tsx}'],
+};
