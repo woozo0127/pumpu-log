@@ -1,10 +1,13 @@
-import { Text } from '@pumpu-log/ui-kit';
-import { View } from 'react-native';
+import { HistoryEmptyScreen } from '~/features/history/history-empty-screen';
+import { HistoryScreen } from '~/features/history/history-screen';
+import { useWorkoutHistoryStore } from '~/shared/stores/workout-history-store';
 
 export default function HistoryTab() {
-  return (
-    <View className="flex-1 bg-background items-center justify-center">
-      <Text variant="h3">기록</Text>
-    </View>
-  );
+  const sessions = useWorkoutHistoryStore((s) => s.sessions);
+
+  if (sessions.length === 0) {
+    return <HistoryEmptyScreen />;
+  }
+
+  return <HistoryScreen />;
 }

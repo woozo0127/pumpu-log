@@ -19,6 +19,7 @@ export const ChevronLeft = createIcon('ChevronLeft');
 export const ChevronRight = createIcon('ChevronRight');
 export const ChevronUp = createIcon('ChevronUp');
 export const Timer = createIcon('Timer');
+export const TrendingUp = createIcon('TrendingUp');
 export const Zap = createIcon('Zap');
 export const Signal = createIcon('Signal');
 export const Wifi = createIcon('Wifi');
