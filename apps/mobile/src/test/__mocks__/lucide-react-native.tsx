@@ -22,6 +22,7 @@ export const GripVertical = createIcon('GripVertical');
 export const Timer = createIcon('Timer');
 export const X = createIcon('X');
 export const TrendingUp = createIcon('TrendingUp');
+export const Trophy = createIcon('Trophy');
 export const CirclePlus = createIcon('CirclePlus');
 export const Plus = createIcon('Plus');
 export const Search = createIcon('Search');
