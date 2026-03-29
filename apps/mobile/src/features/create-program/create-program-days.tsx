@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DayCard } from './components/day-card';
 
 interface DayView {
+  id: string;
   name: string;
   description: string;
 }
@@ -44,7 +45,7 @@ export function CreateProgramDaysContent({
         <View className="gap-[10px]">
           {days.map((day, i) => (
             <DayCard
-              key={`day-${i}`}
+              key={day.id}
               name={day.name}
               description={day.description}
               onPress={() => onDayPress(i)}

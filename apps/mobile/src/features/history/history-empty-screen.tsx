@@ -1,6 +1,6 @@
 import { Button, colors, SectionHeader, Text } from '@pumpu-log/ui-kit';
 import { ChevronLeft, ChevronRight, TrendingUp } from 'lucide-react-native';
-import { Pressable, View } from 'react-native';
+import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const MOCK_DAYS = [

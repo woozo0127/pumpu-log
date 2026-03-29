@@ -5,8 +5,8 @@ describe('CreateProgramDaysContent', () => {
   const props = {
     programName: 'PHUL',
     days: [
-      { name: 'Day 1 — 상체 파워', description: '벤치프레스, 오버헤드 프레스 외 3개' },
-      { name: 'Day 2 — 하체 파워', description: '스쿼트, 레그 프레스 외 3개' },
+      { id: 'd1', name: 'Day 1 — 상체 파워', description: '벤치프레스, 오버헤드 프레스 외 3개' },
+      { id: 'd2', name: 'Day 2 — 하체 파워', description: '스쿼트, 레그 프레스 외 3개' },
     ],
     onBack: jest.fn(),
     onDone: jest.fn(),
