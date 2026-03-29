@@ -1,19 +1,18 @@
-import { Button, colors, Text } from '@pumpu-log/ui-kit';
-import { TrendingUp } from 'lucide-react-native';
-import { ScrollView, View } from 'react-native';
+import { Button, colors, SectionHeader, Text } from '@pumpu-log/ui-kit';
+import { ChevronLeft, ChevronRight, TrendingUp } from 'lucide-react-native';
+import { Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const MOCK_DAYS = [
-  { label: '월', active: true },
-  { label: '화', active: false },
-  { label: '수', active: true },
-  { label: '목', active: false },
-  { label: '금', active: true },
-  { label: '토', active: false },
-  { label: '일', active: true },
+  { day: 17, hasWorkout: false },
+  { day: 18, hasWorkout: true },
+  { day: 19, hasWorkout: true },
+  { day: 20, hasWorkout: true, isToday: true },
+  { day: 21, hasWorkout: true },
+  { day: 22, hasWorkout: false },
+  { day: 23, hasWorkout: false },
 ];
-
-const MOCK_BARS = [20, 35, 50, 40, 60, 45, 75];
+const DAY_HEADERS = ['일', '월', '화', '수', '목', '금', '토'];
 
 export interface HistoryEmptyScreenContentProps {
   onStartWorkout: () => void;
@@ -21,45 +20,66 @@ export interface HistoryEmptyScreenContentProps {
 
 export function HistoryEmptyScreenContent({ onStartWorkout }: HistoryEmptyScreenContentProps) {
   return (
-    <ScrollView className="flex-1 bg-background" contentContainerClassName="gap-2xl p-2xl pt-xl">
-      <Text variant="h1">기록</Text>
+    <View className="flex-1 bg-background">
+      <View className="p-2xl pt-xl gap-xl opacity-30">
+        <Text variant="h1">기록</Text>
 
-      <View className="bg-card rounded-lg border border-border gap-lg p-xl opacity-60">
-        <Text className="text-sm font-semibold text-foreground">운동하면 이렇게 채워져요</Text>
+        <View className="gap-md">
+          <View className="flex-row items-center justify-between">
+            <ChevronLeft size={20} color={colors['foreground-secondary']} />
+            <Text className="text-md font-semibold text-foreground">2026년 3월</Text>
+            <ChevronRight size={20} color={colors['foreground-secondary']} />
+          </View>
 
-        <View className="flex-row justify-center gap-[6px]">
-          {MOCK_DAYS.map((d) => (
-            <View
-              key={d.label}
-              className={`w-9 h-9 rounded-lg items-center justify-center ${
-                d.active ? 'bg-lime' : ''
-              }`}
-            >
-              <Text
-                className={`text-[11px] ${
-                  d.active ? 'font-semibold text-foreground-on-color' : 'text-foreground-tertiary'
-                }`}
+          <View className="flex-row justify-between">
+            {DAY_HEADERS.map((d) => (
+              <View key={d} className="w-9 h-5 items-center justify-center">
+                <Text className="text-xs text-foreground-tertiary">{d}</Text>
+              </View>
+            ))}
+          </View>
+
+          <View className="flex-row justify-between">
+            {MOCK_DAYS.map((cd) => (
+              <View
+                key={`day-${cd.day}`}
+                className={`w-9 h-9 rounded-lg items-center justify-center ${
+                  cd.hasWorkout && !cd.isToday ? 'bg-lime' : ''
+                } ${cd.isToday ? 'bg-lime-dim border border-lime' : ''}`}
               >
-                {d.label}
+                <Text
+                  className={`text-sm ${
+                    cd.hasWorkout || cd.isToday
+                      ? cd.isToday
+                        ? 'font-bold text-lime'
+                        : 'font-semibold text-foreground-on-color'
+                      : 'text-foreground-secondary'
+                  }`}
+                >
+                  {String(cd.day)}
+                </Text>
+              </View>
+            ))}
+          </View>
+        </View>
+
+        <View className="gap-md">
+          <SectionHeader title="3월 20일 (목)" />
+          <View className="bg-card rounded-md flex-row items-center gap-[14px] p-[14px]">
+            <View className="flex-1 gap-[2px]">
+              <Text className="text-sm font-semibold text-foreground">하체 파워</Text>
+              <Text className="text-xs text-foreground-secondary">
+                PHUL Day 2 · 5개 운동 · 45분
               </Text>
             </View>
-          ))}
+          </View>
         </View>
-
-        <View className="flex-row justify-center items-end gap-sm h-[80px]">
-          {MOCK_BARS.map((h, i) => (
-            <View
-              key={MOCK_DAYS[i].label}
-              className={`w-7 rounded-t-sm ${i % 2 === 0 ? 'bg-lime' : 'bg-lime-dim'}`}
-              style={{ height: h }}
-            />
-          ))}
-        </View>
-
-        <Text className="text-xs text-foreground-tertiary text-center">주간 운동 볼륨 추이</Text>
       </View>
 
-      <View className="items-center gap-md pt-xl">
+      <View
+        className="absolute bottom-0 left-0 right-0 items-center justify-center gap-md px-2xl"
+        style={{ top: 300 }}
+      >
         <View className="w-16 h-16 rounded-full bg-lime-dim items-center justify-center">
           <TrendingUp size={28} color={colors.lime.DEFAULT} />
         </View>
@@ -71,7 +91,7 @@ export function HistoryEmptyScreenContent({ onStartWorkout }: HistoryEmptyScreen
           <Text className="font-semibold text-foreground-on-color">운동 시작하기</Text>
         </Button>
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
