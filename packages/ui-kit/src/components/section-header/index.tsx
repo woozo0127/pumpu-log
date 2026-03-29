@@ -13,7 +13,7 @@ export interface SectionHeaderProps {
 const SectionHeader = React.forwardRef<View, SectionHeaderProps>(
   ({ title, actionLabel, onAction, className }, ref) => {
     return (
-      <View ref={ref} className={cn('flex-row items-center justify-between py-sm', className)}>
+      <View ref={ref} className={cn('flex-row items-center justify-between', className)}>
         <Text className="text-md font-semibold text-foreground">{title}</Text>
         {actionLabel && (
           <Pressable onPress={onAction}>

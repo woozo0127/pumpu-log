@@ -44,7 +44,7 @@ function Step({ number, title, description, isActive }: StepProps) {
 
 export function OnboardingGuide() {
   return (
-    <View className="bg-card rounded-lg border border-border-subtle gap-lg p-xl">
+    <View className="bg-card rounded-lg border border-border gap-lg p-xl">
       <Text className="text-md font-bold text-foreground">3단계면 시작할 수 있어요</Text>
       <Step number={1} title="프로그램 선택" description="추천 템플릿 또는 직접 만들기" isActive />
       <Step number={2} title="루틴 구성" description="Day별 운동 종목 배치" isActive={false} />

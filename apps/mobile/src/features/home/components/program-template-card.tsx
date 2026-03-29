@@ -18,7 +18,7 @@ export function ProgramTemplateCard({
   return (
     <Pressable
       onPress={onPress}
-      className="bg-card rounded-lg border border-border-subtle flex-row items-center gap-[14px] p-lg"
+      className="bg-card rounded-lg border border-border flex-row items-center gap-[14px] p-lg"
     >
       <View className="w-12 h-12 rounded-lg bg-lime-dim items-center justify-center">
         <Text className="text-sm font-extrabold text-lime">{badge}</Text>

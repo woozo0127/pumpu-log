@@ -9,8 +9,8 @@ interface GreetingSectionProps {
 export function GreetingSection({ greeting, subtitle }: GreetingSectionProps) {
   return (
     <View className="gap-xs">
-      <Text variant="h1">{greeting}</Text>
-      <Text className="text-sm text-foreground-secondary">{subtitle}</Text>
+      <Text variant="h2">{greeting}</Text>
+      <Text className="text-base text-foreground-secondary">{subtitle}</Text>
     </View>
   );
 }

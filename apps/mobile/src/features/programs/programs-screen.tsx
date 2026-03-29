@@ -38,7 +38,7 @@ export function ProgramsScreenContent({
 }: ProgramsScreenContentProps) {
   return (
     <ScrollView className="flex-1 bg-background" contentContainerClassName="gap-xl p-2xl pt-xl">
-      <Text variant="h1">프로그램</Text>
+      <Text variant="h2">프로그램</Text>
 
       <View className="gap-md">
         <Text className="text-xs font-semibold text-lime tracking-[1px]">진행 중</Text>

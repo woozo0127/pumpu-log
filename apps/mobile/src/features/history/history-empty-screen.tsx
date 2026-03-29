@@ -22,7 +22,7 @@ export function HistoryEmptyScreenContent({ onStartWorkout }: HistoryEmptyScreen
   return (
     <View className="flex-1 bg-background">
       <View className="p-2xl pt-xl gap-xl opacity-30">
-        <Text variant="h1">기록</Text>
+        <Text variant="h2">기록</Text>
 
         <View className="gap-md">
           <View className="flex-row items-center justify-between">

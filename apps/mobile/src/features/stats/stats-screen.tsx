@@ -40,7 +40,7 @@ export function StatsScreenContent({
 
   return (
     <ScrollView className="flex-1 bg-background" contentContainerClassName="gap-xl p-2xl pt-xl">
-      <Text variant="h1">통계</Text>
+      <Text variant="h2">통계</Text>
 
       <View className="bg-card rounded-lg border border-border flex-row">
         {periods.map((p) => (

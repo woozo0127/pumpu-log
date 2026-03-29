@@ -41,7 +41,7 @@ export function HistoryScreenContent({
 }: HistoryScreenContentProps) {
   return (
     <ScrollView className="flex-1 bg-background" contentContainerClassName="gap-xl p-2xl pt-xl">
-      <Text variant="h1">기록</Text>
+      <Text variant="h2">기록</Text>
 
       <View className="gap-md">
         <View className="flex-row items-center justify-between">

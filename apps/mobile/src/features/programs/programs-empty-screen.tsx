@@ -24,7 +24,7 @@ export function ProgramsEmptyScreenContent({
 }: ProgramsEmptyScreenContentProps) {
   return (
     <ScrollView className="flex-1 bg-background" contentContainerClassName="gap-2xl p-2xl pt-xl">
-      <Text variant="h1">프로그램</Text>
+      <Text variant="h2">프로그램</Text>
 
       <OnboardingGuide />
 

@@ -14,7 +14,7 @@ export function StatsEmptyScreenContent({ onStartWorkout }: StatsEmptyScreenCont
   return (
     <View className="flex-1 bg-background">
       <View className="p-2xl pt-xl gap-xl opacity-30">
-        <Text variant="h1">통계</Text>
+        <Text variant="h2">통계</Text>
 
         <View className="bg-card rounded-lg border border-border flex-row">
           <View className="flex-1 h-9 rounded-lg bg-lime items-center justify-center">

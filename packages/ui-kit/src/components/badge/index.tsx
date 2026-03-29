@@ -4,12 +4,12 @@ import { View } from 'react-native';
 import { cn } from '~/lib/utils';
 import { Text } from '../text';
 
-const badgeVariants = cva('rounded-full font-medium inline-flex items-center', {
+const badgeVariants = cva('rounded-full font-semibold inline-flex items-center', {
   variants: {
     variant: {
       default: 'bg-lime-dim',
-      secondary: 'bg-yellow/10',
-      destructive: 'bg-destructive/10',
+      secondary: 'bg-[#2e2308]',
+      destructive: 'bg-[#2e0a0a]',
     },
     size: {
       default: 'px-md py-[6px]',
@@ -22,7 +22,7 @@ const badgeVariants = cva('rounded-full font-medium inline-flex items-center', {
   },
 });
 
-const badgeTextVariants = cva('font-medium', {
+const badgeTextVariants = cva('font-semibold', {
   variants: {
     variant: {
       default: 'text-lime',

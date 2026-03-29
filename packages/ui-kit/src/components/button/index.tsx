@@ -29,10 +29,10 @@ const buttonTextVariants = cva('font-semibold', {
   variants: {
     variant: {
       default: 'text-foreground-on-color',
-      secondary: 'text-foreground',
+      secondary: 'text-foreground-on-color',
       destructive: 'text-foreground',
-      outline: 'text-foreground',
-      ghost: 'text-foreground',
+      outline: 'text-lime',
+      ghost: 'text-lime',
     },
   },
   defaultVariants: {
