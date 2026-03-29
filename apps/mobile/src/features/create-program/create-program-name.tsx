@@ -1,4 +1,5 @@
 import { colors, Text } from '@pumpu-log/ui-kit';
+import { useRouter } from 'expo-router';
 import { X } from 'lucide-react-native';
 import { Pressable, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -62,6 +63,7 @@ export function CreateProgramNameContent({
 
 export function CreateProgramNameScreen() {
   const insets = useSafeAreaInsets();
+  const router = useRouter();
   return (
     <View className="flex-1 bg-background" style={{ paddingTop: insets.top }}>
       <CreateProgramNameContent
@@ -69,8 +71,8 @@ export function CreateProgramNameScreen() {
         description=""
         onNameChange={() => {}}
         onDescriptionChange={() => {}}
-        onClose={() => {}}
-        onNext={() => {}}
+        onClose={() => router.back()}
+        onNext={() => router.push('/create-program/days')}
       />
     </View>
   );

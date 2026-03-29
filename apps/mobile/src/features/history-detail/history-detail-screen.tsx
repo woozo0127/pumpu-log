@@ -1,4 +1,5 @@
 import { Badge, colors, Separator, Text } from '@pumpu-log/ui-kit';
+import { useRouter } from 'expo-router';
 import { ChevronLeft } from 'lucide-react-native';
 import { Pressable, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -94,6 +95,7 @@ export function HistoryDetailContent({
 
 export function HistoryDetailScreen() {
   const insets = useSafeAreaInsets();
+  const router = useRouter();
   return (
     <View className="flex-1 bg-background" style={{ paddingTop: insets.top }}>
       <HistoryDetailContent
@@ -104,7 +106,7 @@ export function HistoryDetailScreen() {
         programName=""
         routineLabel=""
         exercises={[]}
-        onBack={() => {}}
+        onBack={() => router.back()}
       />
     </View>
   );

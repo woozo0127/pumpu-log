@@ -1,4 +1,5 @@
 import { colors, SectionHeader, Text } from '@pumpu-log/ui-kit';
+import { useRouter } from 'expo-router';
 import { ChevronLeft, ChevronRight } from 'lucide-react-native';
 import { Pressable, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -114,6 +115,7 @@ export function HistoryScreenContent({
 
 export function HistoryScreen() {
   const insets = useSafeAreaInsets();
+  const router = useRouter();
   const sessions = useWorkoutHistoryStore((s) => s.sessions);
 
   const dayHeaders = ['일', '월', '화', '수', '목', '금', '토'];
@@ -141,7 +143,7 @@ export function HistoryScreen() {
         onPrevMonth={() => {}}
         onNextMonth={() => {}}
         onSelectDay={() => {}}
-        onWorkoutPress={() => {}}
+        onWorkoutPress={() => router.push('/history-detail')}
       />
     </View>
   );

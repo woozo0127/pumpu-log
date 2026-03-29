@@ -1,7 +1,9 @@
 import { Button, SectionHeader, Text } from '@pumpu-log/ui-kit';
+import { useRouter } from 'expo-router';
 import { ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { SEED_PROGRAMS } from '~/shared/data/seed-programs';
+import { useProgramStore } from '~/shared/stores/program-store';
 import { OnboardingGuide } from './components/onboarding-guide';
 import { PopularProgramItem } from './components/popular-program-item';
 
@@ -56,6 +58,8 @@ const POPULAR_DESCRIPTIONS: Record<string, string> = {
 
 export function ProgramsEmptyScreen() {
   const insets = useSafeAreaInsets();
+  const router = useRouter();
+  const setActiveProgram = useProgramStore((s) => s.setActiveProgram);
   const popularPrograms = SEED_PROGRAMS.filter((p) => p.isTemplate).map((p) => ({
     id: p.id,
     name: p.name,
@@ -66,8 +70,8 @@ export function ProgramsEmptyScreen() {
     <View className="flex-1 bg-background" style={{ paddingTop: insets.top }}>
       <ProgramsEmptyScreenContent
         popularPrograms={popularPrograms}
-        onCreateProgram={() => {}}
-        onSelectPopular={() => {}}
+        onCreateProgram={() => router.push('/create-program/name')}
+        onSelectPopular={(id) => setActiveProgram(id)}
       />
     </View>
   );

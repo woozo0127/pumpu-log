@@ -1,4 +1,5 @@
 import { Button, Text } from '@pumpu-log/ui-kit';
+import { useRouter } from 'expo-router';
 import { ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useProgramStore } from '~/shared/stores/program-store';
@@ -74,6 +75,8 @@ export function ProgramsScreenContent({
 
 export function ProgramsScreen() {
   const insets = useSafeAreaInsets();
+  const router = useRouter();
+  const setActiveProgram = useProgramStore((s) => s.setActiveProgram);
   const activeProgram = useProgramStore((s) => s.getActiveProgram());
   const currentDayIndex = useProgramStore((s) => s.currentDayIndex);
   const programs = useProgramStore((s) => s.programs);
@@ -101,8 +104,8 @@ export function ProgramsScreen() {
       <ProgramsScreenContent
         activeProgram={activeProgramView}
         otherPrograms={otherPrograms}
-        onProgramPress={() => {}}
-        onCreateProgram={() => {}}
+        onProgramPress={(id) => setActiveProgram(id)}
+        onCreateProgram={() => router.push('/create-program/name')}
       />
     </View>
   );

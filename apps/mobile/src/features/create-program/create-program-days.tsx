@@ -1,4 +1,5 @@
 import { Button, colors, Text } from '@pumpu-log/ui-kit';
+import { useRouter } from 'expo-router';
 import { ChevronLeft } from 'lucide-react-native';
 import { Pressable, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -63,13 +64,14 @@ export function CreateProgramDaysContent({
 
 export function CreateProgramDaysScreen() {
   const insets = useSafeAreaInsets();
+  const router = useRouter();
   return (
     <View className="flex-1 bg-background" style={{ paddingTop: insets.top }}>
       <CreateProgramDaysContent
         programName="PHUL"
         days={[]}
-        onBack={() => {}}
-        onDone={() => {}}
+        onBack={() => router.back()}
+        onDone={() => router.replace('/(tabs)/programs')}
         onDayPress={() => {}}
         onAddDay={() => {}}
       />

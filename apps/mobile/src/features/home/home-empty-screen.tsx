@@ -1,4 +1,5 @@
 import { Button, SectionHeader, Text } from '@pumpu-log/ui-kit';
+import { useRouter } from 'expo-router';
 import { ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useProgramStore } from '~/shared/stores/program-store';
@@ -65,7 +66,9 @@ function getDaysLabel(daysPerWeek: number): string {
 
 export function HomeEmptyScreen() {
   const insets = useSafeAreaInsets();
+  const router = useRouter();
   const programs = useProgramStore((s) => s.programs);
+  const setActiveProgram = useProgramStore((s) => s.setActiveProgram);
   const templates = programs
     .filter((p) => p.isTemplate)
     .map((p) => ({
@@ -80,9 +83,9 @@ export function HomeEmptyScreen() {
       <HomeEmptyScreenContent
         greeting="반가워요!"
         templates={templates}
-        onSelectTemplate={() => {}}
-        onCreateCustom={() => {}}
-        onQuickStart={() => {}}
+        onSelectTemplate={(id) => setActiveProgram(id)}
+        onCreateCustom={() => router.push('/create-program/name')}
+        onQuickStart={() => router.push('/workout')}
       />
     </View>
   );

@@ -1,3 +1,4 @@
+import { useRouter } from 'expo-router';
 import { ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ExerciseSection } from './components/exercise-section';
@@ -65,6 +66,7 @@ export function WorkoutScreenContent({
 
 export function WorkoutScreen() {
   const insets = useSafeAreaInsets();
+  const router = useRouter();
 
   return (
     <View className="flex-1 bg-background" style={{ paddingTop: insets.top }}>
@@ -82,10 +84,10 @@ export function WorkoutScreen() {
         }}
         currentExercise={1}
         totalExercises={5}
-        onBack={() => {}}
+        onBack={() => router.back()}
         onToggleSet={() => {}}
         onAddSet={() => {}}
-        onNext={() => {}}
+        onNext={() => router.push('/workout-summary')}
         onShowExercises={() => {}}
       />
     </View>

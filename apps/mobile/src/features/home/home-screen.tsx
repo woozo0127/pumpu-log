@@ -1,4 +1,5 @@
 import { SectionHeader } from '@pumpu-log/ui-kit';
+import { useRouter } from 'expo-router';
 import { ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { getExerciseName } from '~/shared/data/exercise-names';
@@ -70,6 +71,7 @@ export function HomeScreenContent({
 
 export function HomeScreen() {
   const insets = useSafeAreaInsets();
+  const router = useRouter();
   const greeting = useGreeting();
   const activeProgram = useProgramStore((s) => s.getActiveProgram());
   const currentRoutine = useProgramStore((s) => s.getCurrentRoutine());
@@ -103,8 +105,8 @@ export function HomeScreen() {
         dayProgress={dayProgress}
         exercises={exerciseNames}
         recentSessions={recentSessionViews}
-        onStartWorkout={() => {}}
-        onViewAllHistory={() => {}}
+        onStartWorkout={() => router.push('/workout')}
+        onViewAllHistory={() => router.push('/(tabs)/history')}
       />
     </View>
   );
