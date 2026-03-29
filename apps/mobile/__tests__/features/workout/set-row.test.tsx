@@ -10,8 +10,6 @@ describe('SetRow', () => {
         reps={8}
         isCompleted={false}
         onToggle={jest.fn()}
-        onWeightChange={jest.fn()}
-        onRepsChange={jest.fn()}
       />,
     );
     expect(screen.getByText('1')).toBeTruthy();
@@ -27,8 +25,6 @@ describe('SetRow', () => {
         reps={8}
         isCompleted={true}
         onToggle={jest.fn()}
-        onWeightChange={jest.fn()}
-        onRepsChange={jest.fn()}
       />,
     );
     expect(screen.getByText('1')).toBeTruthy();

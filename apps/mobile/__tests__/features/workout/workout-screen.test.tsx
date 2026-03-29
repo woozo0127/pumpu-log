@@ -16,8 +16,6 @@ const props = {
   totalExercises: 5,
   onBack: jest.fn(),
   onToggleSet: jest.fn(),
-  onWeightChange: jest.fn(),
-  onRepsChange: jest.fn(),
   onAddSet: jest.fn(),
   onNext: jest.fn(),
   onShowExercises: jest.fn(),

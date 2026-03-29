@@ -24,8 +24,6 @@ export interface WorkoutScreenContentProps {
   totalExercises: number;
   onBack: () => void;
   onToggleSet: (index: number) => void;
-  onWeightChange: (index: number, value: number) => void;
-  onRepsChange: (index: number, value: number) => void;
   onAddSet: () => void;
   onNext: () => void;
   onShowExercises: () => void;
@@ -39,8 +37,6 @@ export function WorkoutScreenContent({
   totalExercises,
   onBack,
   onToggleSet,
-  onWeightChange,
-  onRepsChange,
   onAddSet,
   onNext,
   onShowExercises,
@@ -54,8 +50,6 @@ export function WorkoutScreenContent({
           previousRecord={exercise.previousRecord}
           sets={exercise.sets}
           onToggleSet={onToggleSet}
-          onWeightChange={onWeightChange}
-          onRepsChange={onRepsChange}
           onAddSet={onAddSet}
         />
       </ScrollView>
@@ -90,8 +84,6 @@ export function WorkoutScreen() {
         totalExercises={5}
         onBack={() => {}}
         onToggleSet={() => {}}
-        onWeightChange={() => {}}
-        onRepsChange={() => {}}
         onAddSet={() => {}}
         onNext={() => {}}
         onShowExercises={() => {}}

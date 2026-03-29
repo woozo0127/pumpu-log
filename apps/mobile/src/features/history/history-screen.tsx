@@ -120,7 +120,8 @@ export function HistoryScreen() {
   const now = new Date();
   const monthLabel = `${now.getFullYear()}년 ${now.getMonth() + 1}월`;
 
-  const calendarDays: CalendarDay[] = Array.from({ length: 28 }, (_, i) => ({
+  const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+  const calendarDays: CalendarDay[] = Array.from({ length: daysInMonth }, (_, i) => ({
     day: i + 1,
     hasWorkout: sessions.some((s) => {
       const d = new Date(s.startedAt);

@@ -13,8 +13,6 @@ interface ExerciseSectionProps {
   previousRecord?: string;
   sets: SetData[];
   onToggleSet: (index: number) => void;
-  onWeightChange: (index: number, value: number) => void;
-  onRepsChange: (index: number, value: number) => void;
   onAddSet: () => void;
 }
 
@@ -23,8 +21,6 @@ export function ExerciseSection({
   previousRecord,
   sets,
   onToggleSet,
-  onWeightChange,
-  onRepsChange,
   onAddSet,
 }: ExerciseSectionProps) {
   return (
@@ -57,8 +53,6 @@ export function ExerciseSection({
             reps={set.reps}
             isCompleted={set.isCompleted}
             onToggle={() => onToggleSet(i)}
-            onWeightChange={(v) => onWeightChange(i, v)}
-            onRepsChange={(v) => onRepsChange(i, v)}
           />
         );
       })}

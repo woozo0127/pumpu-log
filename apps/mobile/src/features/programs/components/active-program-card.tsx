@@ -11,7 +11,6 @@ interface ActiveProgramCardProps {
   name: string;
   dayProgress: string;
   days: DayInfo[];
-  onPress?: () => void;
 }
 
 export function ActiveProgramCard({ name, dayProgress, days }: ActiveProgramCardProps) {

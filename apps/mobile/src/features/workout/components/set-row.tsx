@@ -7,8 +7,6 @@ interface SetRowProps {
   reps: number;
   isCompleted: boolean;
   onToggle: () => void;
-  onWeightChange: (value: number) => void;
-  onRepsChange: (value: number) => void;
 }
 
 export function SetRow({ setNumber, weight, reps, isCompleted, onToggle }: SetRowProps) {
