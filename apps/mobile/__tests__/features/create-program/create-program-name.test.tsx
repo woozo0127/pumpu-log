@@ -41,4 +41,16 @@ describe('CreateProgramNameContent', () => {
     fireEvent.press(screen.getByText('다음'));
     expect(props.onNext).toHaveBeenCalledTimes(1);
   });
+
+  it('calls onNameChange when name input changes', () => {
+    render(<CreateProgramNameContent {...props} />);
+    fireEvent.changeText(screen.getByPlaceholderText('PHUL'), 'PPL');
+    expect(props.onNameChange).toHaveBeenCalledWith('PPL');
+  });
+
+  it('calls onDescriptionChange when description input changes', () => {
+    render(<CreateProgramNameContent {...props} />);
+    fireEvent.changeText(screen.getByPlaceholderText('파워 + 근비대 4일 프로그램'), '주 4일 분할');
+    expect(props.onDescriptionChange).toHaveBeenCalledWith('주 4일 분할');
+  });
 });

@@ -1,7 +1,7 @@
-import { colors, Text } from '@pumpu-log/ui-kit';
+import { colors, Input, Text } from '@pumpu-log/ui-kit';
 import { useRouter } from 'expo-router';
 import { X } from 'lucide-react-native';
-import { Pressable, TextInput, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export interface CreateProgramNameContentProps {
@@ -36,24 +36,20 @@ export function CreateProgramNameContent({
       <View className="gap-2xl p-2xl">
         <View className="gap-sm">
           <Text className="text-sm font-semibold text-foreground">프로그램 이름</Text>
-          <TextInput
-            className="bg-background rounded-xl border border-lime p-[14px] px-lg text-sm text-foreground"
+          <Input
             value={name}
             onChangeText={onNameChange}
             placeholder="PHUL"
-            placeholderTextColor={colors['foreground-secondary']}
           />
           <Text className="text-xs text-foreground-tertiary">예: PHUL, PPL, Upper/Lower 등</Text>
         </View>
 
         <View className="gap-sm">
           <Text className="text-sm font-semibold text-foreground">설명 (선택)</Text>
-          <TextInput
-            className="bg-background rounded-xl border border-border p-[14px] px-lg text-sm text-foreground"
+          <Input
             value={description}
             onChangeText={onDescriptionChange}
             placeholder="파워 + 근비대 4일 프로그램"
-            placeholderTextColor={colors['foreground-tertiary']}
           />
         </View>
       </View>

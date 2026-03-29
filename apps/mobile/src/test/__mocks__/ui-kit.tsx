@@ -1,4 +1,4 @@
-import { Pressable, Text as RNText, View } from 'react-native';
+import { Pressable, Text as RNText, TextInput, View } from 'react-native';
 
 export function Text({ children, ...props }: any) {
   return <RNText {...props}>{children}</RNText>;
@@ -46,6 +46,15 @@ export function Checkbox({ checked, onCheckedChange, ...props }: any) {
     <Pressable onPress={onCheckedChange} {...props}>
       <RNText>{checked ? '✓' : '○'}</RNText>
     </Pressable>
+  );
+}
+
+export function Input({ icon, error, ...props }: any) {
+  return (
+    <View accessibilityState={{ invalid: !!error }}>
+      {icon}
+      <TextInput {...props} />
+    </View>
   );
 }
 

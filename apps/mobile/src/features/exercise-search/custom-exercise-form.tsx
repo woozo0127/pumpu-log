@@ -1,6 +1,6 @@
-import { colors, Text } from '@pumpu-log/ui-kit';
+import { colors, Input, Text } from '@pumpu-log/ui-kit';
 import { ChevronLeft } from 'lucide-react-native';
-import { Pressable, TextInput, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export interface CustomExerciseFormContentProps {
@@ -37,12 +37,10 @@ export function CustomExerciseFormContent({
       <View className="gap-2xl p-2xl">
         <View className="gap-sm">
           <Text className="text-sm font-semibold text-foreground">운동 이름</Text>
-          <TextInput
-            className="bg-background rounded-xl border border-lime p-[14px] px-lg text-sm text-foreground"
+          <Input
             value={name}
             onChangeText={onNameChange}
             placeholder="케이블 컬"
-            placeholderTextColor={colors['foreground-secondary']}
           />
         </View>
 

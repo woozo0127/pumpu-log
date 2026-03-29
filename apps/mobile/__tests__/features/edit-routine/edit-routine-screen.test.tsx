@@ -56,4 +56,10 @@ describe('EditRoutineScreenContent', () => {
     fireEvent.press(screen.getByText('운동 추가'));
     expect(props.onAddExercise).toHaveBeenCalledTimes(1);
   });
+
+  it('calls onNameChange when routine name input changes', () => {
+    render(<EditRoutineScreenContent {...props} />);
+    fireEvent.changeText(screen.getByDisplayValue('상체 파워'), '하체 파워');
+    expect(props.onNameChange).toHaveBeenCalledWith('하체 파워');
+  });
 });

@@ -1,6 +1,6 @@
-import { Button, colors, Text } from '@pumpu-log/ui-kit';
+import { Button, colors, Input, Text } from '@pumpu-log/ui-kit';
 import { ChevronLeft } from 'lucide-react-native';
-import { Pressable, ScrollView, TextInput, View } from 'react-native';
+import { Pressable, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ExerciseItem } from './components/exercise-item';
 
@@ -44,11 +44,9 @@ export function EditRoutineScreenContent({
       <ScrollView className="flex-1" contentContainerClassName="gap-lg p-2xl pt-xl">
         <View className="gap-sm">
           <Text className="text-sm font-semibold text-foreground">루틴 이름</Text>
-          <TextInput
-            className="bg-background rounded-lg border border-lime p-[14px] px-lg text-sm text-foreground"
+          <Input
             value={routineName}
             onChangeText={onNameChange}
-            placeholderTextColor={colors['foreground-secondary']}
           />
         </View>
 

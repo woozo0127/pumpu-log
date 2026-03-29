@@ -41,4 +41,10 @@ describe('CustomExerciseFormContent', () => {
     fireEvent.press(screen.getByText('저장'));
     expect(props.onSave).toHaveBeenCalledTimes(1);
   });
+
+  it('calls onNameChange when exercise name input changes', () => {
+    render(<CustomExerciseFormContent {...props} />);
+    fireEvent.changeText(screen.getByPlaceholderText('케이블 컬'), '덤벨 컬');
+    expect(props.onNameChange).toHaveBeenCalledWith('덤벨 컬');
+  });
 });

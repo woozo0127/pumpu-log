@@ -1,6 +1,6 @@
-import { colors, Text } from '@pumpu-log/ui-kit';
+import { colors, Input, Text } from '@pumpu-log/ui-kit';
 import { CirclePlus, Plus, Search, X } from 'lucide-react-native';
-import { Pressable, ScrollView, TextInput, View } from 'react-native';
+import { Pressable, ScrollView, View } from 'react-native';
 
 interface ExerciseView {
   id: string;
@@ -46,16 +46,12 @@ export function ExerciseSearchSheetContent({
         </View>
 
         <View className="px-2xl pb-md">
-          <View className="bg-background rounded-xl border border-border flex-row items-center gap-sm p-[14px] px-lg">
-            <Search size={18} color={colors['foreground-secondary']} />
-            <TextInput
-              className="flex-1 text-sm text-foreground"
-              value={searchQuery}
-              onChangeText={onSearchChange}
-              placeholder="검색"
-              placeholderTextColor={colors['foreground-tertiary']}
-            />
-          </View>
+          <Input
+            value={searchQuery}
+            onChangeText={onSearchChange}
+            placeholder="검색"
+            icon={<Search size={18} color={colors['foreground-secondary']} />}
+          />
         </View>
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false} className="px-2xl pb-md">

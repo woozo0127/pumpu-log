@@ -49,4 +49,10 @@ describe('ExerciseSearchSheetContent', () => {
     fireEvent.press(screen.getByText('직접 운동 추가'));
     expect(props.onCustomExercise).toHaveBeenCalledTimes(1);
   });
+
+  it('calls onSearchChange when search input changes', () => {
+    render(<ExerciseSearchSheetContent {...props} />);
+    fireEvent.changeText(screen.getByPlaceholderText('검색'), '벤치');
+    expect(props.onSearchChange).toHaveBeenCalledWith('벤치');
+  });
 });
