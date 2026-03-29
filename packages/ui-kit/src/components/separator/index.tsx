@@ -13,7 +13,7 @@ const Separator = React.forwardRef<SeparatorPrimitive.RootRef, SeparatorProps>(
         ref={ref}
         orientation={orientation}
         className={cn(
-          'bg-border-subtle',
+          'bg-border',
           orientation === 'vertical' ? 'w-[1px] h-full' : 'h-[1px] w-full',
           className,
         )}

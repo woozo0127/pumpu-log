@@ -23,7 +23,7 @@ export function PopularProgramItem({ rank, name, description, onPress }: Popular
       </Text>
       <View className="flex-1 gap-[1px]">
         <Text className="text-sm font-semibold text-foreground">{name}</Text>
-        <Text className="text-[11px] text-foreground-tertiary">{description}</Text>
+        <Text className="text-xs text-foreground-tertiary">{description}</Text>
       </View>
     </Pressable>
   );

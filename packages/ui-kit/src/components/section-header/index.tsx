@@ -14,10 +14,10 @@ const SectionHeader = React.forwardRef<View, SectionHeaderProps>(
   ({ title, actionLabel, onAction, className }, ref) => {
     return (
       <View ref={ref} className={cn('flex-row items-center justify-between py-sm', className)}>
-        <Text className="text-base font-semibold text-foreground">{title}</Text>
+        <Text className="text-md font-semibold text-foreground">{title}</Text>
         {actionLabel && (
           <Pressable onPress={onAction}>
-            <Text className="text-sm text-lime font-medium">{actionLabel}</Text>
+            <Text className="text-[13px] text-lime">{actionLabel}</Text>
           </Pressable>
         )}
       </View>

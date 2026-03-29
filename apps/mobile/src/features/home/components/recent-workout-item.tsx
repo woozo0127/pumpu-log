@@ -10,7 +10,7 @@ interface RecentWorkoutItemProps {
 
 export function RecentWorkoutItem({ day, month, name, detail }: RecentWorkoutItemProps) {
   return (
-    <View className="bg-card rounded-lg flex-row items-center gap-[14px] p-[14px]">
+    <View className="bg-card rounded-md flex-row items-center gap-[14px] p-[14px]">
       <View className="items-center w-10 gap-[2px]">
         <Text className="text-lg font-bold text-lime">{day}</Text>
         <Text className="text-xs text-foreground-tertiary">{month}</Text>

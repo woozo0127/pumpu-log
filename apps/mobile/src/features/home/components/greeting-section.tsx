@@ -10,7 +10,7 @@ export function GreetingSection({ greeting, subtitle }: GreetingSectionProps) {
   return (
     <View className="gap-xs">
       <Text variant="h1">{greeting}</Text>
-      <Text variant="muted">{subtitle}</Text>
+      <Text className="text-sm text-foreground-secondary">{subtitle}</Text>
     </View>
   );
 }

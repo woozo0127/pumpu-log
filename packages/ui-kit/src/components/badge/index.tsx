@@ -12,8 +12,8 @@ const badgeVariants = cva('rounded-full font-medium inline-flex items-center', {
       destructive: 'bg-destructive/10',
     },
     size: {
-      default: 'px-md py-xs',
-      sm: 'px-sm py-[2px]',
+      default: 'px-md py-[6px]',
+      sm: 'px-sm py-[3px]',
     },
   },
   defaultVariants: {

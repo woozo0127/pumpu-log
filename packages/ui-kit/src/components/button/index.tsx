@@ -3,19 +3,19 @@ import * as React from 'react';
 import { ActivityIndicator, Pressable, type PressableProps, type View } from 'react-native';
 import { cn } from '~/lib/utils';
 
-const buttonVariants = cva('items-center justify-center rounded-md', {
+const buttonVariants = cva('items-center justify-center', {
   variants: {
     variant: {
-      default: 'bg-lime active:bg-lime-active',
-      secondary: 'bg-card border border-border active:bg-card-hover',
-      destructive: 'bg-destructive active:opacity-80',
-      outline: 'border border-border bg-transparent active:bg-card',
-      ghost: 'bg-transparent active:bg-card',
+      default: 'bg-lime rounded-lg active:bg-lime-active',
+      secondary: 'bg-yellow rounded-lg active:opacity-80',
+      destructive: 'bg-destructive rounded-lg active:opacity-80',
+      outline: 'border border-lime rounded-lg bg-transparent active:bg-card',
+      ghost: 'bg-transparent rounded-lg active:bg-card',
     },
     size: {
       default: 'h-11 px-lg',
-      sm: 'h-9 px-md',
-      lg: 'h-[52px] px-xl',
+      sm: 'h-9 px-md rounded-[8px]',
+      lg: 'h-[52px] px-[28px] rounded-[16px]',
       icon: 'h-11 w-11',
     },
   },
