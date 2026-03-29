@@ -8,9 +8,13 @@ function createIcon(name: string) {
 }
 
 export const Home = createIcon('Home');
+export const House = createIcon('House');
 export const Dumbbell = createIcon('Dumbbell');
+export const LayoutGrid = createIcon('LayoutGrid');
 export const History = createIcon('History');
+export const Calendar = createIcon('Calendar');
 export const BarChart3 = createIcon('BarChart3');
+export const ChartNoAxesColumnIncreasing = createIcon('ChartNoAxesColumnIncreasing');
 export const ChevronRight = createIcon('ChevronRight');
 export const Zap = createIcon('Zap');
 export const Signal = createIcon('Signal');

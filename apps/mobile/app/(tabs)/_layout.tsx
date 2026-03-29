@@ -1,6 +1,6 @@
 import { Tab, TabBar } from '@pumpu-log/ui-kit';
 import { Tabs } from 'expo-router';
-import { BarChart3, Dumbbell, History, Home } from 'lucide-react-native';
+import { Calendar, ChartNoAxesColumnIncreasing, House, LayoutGrid } from 'lucide-react-native';
 import { View } from 'react-native';
 
 export default function TabLayout() {
@@ -11,25 +11,25 @@ export default function TabLayout() {
         <View className="bg-background pb-2">
           <TabBar>
             <Tab
-              icon={<Home />}
+              icon={<House />}
               label="홈"
               active={state.index === 0}
               onPress={() => navigation.navigate('index')}
             />
             <Tab
-              icon={<Dumbbell />}
+              icon={<LayoutGrid />}
               label="프로그램"
               active={state.index === 1}
               onPress={() => navigation.navigate('programs')}
             />
             <Tab
-              icon={<History />}
+              icon={<Calendar />}
               label="기록"
               active={state.index === 2}
               onPress={() => navigation.navigate('history')}
             />
             <Tab
-              icon={<BarChart3 />}
+              icon={<ChartNoAxesColumnIncreasing />}
               label="통계"
               active={state.index === 3}
               onPress={() => navigation.navigate('stats')}
