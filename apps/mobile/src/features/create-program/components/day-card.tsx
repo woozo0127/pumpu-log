@@ -12,7 +12,7 @@ export function DayCard({ name, description, onPress }: DayCardProps) {
   return (
     <Pressable
       onPress={onPress}
-      className="bg-card rounded-lg border border-border flex-row items-center gap-md p-lg"
+      className="bg-card rounded-xl border border-border flex-row items-center gap-md p-lg"
     >
       <GripVertical size={16} color={colors['foreground-tertiary']} />
       <View className="flex-1 gap-[2px]">

@@ -44,7 +44,7 @@ export function CreateProgramDaysContent({
         <View className="gap-[10px]">
           {days.map((day, i) => (
             <DayCard
-              key={day.name}
+              key={`day-${i}`}
               name={day.name}
               description={day.description}
               onPress={() => onDayPress(i)}
