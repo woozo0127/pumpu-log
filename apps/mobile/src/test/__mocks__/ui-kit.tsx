@@ -1,4 +1,3 @@
-import React from 'react';
 import { Pressable, Text as RNText, View } from 'react-native';
 
 export function Text({ children, ...props }: any) {
@@ -39,6 +38,14 @@ export function SectionHeader({ title, actionLabel, onAction, ...props }: any) {
         </Pressable>
       )}
     </View>
+  );
+}
+
+export function Checkbox({ checked, onCheckedChange, ...props }: any) {
+  return (
+    <Pressable onPress={onCheckedChange} {...props}>
+      <RNText>{checked ? '✓' : '○'}</RNText>
+    </Pressable>
   );
 }
 
