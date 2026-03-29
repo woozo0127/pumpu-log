@@ -1,10 +1,13 @@
-import { Text } from '@pumpu-log/ui-kit';
-import { View } from 'react-native';
+import { ProgramsEmptyScreen } from '~/features/programs/programs-empty-screen';
+import { ProgramsScreen } from '~/features/programs/programs-screen';
+import { useProgramStore } from '~/shared/stores/program-store';
 
 export default function ProgramsTab() {
-  return (
-    <View className="flex-1 bg-background items-center justify-center">
-      <Text variant="h3">프로그램</Text>
-    </View>
-  );
+  const hasActiveProgram = useProgramStore((s) => s.hasActiveProgram());
+
+  if (!hasActiveProgram) {
+    return <ProgramsEmptyScreen />;
+  }
+
+  return <ProgramsScreen />;
 }
