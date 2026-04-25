@@ -354,6 +354,7 @@ function ScreenScratchProgram({ t, api, onBack, onConfirm, onEditRoutine }) {
           프로그램 이름
         </label>
         <input
+          className="pl-field"
           value={name}
           onChange={(e) => setName(e.target.value)}
           style={{
@@ -372,6 +373,7 @@ function ScreenScratchProgram({ t, api, onBack, onConfirm, onEditRoutine }) {
           설명 (선택)
         </label>
         <textarea
+          className="pl-field"
           placeholder="이 프로그램의 목표나 특징을 적어주세요..."
           style={{
             width: '100%', padding: '14px 18px', minHeight: 70,
@@ -410,11 +412,12 @@ function ScreenScratchProgram({ t, api, onBack, onConfirm, onEditRoutine }) {
                   <span style={{ ...numStyle(12), color: t.accentInk }}>D{i+1}</span>
                 </div>
                 <input
+                  className="pl-inline"
                   value={r.name}
                   onChange={(e) => renameRoutine(i, e.target.value)}
                   onClick={(e) => e.stopPropagation()}
                   style={{
-                    flex: 1, minWidth: 0, padding: 0,
+                    flex: 1, minWidth: 0, padding: '2px 0',
                     background: 'transparent', color: t.text,
                     border: 'none', outline: 'none',
                     fontSize: 15, fontWeight: 700, fontFamily: 'inherit',

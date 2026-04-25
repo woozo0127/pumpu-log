@@ -73,6 +73,45 @@
     background: rgba(255,255,255,0.2); cursor: pointer;
   }
   .dot.active { background: #C8FF1C; box-shadow: 0 0 8px #C8FF1C; }
+
+  /* ─── Inputs (focus states) ─────────────────────────────────────── */
+  /* All <input> and <textarea> share the same focus visual language so
+     keyboard/tap focus is unmistakable on dark surfaces. */
+  input, textarea {
+    caret-color: #C8FF1C;
+    transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
+  }
+  input::placeholder, textarea::placeholder {
+    color: rgba(255,255,255,0.28);
+    transition: color .15s ease;
+  }
+  input:focus::placeholder, textarea:focus::placeholder {
+    color: rgba(255,255,255,0.18);
+  }
+  /* Boxed fields (have their own border) — accent border only */
+  input.pl-field:focus, textarea.pl-field:focus {
+    border-color: #C8FF1C !important;
+    background: rgba(200,255,28,0.04) !important;
+    box-shadow: inset 0 0 0 1px rgba(200,255,28,0.4);
+  }
+  /* Borderless fields embedded in cards/headers — underline grows on focus */
+  input.pl-flush:focus, textarea.pl-flush:focus {
+    box-shadow: inset 0 -2px 0 0 #C8FF1C;
+  }
+  /* Title-sized hero input (e.g. routine name) — underline only */
+  input.pl-title:focus {
+    box-shadow: inset 0 -2px 0 0 #C8FF1C;
+  }
+  /* Search row container that wraps an input — light border on focus */
+  .pl-search:focus-within {
+    border-color: #C8FF1C !important;
+    background: rgba(200,255,28,0.04) !important;
+    box-shadow: inset 0 0 0 1px rgba(200,255,28,0.35);
+  }
+  /* Inline name input inside a row card */
+  input.pl-inline:focus {
+    box-shadow: inset 0 -2px 0 0 #C8FF1C;
+  }
 </style>
 </head>
 <body>

@@ -159,12 +159,13 @@ function ScreenSession({ t, onBack }) {
                 )}
               </div>
               <textarea
+                className="pl-flush"
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
                 placeholder="이 세션에 대한 메모를 남겨보세요..."
                 rows={Math.max(2, note.split('\n').length)}
                 style={{
-                  width: '100%', padding: 0,
+                  width: '100%', padding: '2px 0 4px',
                   background: 'transparent', color: t.text,
                   border: 'none', outline: 'none', resize: 'none',
                   fontSize: 13, lineHeight: 1.55,

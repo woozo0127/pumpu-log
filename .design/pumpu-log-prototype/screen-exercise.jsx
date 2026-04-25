@@ -56,6 +56,7 @@ function ScreenRoutineEditor({ t, api, onBack, onSave, onAddExercise }) {
         }}>{Icon.chevL(t.text, 16)}</PressButton>
         <div style={{ fontSize: 13, color: t.textDim, fontWeight: 600 }}>루틴 편집</div>
         <input
+          className="pl-title"
           value={name}
           onChange={(e) => setName(e.target.value)}
           style={{
@@ -241,10 +242,11 @@ function ScreenExerciseLibrary({ t, api, onBack, onConfirm }) {
 
       {/* Search */}
       <div style={{ padding: '16px 20px 0' }}>
-        <div style={{
+        <div className="pl-search" style={{
           display: 'flex', alignItems: 'center', gap: 10,
           background: t.surface, border: `1px solid ${t.line}`,
           borderRadius: 14, padding: '12px 14px',
+          transition: 'border-color .15s ease, box-shadow .15s ease, background-color .15s ease',
         }}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
             <circle cx="11" cy="11" r="7" stroke={t.textFaint} strokeWidth="2"/>

@@ -17,8 +17,8 @@ function ScreenOnboarding({ t, onDone }) {
     },
     {
       eyebrow: '02 / 03',
-      title: '데이터가\n다음 세트를 정해요.',
-      body: '지난 PR과 1RM을 기반으로\nAI가 오늘의 목표 무게를 제안합니다.',
+      title: '지난 기록을 보며\n무게를 정해요.',
+      body: '직전 PR과 1RM이 한눈에 보여서\n오늘의 목표 무게를 빠르게 설정할 수 있어요.',
       art: 'three',
     },
   ];
