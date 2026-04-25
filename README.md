@@ -1,50 +1,63 @@
-# Welcome to your Expo app 👋
+# Pumpu Log
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+![Pumpu Log](./assets/images/readme-cover.png)
 
-## Get started
+운동 루틴과 볼륨을 기록하는 모바일 앱 프로토타입. Expo Router 기반 React Native 프로젝트로, 자체 UI 킷과 프리뷰 라우트 위에서 디자인을 빠르게 검증한다.
 
-1. Install dependencies
+## 기술 스택
 
-   ```bash
-   npm install
-   ```
+- Expo SDK 54 / React Native 0.81 / React 19
+- expo-router (file-based routing, typed routes)
+- TypeScript strict, path alias `#/*`
+- Biome (format/lint), ESLint (expo config)
+- pnpm
 
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## 시작하기
 
 ```bash
-npm run reset-project
+pnpm install
+pnpm start          # Expo Dev Tools
+pnpm ios            # iOS 시뮬레이터
+pnpm android        # Android 에뮬레이터
+pnpm web            # 웹
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+진입 화면(`app/index.tsx`)에서 다음 라우트로 이동할 수 있다.
 
-## Learn more
+- `/preview/gallery` — UI Kit 갤러리
+- `/preview/home` · `/preview/routine` · `/preview/workout` — 화면 프리뷰
+- `/preview/tabs/home` — Liquid Glass 네이티브 탭 프리뷰
 
-To learn more about developing your project with Expo, look at the following resources:
+## 디렉터리 구조
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```
+app/                 # expo-router 라우트
+  index.tsx          # 진입 메뉴
+  preview/           # 화면별 프리뷰 + 갤러리
+components/ui/       # 자체 UI 킷 (badge, card, gradient-hero, ...)
+  theme.ts           # palette / spacing / radius / shadow / motion 토큰
+.design/             # 디자인 프로토타입 (코드 빌드 대상 아님)
+assets/              # 아이콘 · 스플래시 이미지
+```
 
-## Join the community
+## 디자인 토큰
 
-Join our community of developers creating universal apps.
+`components/ui/theme.ts`의 `palette`, `theme`을 단일 출처로 사용한다.
+- `palette.neutral` (0~1000), `lime` 액센트, alpha 셰이드
+- `theme.space` / `theme.radius` / `theme.shadow` / `theme.motion`
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 코드 스타일
+
+- 인덴트는 스페이스 2칸
+- JS/TS 문자열은 작은따옴표, JSX 속성은 큰따옴표 (Biome `quoteStyle` 설정)
+- 경로 import는 `#/...` alias 사용
+
+## 스크립트
+
+| 명령 | 설명 |
+| --- | --- |
+| `pnpm start` | Expo 개발 서버 |
+| `pnpm ios` / `pnpm android` / `pnpm web` | 플랫폼별 실행 |
+| `pnpm lint` | `expo lint` (ESLint) |
+| `pnpm biome` | Biome 검사 |
+| `pnpm biome:fix` | Biome 자동 수정 |
