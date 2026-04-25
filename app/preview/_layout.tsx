@@ -1,7 +1,7 @@
 import { Stack } from 'expo-router';
 import { palette } from '#/components/ui/theme';
 
-export default function RootLayout() {
+export default function PreviewLayout() {
   return (
     <Stack
       screenOptions={{

@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<title>Pumpu Log — 운동 기록</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, "SF Pro Display", "Pretendard", system-ui, sans-serif;
+    background: #0E0F12;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    color: #fff;
+  }
+  /* Stage backdrop with subtle glow */
+  .stage {
+    position: fixed; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(200,255,28,0.08), transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(155,255,0,0.06), transparent 50%),
+      #0A0B0E;
+    overflow: hidden;
+  }
+  .stage::before {
+    content:''; position: absolute; inset: -50%;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+  .row {
+    display: flex; gap: 36px; align-items: center;
+    transform-origin: center center;
+    position: relative;
+    padding: 40px;
+  }
+  .frame-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .frame-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    color: rgba(255,255,255,0.45); text-transform: uppercase;
+    font-family: -apple-system, ui-monospace, monospace;
+  }
+  .frame-label .num { color: #C8FF1C; }
+  /* nav arrows */
+  .nav {
+    position: fixed; top: 50%; transform: translateY(-50%);
+    width: 48px; height: 48px; border-radius: 50%;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+    color: #fff; cursor: pointer; z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(10px);
+    font-size: 18px;
+  }
+  .nav:hover { background: rgba(200,255,28,0.15); border-color: #C8FF1C; }
+  .nav.l { left: 24px; } .nav.r { right: 24px; }
+  /* Bottom screen index */
+  .footer {
+    position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 8px; align-items: center; z-index: 100;
+    padding: 8px 14px; border-radius: 999px;
+    background: rgba(20,22,26,0.7); backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.08);
+    font-size: 12px; color: rgba(255,255,255,0.7); font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .footer b { color: #C8FF1C; font-weight: 800; }
+  .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(255,255,255,0.2); cursor: pointer;
+  }
+  .dot.active { background: #C8FF1C; box-shadow: 0 0 8px #C8FF1C; }
+</style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script type="text/babel" src="ios-frame.jsx"></script>
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel" src="ui-press.jsx"></script>
+  <script type="text/babel" src="screens.jsx"></script>
+  <script type="text/babel" src="screen-onboarding.jsx"></script>
+  <script type="text/babel" src="screen-home.jsx"></script>
+  <script type="text/babel" src="screen-routine.jsx"></script>
+  <script type="text/babel" src="screen-workout.jsx"></script>
+  <script type="text/babel" src="screen-finish.jsx"></script>
+  <script type="text/babel" src="screen-stats.jsx"></script>
+  <script type="text/babel" src="screen-add-program.jsx"></script>
+  <script type="text/babel" src="screen-exercise.jsx"></script>
+  <script type="text/babel" src="screen-session.jsx"></script>
+
+  <script type="text/babel">
+    const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+      "showAllScreens": false,
+      "glow": true
+    }/*EDITMODE-END*/;
+
+    const FLOW = [
+      { id: 'onboarding', label: '온보딩' },
+      { id: 'home',       label: '홈' },
+      { id: 'programs',   label: '프로그램' },
+      { id: 'addProgram', label: '프로그램 추가' },
+      { id: 'templates',  label: '템플릿 선택' },
+      { id: 'templatePreview', label: '템플릿 미리보기' },
+      { id: 'scratchProgram', label: '스크래치 만들기' },
+      { id: 'routineEditor', label: '루틴 편집' },
+      { id: 'exerciseLibrary', label: '운동 라이브러리' },
+      { id: 'program',    label: '프로그램 상세' },
+      { id: 'routine',    label: '루틴 상세' },
+      { id: 'workout',    label: '운동 중' },
+      { id: 'finish',     label: '완료' },
+      { id: 'history',    label: '기록' },
+      { id: 'session',    label: '세션 상세' },
+      { id: 'stats',      label: '통계' },
+    ];
+
+    function Screen({ id, t, layout, onNav, scratchApi }) {
+      switch (id) {
+        case 'onboarding': return <ScreenOnboarding t={t} onDone={() => onNav('home')}/>;
+        case 'home':       return <><ScreenHome t={t} onStart={() => onNav('routine')} onTab={onNav} onRoutine={() => onNav('program')}/><TabBar t={t} current="home" onChange={onNav}/></>;
+        case 'programs':   return <><ScreenPrograms t={t} onPick={() => onNav('program')} onAdd={() => onNav('addProgram')}/><TabBar t={t} current="programs" onChange={onNav}/></>;
+        case 'addProgram': return <ScreenAddProgram t={t} onBack={() => onNav('programs')} onPick={(m) => onNav(m === 'template' ? 'templates' : 'scratchProgram')}/>;
+        case 'templates':  return <ScreenTemplates t={t} onBack={() => onNav('addProgram')} onPick={() => onNav('templatePreview')}/>;
+        case 'templatePreview': return <ScreenTemplatePreview t={t} onBack={() => onNav('templates')} onConfirm={() => onNav('program')}/>;
+        case 'scratchProgram': return <ScreenScratchProgram t={t} api={scratchApi} onBack={() => onNav('addProgram')} onConfirm={() => onNav('program')} onEditRoutine={(i) => { scratchApi.setEditing(i); onNav('routineEditor'); }}/>;
+        case 'routineEditor': return <ScreenRoutineEditor t={t} api={scratchApi} onBack={() => onNav('scratchProgram')} onSave={() => onNav('scratchProgram')} onAddExercise={() => onNav('exerciseLibrary')}/>;
+        case 'exerciseLibrary': return <ScreenExerciseLibrary t={t} api={scratchApi} onBack={() => onNav('routineEditor')} onConfirm={(exs) => { if (exs && exs.length) scratchApi.addExercisesToEditing(exs); onNav('routineEditor'); }}/>;
+        case 'program':    return <ScreenProgram t={t} onBack={() => onNav('programs')} onPickRoutine={() => onNav('routine')} onEditRoutine={() => onNav('routineEditor')}/>;
+        case 'routine':    return <ScreenRoutine t={t} onStart={() => onNav('workout')} onBack={() => onNav('program')} onEdit={() => onNav('routineEditor')}/>;
+        case 'workout':    return <ScreenWorkout t={t} layout={layout} onFinish={() => onNav('finish')} onBack={() => onNav('routine')}/>;
+        case 'finish':     return <ScreenFinish t={t} onDone={() => onNav('home')}/>;
+        case 'history':    return <><ScreenHistory t={t} onPickSession={() => onNav('session')}/><TabBar t={t} current="history" onChange={onNav}/></>;
+        case 'session':    return <ScreenSession t={t} onBack={() => onNav('history')}/>;
+        case 'stats':      return <><ScreenStats t={t}/><TabBar t={t} current="stats" onChange={onNav}/></>;
+        default: return null;
+      }
+    }
+
+    // ─── Scratch program state (persists across screen navigation) ─────────
+    const initialScratch = () => ({
+      name: '내 커스텀 프로그램',
+      routines: [
+        { name: 'Day 1', exercises: [] },
+        { name: 'Day 2', exercises: [] },
+      ],
+      editingIdx: 0,
+    });
+
+    const ScratchCtx = React.createContext(null);
+
+    function App() {
+      const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
+      const [scratch, setScratch] = React.useState(initialScratch);
+      const scratchApi = React.useMemo(() => ({
+        scratch,
+        setName: (name) => setScratch(s => ({ ...s, name })),
+        setRoutines: (routines) => setScratch(s => ({ ...s, routines })),
+        setEditing: (i) => setScratch(s => ({ ...s, editingIdx: i })),
+        addExercisesToEditing: (exs) => setScratch(s => ({
+          ...s,
+          routines: s.routines.map((r, idx) =>
+            idx === s.editingIdx ? { ...r, exercises: [...r.exercises, ...exs] } : r
+          ),
+        })),
+        reset: () => setScratch(initialScratch()),
+      }), [scratch]);
+      const t = T.carbon;
+      const [active, setActive] = React.useState('home');
+
+      const rowRef = React.useRef(null);
+      const [scale, setScale] = React.useState(0.7);
+
+      const fitScale = React.useCallback(() => {
+        if (!rowRef.current) return;
+        const r = rowRef.current;
+        // temporarily reset scale to measure natural size
+        r.style.transform = 'scale(1)';
+        const rw = r.scrollWidth, rh = r.scrollHeight;
+        const vw = window.innerWidth - 80;
+        const vh = window.innerHeight - 80;
+        const s = Math.min(vw / rw, vh / rh, 1);
+        setScale(s);
+        r.style.transform = `scale(${s})`;
+      }, []);
+
+      React.useLayoutEffect(() => {
+        fitScale();
+        const ro = new ResizeObserver(fitScale);
+        ro.observe(document.body);
+        window.addEventListener('resize', fitScale);
+        return () => { ro.disconnect(); window.removeEventListener('resize', fitScale); };
+      }, [fitScale, tweaks.showAllScreens]);
+
+      // Single-screen view focused on current
+      const idx = FLOW.findIndex(f => f.id === active);
+      const next = () => setActive(FLOW[(idx + 1) % FLOW.length].id);
+      const prev = () => setActive(FLOW[(idx - 1 + FLOW.length) % FLOW.length].id);
+
+      const screens = tweaks.showAllScreens ? FLOW : [FLOW[idx]];
+
+      return (
+        <div className="stage">
+          <div className="row" ref={rowRef} style={{ transform: `scale(${scale})` }}>
+            {screens.map((s, i) => (
+              <div className="frame-wrap" key={s.id}>
+                <IOSDevice dark={true}>
+                  <Screen id={s.id} t={t} layout="focus" onNav={setActive} scratchApi={scratchApi}/>
+                </IOSDevice>
+                <div className="frame-label">
+                  <span className="num">{String(FLOW.findIndex(f=>f.id===s.id)+1).padStart(2,'0')}</span> · {s.label}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {!tweaks.showAllScreens && (
+            <>
+              <button className="nav l" onClick={prev}>‹</button>
+              <button className="nav r" onClick={next}>›</button>
+            </>
+          )}
+
+          <div className="footer">
+            {FLOW.map((f, i) => (
+              <div key={f.id} className={`dot ${f.id === active ? 'active' : ''}`} onClick={() => setActive(f.id)}/>
+            ))}
+            <span style={{ marginLeft: 8 }}>
+              <b>{FLOW[idx]?.label}</b>
+              <span style={{ opacity: 0.6, marginLeft: 6 }}>{idx+1}/{FLOW.length}</span>
+            </span>
+          </div>
+
+          <TweaksPanel title="Tweaks">
+            <TweakSection label="뷰"/>
+            <TweakToggle label="모든 스크린 보기"
+              value={tweaks.showAllScreens}
+              onChange={(v) => setTweak('showAllScreens', v)}/>
+
+            <TweakSection label="빠른 이동"/>
+            <TweakSelect label="화면"
+              value={active}
+              options={FLOW.map(f => ({ value: f.id, label: f.label }))}
+              onChange={setActive}/>
+          </TweaksPanel>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
