@@ -1,8 +1,19 @@
 # Pumpu Log
 
-![Pumpu Log](./assets/images/readme-cover.png)
+![Pumpu Log](./assets/images/onboarding-screen.png)
 
-운동 루틴과 볼륨을 기록하는 모바일 앱 프로토타입. Expo Router 기반 React Native 프로젝트로, 자체 UI 킷과 프리뷰 라우트 위에서 디자인을 빠르게 검증한다.
+> **오늘보다 조금 더 무겁게.**
+
+운동 한 세트마다 무게·횟수를 기록하고, 다음 목표를 자동으로 제안받는 모바일 앱이다. 점진적 과부하(progressive overload)를 게임 스코어처럼 시각화해 "어제의 나"를 한 단계씩 넘기는 경험에 집중한다.
+
+## 어떤 앱인가
+
+- **세트 단위 로깅** — 무게·반복수·RPE를 빠르게 입력해 운동 볼륨을 누적한다.
+- **자동 다음 목표** — 직전 세션의 기록을 바탕으로 다음 세트의 추천 무게/횟수를 제시한다.
+- **1RM 트래킹** — 추정 1RM 대비 현재 강도(%1RM)를 원형 차트로 한눈에 본다.
+- **루틴 프리뷰** — 홈 / 루틴 / 워크아웃 화면을 라우트별로 분리해 디자인을 빠르게 검증한다.
+
+다크 배경에 라임 액센트, 큰 숫자 타이포그래피로 "한 번에 한 가지 숫자"만 보게 해 운동 중에도 시선이 흐트러지지 않도록 했다.
 
 ## 기술 스택
 
@@ -37,7 +48,7 @@ app/                 # expo-router 라우트
 components/ui/       # 자체 UI 킷 (badge, card, gradient-hero, ...)
   theme.ts           # palette / spacing / radius / shadow / motion 토큰
 .design/             # 디자인 프로토타입 (코드 빌드 대상 아님)
-assets/              # 아이콘 · 스플래시 이미지
+assets/              # 아이콘 · 스플래시 · 온보딩 이미지
 ```
 
 ## 디자인 토큰
