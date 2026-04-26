@@ -38,8 +38,20 @@ export default function Index() {
         <Link href="/preview" style={{ color: palette.alpha['white-55'] }}>
           (개발) Preview 진열장
         </Link>
+        <Link
+          href="/preview/finish"
+          style={{ color: palette.alpha['white-55'] }}
+        >
+          완료 (preview)
+        </Link>
+        <Link
+          href="/preview/session"
+          style={{ color: palette.alpha['white-55'] }}
+        >
+          세션 상세 (preview)
+        </Link>
         {__DEV__ ? (
-          <Button variant="outline" size="sm" onPress={resetOnboarding}>
+          <Button variant="outline" size="small" onPress={resetOnboarding}>
             (개발) 온보딩 리셋
           </Button>
         ) : null}

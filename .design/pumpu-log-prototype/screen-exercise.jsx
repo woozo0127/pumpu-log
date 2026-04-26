@@ -49,12 +49,8 @@ function ScreenRoutineEditor({ t, api, onBack, onSave, onAddExercise }) {
   return (
     <div style={{ width: '100%', height: '100%', background: t.bg, color: t.text, overflow: 'auto', paddingBottom: 110 }}>
       <div style={{ padding: '60px 20px 8px' }}>
-        <PressButton onClick={onBack} style={{
-          width: 36, height: 36, borderRadius: 12, marginBottom: 18,
-          background: 'rgba(255,255,255,0.06)', border: 'none', cursor: 'pointer',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0,
-        }}>{Icon.chevL(t.text, 16)}</PressButton>
-        <div style={{ fontSize: 13, color: t.textDim, fontWeight: 600 }}>루틴 편집</div>
+        <BackButton t={t} onClick={onBack}/>
+        <div style={{ ...TYPE.bodySm, color: t.textDim }}>루틴 편집</div>
         <input
           className="pl-title"
           value={name}
@@ -95,7 +91,7 @@ function ScreenRoutineEditor({ t, api, onBack, onSave, onAddExercise }) {
                   </svg>
                 </div>
                 <div style={{
-                  width: 38, height: 38, borderRadius: 11,
+                  width: 38, height: 38, borderRadius: 12,
                   background: 'rgba(255,255,255,0.06)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   flexShrink: 0,
@@ -116,16 +112,14 @@ function ScreenRoutineEditor({ t, api, onBack, onSave, onAddExercise }) {
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 10, paddingTop: 10, borderTop: `1px solid ${t.line}` }}>
                 <span style={{ fontSize: 11, color: t.textDim, fontWeight: 700, letterSpacing: 0.5 }}>세트 수</span>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <PressButton onClick={() => setSets(i, -1)} style={{
-                    width: 28, height: 28, borderRadius: 9, border: 'none',
+                  <PressButton onClick={() => setSets(i, -1)} size="xs" iconOnly style={{
                     background: 'rgba(255,255,255,0.06)', color: t.text, cursor: 'pointer',
-                    fontSize: 16, fontWeight: 700,
+                    border: 'none', fontWeight: 700,
                   }}>−</PressButton>
                   <span style={{ ...numStyle(15), minWidth: 24, textAlign: 'center', color: t.text }}>{ex.sets}</span>
-                  <PressButton onClick={() => setSets(i, 1)} style={{
-                    width: 28, height: 28, borderRadius: 9, border: 'none',
+                  <PressButton onClick={() => setSets(i, 1)} size="xs" iconOnly style={{
                     background: t.accent, color: t.accentInk, cursor: 'pointer',
-                    fontSize: 16, fontWeight: 700,
+                    border: 'none', fontWeight: 700,
                   }}>+</PressButton>
                 </div>
               </div>
@@ -151,11 +145,9 @@ function ScreenRoutineEditor({ t, api, onBack, onSave, onAddExercise }) {
         padding: '14px 20px 26px',
         background: `linear-gradient(to top, ${t.bg}, ${t.bg}f8 70%, ${t.bg}00)`,
       }}>
-        <PressButton onClick={onSave} style={{
-          width: '100%', height: 56, borderRadius: 18, border: 'none', cursor: 'pointer',
+        <PressButton onClick={onSave} size="md" style={{
+          width: '100%', border: 'none', cursor: 'pointer', 
           background: t.accent, color: t.accentInk,
-          fontSize: 16, fontWeight: 800, letterSpacing: -0.2,
-          boxShadow: `0 8px 24px ${t.accent}55`,
         }}>저장</PressButton>
       </div>
     </div>
@@ -231,13 +223,9 @@ function ScreenExerciseLibrary({ t, api, onBack, onConfirm }) {
   return (
     <div style={{ width: '100%', height: '100%', background: t.bg, color: t.text, overflow: 'auto', paddingBottom: selCount > 0 ? 110 : 30 }}>
       <div style={{ padding: '60px 20px 8px' }}>
-        <PressButton onClick={onBack} style={{
-          width: 36, height: 36, borderRadius: 12, marginBottom: 18,
-          background: 'rgba(255,255,255,0.06)', border: 'none', cursor: 'pointer',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0,
-        }}>{Icon.chevL(t.text, 16)}</PressButton>
-        <div style={{ fontSize: 13, color: t.textDim, fontWeight: 600 }}>운동 라이브러리</div>
-        <h1 style={{ fontSize: 28, fontWeight: 800, letterSpacing: -0.8, margin: '4px 0 0' }}>운동 추가</h1>
+        <BackButton t={t} onClick={onBack}/>
+        <div style={{ ...TYPE.bodySm, color: t.textDim }}>운동 라이브러리</div>
+        <h1 style={{ ...TYPE.displayMd, margin: '4px 0 0' }}>운동 추가</h1>
       </div>
 
       {/* Search */}
@@ -245,7 +233,7 @@ function ScreenExerciseLibrary({ t, api, onBack, onConfirm }) {
         <div className="pl-search" style={{
           display: 'flex', alignItems: 'center', gap: 10,
           background: t.surface, border: `1px solid ${t.line}`,
-          borderRadius: 14, padding: '12px 14px',
+          borderRadius: 16, padding: '12px 14px',
           transition: 'border-color .15s ease, box-shadow .15s ease, background-color .15s ease',
         }}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -333,11 +321,9 @@ function ScreenExerciseLibrary({ t, api, onBack, onConfirm }) {
             const picked = library.filter(ex => selected[ex.id])
               .map(ex => ({ id: ex.id, name: ex.name, sub: ex.sub, sets: 3 }));
             onConfirm && onConfirm(picked);
-          }} style={{
-            width: '100%', height: 56, borderRadius: 18, border: 'none', cursor: 'pointer',
+          }} size="md" style={{
+            width: '100%', border: 'none', cursor: 'pointer',
             background: t.accent, color: t.accentInk,
-            fontSize: 16, fontWeight: 800, letterSpacing: -0.2,
-            boxShadow: `0 8px 24px ${t.accent}55`,
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
           }}>
             {selCount}개 운동 추가

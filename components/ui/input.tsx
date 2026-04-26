@@ -6,18 +6,11 @@ type FocusHandler = NonNullable<TextInputProps['onFocus']>;
 type BlurHandler = NonNullable<TextInputProps['onBlur']>;
 
 type InputProps = TextInputProps & {
-  size?: 'default' | 'lg';
   invalid?: boolean;
   iconLeft?: ReactNode;
 };
 
-const HEIGHT: Record<NonNullable<InputProps['size']>, number> = {
-  default: 44,
-  lg: 54,
-};
-
 export function Input({
-  size = 'default',
   invalid,
   iconLeft,
   style,
@@ -47,7 +40,7 @@ export function Input({
       style={[
         styles.wrap,
         {
-          height: HEIGHT[size],
+          height: 44,
           borderColor,
         },
       ]}
@@ -59,7 +52,7 @@ export function Input({
         onBlur={handleBlur}
         style={[
           styles.field,
-          { color: palette.neutral[0], fontSize: size === 'lg' ? 16 : 14 },
+          { color: palette.neutral[0], fontSize: 14 },
           style,
         ]}
         {...rest}

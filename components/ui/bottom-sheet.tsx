@@ -16,10 +16,12 @@ const BEZIER = Easing.bezier(0.32, 0.72, 0.24, 1.1);
 type BottomSheetProps = {
   open: boolean;
   onClose: () => void;
-  children: ReactNode;
+  children?: ReactNode;
+  header?: ReactNode;
+  footer?: ReactNode;
 };
 
-function Root({ open, onClose, children }: BottomSheetProps) {
+function Root({ open, onClose, children, header, footer }: BottomSheetProps) {
   const [mounted, setMounted] = useState(open);
   const opacity = useSharedValue(0);
   const translateY = useSharedValue(24);
@@ -53,7 +55,11 @@ function Root({ open, onClose, children }: BottomSheetProps) {
 
   return (
     <View style={StyleSheet.absoluteFillObject} pointerEvents="box-none">
-      <Pressable style={StyleSheet.absoluteFillObject} onPress={onClose}>
+      <Pressable
+        testID="bottom-sheet-scrim"
+        style={StyleSheet.absoluteFillObject}
+        onPress={onClose}
+      >
         <Animated.View style={[StyleSheet.absoluteFillObject, scrimStyle]}>
           <BlurView
             intensity={50}
@@ -71,16 +77,18 @@ function Root({ open, onClose, children }: BottomSheetProps) {
       </Pressable>
       <View style={styles.bottomWrap} pointerEvents="box-none">
         <Animated.View style={[styles.sheet, sheetStyle]}>
+          {header ? (
+            <View style={{ marginBottom: theme.space.sm, gap: 8 }}>
+              {header}
+            </View>
+          ) : null}
           {children}
+          {footer ? (
+            <View style={{ marginTop: theme.space.xl, gap: 10 }}>{footer}</View>
+          ) : null}
         </Animated.View>
       </View>
     </View>
-  );
-}
-
-function Header({ children }: { children: ReactNode }) {
-  return (
-    <View style={{ marginBottom: theme.space.sm, gap: 4 }}>{children}</View>
   );
 }
 
@@ -108,10 +116,6 @@ function Description({ children }: { children: ReactNode }) {
   );
 }
 
-function Footer({ children }: { children: ReactNode }) {
-  return <View style={{ marginTop: theme.space.xl, gap: 10 }}>{children}</View>;
-}
-
 const styles = StyleSheet.create({
   bottomWrap: {
     position: 'absolute',
@@ -129,9 +133,7 @@ const styles = StyleSheet.create({
 });
 
 export const BottomSheet = Object.assign(Root, {
-  Header,
   Eyebrow,
   Title,
   Description,
-  Footer,
 });

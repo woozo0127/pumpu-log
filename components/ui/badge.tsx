@@ -7,6 +7,7 @@ type BadgeVariant = 'default' | 'secondary' | 'outline' | 'accent';
 
 type BadgeProps = {
   variant?: BadgeVariant;
+  size?: 'small' | 'medium';
   children: ReactNode;
 };
 
@@ -23,12 +24,21 @@ const FG: Record<BadgeVariant, string> = {
   accent: palette.neutral[950],
 };
 
-export function Badge({ variant = 'default', children }: BadgeProps) {
+export function Badge({
+  variant = 'default',
+  size = 'medium',
+  children,
+}: BadgeProps) {
+  const HEIGHT = size === 'small' ? 18 : 22;
+  const PADDING_H = size === 'small' ? 7 : 8;
+  const FONT_SIZE = size === 'small' ? 9 : 11;
+  const LETTER_SPACING = size === 'small' ? 0.4 : 1.2;
+
   return (
     <View
       style={{
-        height: 18,
-        paddingHorizontal: 7,
+        height: HEIGHT,
+        paddingHorizontal: PADDING_H,
         borderRadius: theme.radius.pill,
         backgroundColor: BG[variant],
         borderWidth: variant === 'outline' ? 1 : 0,
@@ -41,7 +51,15 @@ export function Badge({ variant = 'default', children }: BadgeProps) {
       }}
     >
       {typeof children === 'string' ? (
-        <Text typography="label" color={FG[variant]}>
+        <Text
+          style={{
+            fontSize: FONT_SIZE,
+            fontWeight: '700',
+            letterSpacing: LETTER_SPACING,
+            textTransform: 'uppercase',
+          }}
+          color={FG[variant]}
+        >
           {children}
         </Text>
       ) : (

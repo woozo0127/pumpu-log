@@ -125,6 +125,7 @@
   <script type="text/babel" src="tweaks-panel.jsx"></script>
   <script type="text/babel" src="ui-press.jsx"></script>
   <script type="text/babel" src="screens.jsx"></script>
+  <script type="text/babel" src="tokens.jsx"></script>
   <script type="text/babel" src="screen-onboarding.jsx"></script>
   <script type="text/babel" src="screen-home.jsx"></script>
   <script type="text/babel" src="screen-routine.jsx"></script>
@@ -134,11 +135,13 @@
   <script type="text/babel" src="screen-add-program.jsx"></script>
   <script type="text/babel" src="screen-exercise.jsx"></script>
   <script type="text/babel" src="screen-session.jsx"></script>
+  <script type="text/babel" src="screen-settings.jsx"></script>
 
   <script type="text/babel">
     const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
       "showAllScreens": false,
-      "glow": true
+      "glow": true,
+      "emptyState": false
     }/*EDITMODE-END*/;
 
     const FLOW = [
@@ -158,13 +161,15 @@
       { id: 'history',    label: '기록' },
       { id: 'session',    label: '세션 상세' },
       { id: 'stats',      label: '통계' },
+      { id: 'settings',   label: '설정' },
     ];
 
-    function Screen({ id, t, layout, onNav, scratchApi }) {
+    function Screen({ id, t, layout, onNav, scratchApi, empty }) {
       switch (id) {
         case 'onboarding': return <ScreenOnboarding t={t} onDone={() => onNav('home')}/>;
-        case 'home':       return <><ScreenHome t={t} onStart={() => onNav('routine')} onTab={onNav} onRoutine={() => onNav('program')}/><TabBar t={t} current="home" onChange={onNav}/></>;
-        case 'programs':   return <><ScreenPrograms t={t} onPick={() => onNav('program')} onAdd={() => onNav('addProgram')}/><TabBar t={t} current="programs" onChange={onNav}/></>;
+        case 'home':       return <><ScreenHome t={t} empty={empty} onStart={() => onNav('routine')} onTab={onNav} onRoutine={() => onNav('program')} onAddProgram={() => onNav('addProgram')} onSettings={() => onNav('settings')}/><TabBar t={t} current="home" onChange={onNav}/></>;
+        case 'settings':   return <ScreenSettings t={t} onBack={() => onNav('home')}/>;
+        case 'programs':   return <><ScreenPrograms t={t} empty={empty} onPick={() => onNav('program')} onAdd={() => onNav('addProgram')}/><TabBar t={t} current="programs" onChange={onNav}/></>;
         case 'addProgram': return <ScreenAddProgram t={t} onBack={() => onNav('programs')} onPick={(m) => onNav(m === 'template' ? 'templates' : 'scratchProgram')}/>;
         case 'templates':  return <ScreenTemplates t={t} onBack={() => onNav('addProgram')} onPick={() => onNav('templatePreview')}/>;
         case 'templatePreview': return <ScreenTemplatePreview t={t} onBack={() => onNav('templates')} onConfirm={() => onNav('program')}/>;
@@ -175,9 +180,9 @@
         case 'routine':    return <ScreenRoutine t={t} onStart={() => onNav('workout')} onBack={() => onNav('program')} onEdit={() => onNav('routineEditor')}/>;
         case 'workout':    return <ScreenWorkout t={t} layout={layout} onFinish={() => onNav('finish')} onBack={() => onNav('routine')}/>;
         case 'finish':     return <ScreenFinish t={t} onDone={() => onNav('home')}/>;
-        case 'history':    return <><ScreenHistory t={t} onPickSession={() => onNav('session')}/><TabBar t={t} current="history" onChange={onNav}/></>;
+        case 'history':    return <><ScreenHistory t={t} empty={empty} onPickSession={() => onNav('session')}/><TabBar t={t} current="history" onChange={onNav}/></>;
         case 'session':    return <ScreenSession t={t} onBack={() => onNav('history')}/>;
-        case 'stats':      return <><ScreenStats t={t}/><TabBar t={t} current="stats" onChange={onNav}/></>;
+        case 'stats':      return <><ScreenStats t={t} empty={empty}/><TabBar t={t} current="stats" onChange={onNav}/></>;
         default: return null;
       }
     }
@@ -250,7 +255,7 @@
             {screens.map((s, i) => (
               <div className="frame-wrap" key={s.id}>
                 <IOSDevice dark={true}>
-                  <Screen id={s.id} t={t} layout="focus" onNav={setActive} scratchApi={scratchApi}/>
+                  <Screen id={s.id} t={t} layout="focus" onNav={setActive} scratchApi={scratchApi} empty={tweaks.emptyState}/>
                 </IOSDevice>
                 <div className="frame-label">
                   <span className="num">{String(FLOW.findIndex(f=>f.id===s.id)+1).padStart(2,'0')}</span> · {s.label}
@@ -281,6 +286,9 @@
             <TweakToggle label="모든 스크린 보기"
               value={tweaks.showAllScreens}
               onChange={(v) => setTweak('showAllScreens', v)}/>
+            <TweakToggle label="빈 상태 (신규 유저)"
+              value={tweaks.emptyState}
+              onChange={(v) => setTweak('emptyState', v)}/>
 
             <TweakSection label="빠른 이동"/>
             <TweakSelect label="화면"

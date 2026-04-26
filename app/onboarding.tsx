@@ -175,7 +175,7 @@ export default function OnboardingScreen() {
         </GestureDetector>
         <View style={{ paddingHorizontal: 20, paddingBottom: 50 }}>
           <PaginationBar step={step} total={slides.length} />
-          <Button variant="default" size="lg" onPress={onCTA}>
+          <Button variant="default" size="medium" onPress={onCTA}>
             {step < slides.length - 1 ? '계속' : '시작하기'}
           </Button>
         </View>

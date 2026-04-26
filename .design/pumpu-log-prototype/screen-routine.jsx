@@ -22,13 +22,7 @@ function ScreenRoutine({ t, onStart, onBack }) {
           position: 'absolute', right: -60, bottom: -60, width: 240, height: 240,
           borderRadius: '50%', background: 'rgba(255,255,255,0.15)', filter: 'blur(40px)',
         }}/>
-        <PressButton onClick={onBack} style={{
-          width: 36, height: 36, borderRadius: 12, marginBottom: 18,
-          background: 'rgba(0,0,0,0.15)', border: 'none', cursor: 'pointer',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0,
-        }}>
-          {Icon.chevL(t.accentInk, 16)}
-        </PressButton>
+        <BackButton t={t} onClick={onBack} onHero/>
         <div style={{ position: 'relative' }}>
           <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1.5, opacity: 0.7 }}>DAY 4 · PUSH</div>
           <h1 style={{ fontSize: 34, fontWeight: 800, letterSpacing: -1.2, margin: '6px 0 14px' }}>Push Day</h1>
@@ -53,11 +47,11 @@ function ScreenRoutine({ t, onStart, onBack }) {
           {exercises.map((ex, i) => (
             <div key={i} style={{
               background: t.surface, border: `1px solid ${t.line}`,
-              borderRadius: 18, padding: 16,
+              borderRadius: 16, padding: 16,
             }}>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
                 <div style={{
-                  width: 32, height: 32, borderRadius: 10,
+                  width: 32, height: 32, borderRadius: 12,
                   background: 'rgba(255,255,255,0.06)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   flexShrink: 0,
@@ -92,13 +86,11 @@ function ScreenRoutine({ t, onStart, onBack }) {
         padding: '12px 20px 38px',
         background: `linear-gradient(180deg, ${t.bg}00 0%, ${t.bg} 30%)`,
       }}>
-        <PressButton onClick={onStart} style={{
-          width: '100%', height: 60, borderRadius: 22,
+        <PressButton onClick={onStart} size="md" style={{
+          width: '100%', borderRadius: 24, 
           background: t.accent, color: t.accentInk,
           border: 'none', cursor: 'pointer',
-          fontSize: 17, fontWeight: 700, letterSpacing: -0.2,
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-          boxShadow: `0 10px 40px ${t.accent}55`,
         }}>
           {Icon.play(t.accentInk, 16)} 운동 시작
         </PressButton>

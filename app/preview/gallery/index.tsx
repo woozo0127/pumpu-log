@@ -1,21 +1,26 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { GalleryRow } from '#/app/preview/gallery/_components/gallery-row';
 import { GallerySection } from '#/app/preview/gallery/_components/gallery-section';
 import { Badge } from '#/components/ui/badge';
 import { Button } from '#/components/ui/button';
 import { Card } from '#/components/ui/card';
+import { EmptyState } from '#/components/ui/empty-state';
 import { ExerciseCard } from '#/components/ui/exercise-card';
+import { Glow } from '#/components/ui/glow';
 import { GradientHero } from '#/components/ui/gradient-hero';
-import { Icon, type IconName } from '#/components/ui/icon';
+import { DumbbellIcon, Icon, type IconName } from '#/components/ui/icon';
 import { Input } from '#/components/ui/input';
 import { Label } from '#/components/ui/label';
+import { ListRow } from '#/components/ui/list-row';
 import { Progress } from '#/components/ui/progress';
 import { ScreenContainer } from '#/components/ui/screen-container';
 import { ScrollArea } from '#/components/ui/scroll-area';
 import { SectionHeader } from '#/components/ui/section-header';
 import { Separator } from '#/components/ui/separator';
+import { StatTile } from '#/components/ui/stat-tile';
 import { Stepper } from '#/components/ui/stepper';
+import { Switch } from '#/components/ui/switch';
 import { Tabs } from '#/components/ui/tabs';
 import { Text } from '#/components/ui/text';
 import { palette, theme } from '#/components/ui/theme';
@@ -46,6 +51,27 @@ const ICON_NAMES: IconName[] = [
 const TYPO_TOKENS: TypographyToken[] = Object.keys(
   typography,
 ) as TypographyToken[];
+
+function SwitchDemo() {
+  const [v, setV] = React.useState(false);
+  return (
+    <View style={{ flexDirection: 'row', gap: 12 }}>
+      <Switch value={v} onValueChange={setV} />
+      <Switch value={true} onValueChange={() => {}} />
+      <Switch value={false} onValueChange={() => {}} disabled />
+    </View>
+  );
+}
+
+function SegmentDemo() {
+  const [v, setV] = React.useState<'kg' | 'lb'>('kg');
+  return (
+    <ToggleGroup type="single" value={v} onValueChange={setV}>
+      <ToggleGroup.Item value="kg">kg</ToggleGroup.Item>
+      <ToggleGroup.Item value="lb">lb</ToggleGroup.Item>
+    </ToggleGroup>
+  );
+}
 
 export default function Gallery() {
   const [tab, setTab] = useState<'a' | 'b' | 'c'>('a');
@@ -82,11 +108,23 @@ export default function Gallery() {
               ))}
             </View>
           </GalleryRow>
+          <GalleryRow label="Color · green">
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>
+              <Swatch label="green.400" color={palette.green[400]} />
+            </View>
+          </GalleryRow>
           <GalleryRow label="Color · alpha (overlays)">
             <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>
               {Object.entries(palette.alpha).map(([k, v]) => (
                 <Swatch key={k} label={`alpha.${k}`} color={v} />
               ))}
+            </View>
+          </GalleryRow>
+          <GalleryRow label="Color · alpha new (white-3/6/12)">
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>
+              <Swatch label="white-3" color={palette.alpha['white-3']} />
+              <Swatch label="white-6" color={palette.alpha['white-6']} />
+              <Swatch label="white-12" color={palette.alpha['white-12']} />
             </View>
           </GalleryRow>
           <GalleryRow label="Spacing">
@@ -199,35 +237,52 @@ export default function Gallery() {
           </GalleryRow>
           <GalleryRow label="Button · sizes">
             <View style={{ gap: 8 }}>
-              <Button size="sm">sm</Button>
-              <Button size="default">default</Button>
-              <Button size="lg">lg</Button>
+              <Button size="xsmall">xsmall</Button>
+              <Button size="small">small</Button>
+              <Button size="medium">medium</Button>
             </View>
           </GalleryRow>
           <GalleryRow label="Card">
-            <Card>
-              <Card.Header>
-                <Card.Title>이번 주 볼륨</Card.Title>
-                <Card.Description>지난 주 7,360kg</Card.Description>
-              </Card.Header>
-              <Card.Content>
-                <Text typography="num-lg" color={palette.neutral[0]}>
-                  8,240
-                </Text>
-              </Card.Content>
+            <Card
+              header={
+                <>
+                  <Card.Title>이번 주 볼륨</Card.Title>
+                  <Card.Description>지난 주 7,360kg</Card.Description>
+                </>
+              }
+            >
+              <Text typography="num-lg" color={palette.neutral[0]}>
+                8,240
+              </Text>
             </Card>
           </GalleryRow>
           <GalleryRow label="Card · glow">
-            <Card glow>
-              <Card.Title>강조 카드</Card.Title>
-            </Card>
+            <Glow>
+              <Card>
+                <Card.Title>강조 카드</Card.Title>
+              </Card>
+            </Glow>
           </GalleryRow>
           <GalleryRow label="Badge">
-            <View style={{ flexDirection: 'row', gap: 6 }}>
-              <Badge>default</Badge>
-              <Badge variant="secondary">secondary</Badge>
-              <Badge variant="outline">outline</Badge>
-              <Badge variant="accent">accent</Badge>
+            <View style={{ gap: 8 }}>
+              <View style={{ flexDirection: 'row', gap: 6 }}>
+                <Badge>default</Badge>
+                <Badge variant="secondary">secondary</Badge>
+                <Badge variant="outline">outline</Badge>
+                <Badge variant="accent">accent</Badge>
+              </View>
+              <View style={{ flexDirection: 'row', gap: 8 }}>
+                <Badge size="small">default</Badge>
+                <Badge size="small" variant="secondary">
+                  secondary
+                </Badge>
+                <Badge size="small" variant="outline">
+                  outline
+                </Badge>
+                <Badge size="small" variant="accent">
+                  accent
+                </Badge>
+              </View>
             </View>
           </GalleryRow>
           <GalleryRow label="Separator">
@@ -239,7 +294,6 @@ export default function Gallery() {
           <GalleryRow label="Input">
             <View style={{ gap: 8 }}>
               <Input placeholder="기본" />
-              <Input placeholder="lg" size="lg" />
               <Input placeholder="invalid" invalid />
             </View>
           </GalleryRow>
@@ -295,6 +349,9 @@ export default function Gallery() {
               ))}
             </ScrollArea>
           </GalleryRow>
+          <GalleryRow label="Switch">
+            <SwitchDemo />
+          </GalleryRow>
           <GalleryRow label="Tabs">
             <Tabs value={tab} onValueChange={setTab}>
               <Tabs.List>
@@ -319,6 +376,85 @@ export default function Gallery() {
               <ToggleGroup.Item value="one">One</ToggleGroup.Item>
               <ToggleGroup.Item value="two">Two</ToggleGroup.Item>
             </ToggleGroup>
+          </GalleryRow>
+          <GalleryRow label="ToggleGroup · single (kg/lb)">
+            <SegmentDemo />
+          </GalleryRow>
+          <GalleryRow label="ListRow">
+            <View style={{ gap: 8 }}>
+              <ListRow
+                title="단순 NavRow"
+                subtitle="서브"
+                chevron
+                divider
+                onPress={() => {}}
+              />
+              <ListRow
+                title="Switch trailing"
+                trailing={<Switch value={true} onValueChange={() => {}} />}
+                divider
+              />
+              <ListRow
+                title="ToggleGroup trailing"
+                trailing={
+                  <ToggleGroup
+                    type="single"
+                    value="kg"
+                    onValueChange={() => {}}
+                  >
+                    <ToggleGroup.Item value="kg">kg</ToggleGroup.Item>
+                    <ToggleGroup.Item value="lb">lb</ToggleGroup.Item>
+                  </ToggleGroup>
+                }
+                divider
+              />
+              <ListRow
+                surface
+                title="Surface 단독"
+                subtitle="border + bg"
+                chevron
+                onPress={() => {}}
+              />
+              <ListRow
+                leading={<DumbbellIcon color={palette.lime[400]} />}
+                title={
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      gap: 6,
+                    }}
+                  >
+                    <ListRow.Title>풍부 본문</ListRow.Title>
+                    <Badge size="small" variant="accent">
+                      PR
+                    </Badge>
+                  </View>
+                }
+                subtitle="dot-notation + Badge 인라인"
+                chevron
+                onPress={() => {}}
+              />
+            </View>
+          </GalleryRow>
+          <GalleryRow label="Glow · variants">
+            <View style={{ gap: 12 }}>
+              <Glow>
+                <Card>
+                  <Card.Title>default Glow</Card.Title>
+                </Card>
+              </Glow>
+              <Glow variant="card">
+                <Card>
+                  <Card.Title>card Glow</Card.Title>
+                </Card>
+              </Glow>
+              <Glow color="#FF7A00">
+                <Card>
+                  <Card.Title>color override</Card.Title>
+                </Card>
+              </Glow>
+            </View>
           </GalleryRow>
         </GallerySection>
 
@@ -380,6 +516,65 @@ export default function Gallery() {
                 { w: 10, r: 12 },
               ]}
             />
+          </GalleryRow>
+          <GalleryRow label="EmptyState">
+            <View style={{ gap: 12 }}>
+              <EmptyState
+                eyebrow="아직 프로그램이 없어요"
+                title={`첫 프로그램을 만들거나\n템플릿에서 골라보세요.`}
+                body="템플릿으로 빠르게 시작하거나, 처음부터 직접 만들 수 있어요."
+                footer={<Button>프로그램 추가</Button>}
+              />
+              <EmptyState
+                eyebrow={
+                  <EmptyState.Eyebrow
+                    icon={<DumbbellIcon color={palette.lime[400]} size={14} />}
+                  >
+                    커스텀 eyebrow
+                  </EmptyState.Eyebrow>
+                }
+                title="dot-notation 명시"
+                body="아이콘 좌측 부착"
+              />
+            </View>
+          </GalleryRow>
+          <GalleryRow label="StatTile">
+            <View style={{ gap: 12 }}>
+              <View style={{ flexDirection: 'row', gap: 8 }}>
+                <View style={{ flex: 1 }}>
+                  <StatTile surface label="이번 주" value={4} unit="회" />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <StatTile surface label="연속" value={12} unit="일" />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <StatTile surface label="볼륨" value={8.2} unit="k kg" />
+                </View>
+              </View>
+              <View style={{ flexDirection: 'row', gap: 16 }}>
+                <StatTile label="운동" value={6} />
+                <View
+                  style={{
+                    width: 1,
+                    backgroundColor: palette.alpha['black-15'],
+                  }}
+                />
+                <StatTile label="세트" value={20} />
+                <View
+                  style={{
+                    width: 1,
+                    backgroundColor: palette.alpha['black-15'],
+                  }}
+                />
+                <StatTile label="시간" value={52} unit="분" />
+              </View>
+              <StatTile
+                surface
+                label="큰 숫자 override"
+                value={<StatTile.Value typography="num-lg">52</StatTile.Value>}
+                unit="분"
+              />
+            </View>
           </GalleryRow>
         </GallerySection>
       </ScrollView>

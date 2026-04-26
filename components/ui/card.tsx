@@ -1,15 +1,15 @@
 import type { ReactNode } from 'react';
 import { View, type ViewProps } from 'react-native';
 import { Text } from '#/components/ui/text';
-import { palette, type Space, theme } from '#/components/ui/theme';
+import { palette, theme } from '#/components/ui/theme';
 
 type CardProps = ViewProps & {
-  glow?: boolean;
-  padding?: Space | number;
+  header?: ReactNode;
+  footer?: ReactNode;
+  children?: ReactNode;
 };
 
-function Root({ glow, padding = 'lg', style, children, ...rest }: CardProps) {
-  const padValue = typeof padding === 'number' ? padding : theme.space[padding];
+function Root({ header, footer, style, children, ...rest }: CardProps) {
   return (
     <View
       style={[
@@ -18,21 +18,28 @@ function Root({ glow, padding = 'lg', style, children, ...rest }: CardProps) {
           borderRadius: theme.radius['2xl'],
           borderWidth: 1,
           borderColor: palette.alpha['white-7'],
-          padding: padValue,
+          padding: theme.space.lg,
         },
-        glow ? theme.shadow.glow : null,
         style,
       ]}
       {...rest}
     >
+      {header ? (
+        <View style={{ marginBottom: theme.space.md, gap: 4 }}>{header}</View>
+      ) : null}
       {children}
+      {footer ? (
+        <View
+          style={{
+            marginTop: theme.space.md,
+            flexDirection: 'row',
+            gap: theme.space.sm,
+          }}
+        >
+          {footer}
+        </View>
+      ) : null}
     </View>
-  );
-}
-
-function Header({ children }: { children: ReactNode }) {
-  return (
-    <View style={{ marginBottom: theme.space.md, gap: 4 }}>{children}</View>
   );
 }
 
@@ -52,28 +59,7 @@ function Description({ children }: { children: ReactNode }) {
   );
 }
 
-function Content({ children }: { children: ReactNode }) {
-  return <View>{children}</View>;
-}
-
-function Footer({ children }: { children: ReactNode }) {
-  return (
-    <View
-      style={{
-        marginTop: theme.space.md,
-        flexDirection: 'row',
-        gap: theme.space.sm,
-      }}
-    >
-      {children}
-    </View>
-  );
-}
-
 export const Card = Object.assign(Root, {
-  Header,
   Title,
   Description,
-  Content,
-  Footer,
 });

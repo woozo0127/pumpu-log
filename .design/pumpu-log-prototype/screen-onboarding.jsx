@@ -59,18 +59,16 @@ function ScreenOnboarding({ t, onDone }) {
           {slides.map((_, i) => (
             <div key={i} style={{
               height: 4, flex: i === step ? 2 : 1,
-              borderRadius: 2,
+              borderRadius: 4,
               background: i === step ? t.accent : 'rgba(255,255,255,0.12)',
               transition: 'all .3s ease',
             }} />
           ))}
         </div>
-        <PressButton onClick={() => step < 2 ? setStep(step + 1) : onDone()} style={{
-          width: '100%', height: 60, borderRadius: 22,
+        <PressButton onClick={() => step < 2 ? setStep(step + 1) : onDone()} size="md" style={{
+          width: '100%', borderRadius: 24,
           background: t.accent, color: t.accentInk,
           border: 'none', cursor: 'pointer',
-          fontSize: 17, fontWeight: 700, letterSpacing: -0.2,
-          boxShadow: `0 0 40px ${t.accent}55`,
         }}>
           {step < 2 ? '계속' : '시작하기'}
         </PressButton>
@@ -125,7 +123,7 @@ function ArtCheck({ t }) {
           opacity: s.done ? 0.55 : 1,
         }}>
           <div style={{
-            width: 28, height: 28, borderRadius: 10,
+            width: 28, height: 28, borderRadius: 12,
             background: s.done ? t.accent : 'transparent',
             border: s.done ? 'none' : `1.5px solid ${t.textFaint}`,
             display: 'flex', alignItems: 'center', justifyContent: 'center',

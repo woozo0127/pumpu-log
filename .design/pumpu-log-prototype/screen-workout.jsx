@@ -65,11 +65,7 @@ function ScreenWorkout({ t, layout = 'focus', onFinish, onBack }) {
     <div style={{ width: '100%', height: '100%', background: t.bg, color: t.text, display: 'flex', flexDirection: 'column' }}>
       {/* Top bar — workout meta */}
       <div style={{ padding: '56px 16px 12px', display: 'flex', alignItems: 'center', gap: 10 }}>
-        <PressButton onClick={() => setConfirmExit(true)} style={{
-          width: 36, height: 36, borderRadius: 12, padding: 0,
-          background: 'rgba(255,255,255,0.06)', border: 'none', cursor: 'pointer',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-        }}>{Icon.chevL(t.text, 16)}</PressButton>
+        <BackButton t={t} onClick={() => setConfirmExit(true)} mb={0}/>
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 11, fontWeight: 700, color: t.textDim, letterSpacing: 1.2, textTransform: 'uppercase' }}>PUSH DAY</div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 1 }}>
@@ -87,7 +83,7 @@ function ScreenWorkout({ t, layout = 'focus', onFinish, onBack }) {
 
       {/* Progress bar */}
       <div style={{ padding: '0 16px 8px' }}>
-        <div style={{ height: 4, borderRadius: 2, background: 'rgba(255,255,255,0.06)', overflow: 'hidden' }}>
+        <div style={{ height: 4, borderRadius: 4, background: 'rgba(255,255,255,0.06)', overflow: 'hidden' }}>
           <div style={{ width: `${progress*100}%`, height: '100%', background: t.accent, transition: 'width .3s' }}/>
         </div>
       </div>
@@ -201,19 +197,18 @@ function ExitDialog({ t, onCancel, onConfirm }) {
 
         {/* Buttons — same height/radius/weight as primary CTA, color swapped */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 22 }}>
-          <PressButton onClick={handleConfirm} style={{
-            width: '100%', height: 56, borderRadius: 18,
+          <PressButton onClick={handleConfirm} size="md" style={{
+            width: '100%', 
             background: DANGER, color: '#fff',
             border: 'none', cursor: 'pointer',
             fontSize: 16, fontWeight: 700, letterSpacing: -0.2,
           }}>
             그만두기
           </PressButton>
-          <PressButton onClick={handleCancel} style={{
-            width: '100%', height: 56, borderRadius: 18,
+          <PressButton onClick={handleCancel} size="md" style={{
+            width: '100%',
             background: 'rgba(255,255,255,0.06)', color: t.text,
             border: `1px solid ${t.line}`, cursor: 'pointer',
-            fontSize: 16, fontWeight: 700, letterSpacing: -0.2,
           }}>
             계속 운동하기
           </PressButton>
@@ -254,12 +249,11 @@ function FocusLayout({ t, ex, active, updateSet, completeSet }) {
           onPlus={() => updateSet(active, 'r', 1)}/>
 
         {/* Complete button */}
-        <PressButton onClick={() => completeSet(active)} style={{
-          width: '100%', height: 56, borderRadius: 18, marginTop: 18,
+        <PressButton onClick={() => completeSet(active)} size="md" style={{
+          width: '100%', marginTop: 18,
           background: set.done ? 'rgba(255,255,255,0.06)' : t.accent,
           color: set.done ? t.text : t.accentInk,
           border: set.done ? `1px solid ${t.line}` : 'none', cursor: 'pointer',
-          fontSize: 16, fontWeight: 700, letterSpacing: -0.2,
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
         }}>
           {set.done ? '완료 취소' : <>{Icon.check(t.accentInk, 18)} 세트 완료</>}
@@ -277,7 +271,7 @@ function FocusLayout({ t, ex, active, updateSet, completeSet }) {
             opacity: s.done ? 0.5 : 1,
           }}>
             <div style={{
-              width: 22, height: 22, borderRadius: 7,
+              width: 22, height: 22, borderRadius: 8,
               background: s.done ? t.accent : 'transparent',
               border: s.done ? 'none' : `1.5px solid ${t.textFaint}`,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -285,7 +279,7 @@ function FocusLayout({ t, ex, active, updateSet, completeSet }) {
             }}>
               {s.done ? Icon.check(t.accentInk, 14) : <span style={{ fontSize: 11, fontWeight: 700, color: t.textFaint }}>{i+1}</span>}
             </div>
-            <span style={{ fontSize: 13, color: t.textDim, fontWeight: 600, flex: 1 }}>SET {i+1}</span>
+            <span style={{ ...TYPE.bodySm, color: t.textDim, flex: 1 }}>SET {i+1}</span>
             <span style={{ ...numStyle(15), color: t.text }}>{s.w}<span style={{ fontSize: 10, color: t.textDim, marginLeft: 3, fontWeight: 600 }}>kg</span></span>
             <span style={{ ...numStyle(15), color: t.text, marginLeft: 14 }}>{s.r}<span style={{ fontSize: 10, color: t.textDim, marginLeft: 3, fontWeight: 600 }}>회</span></span>
           </div>
@@ -298,7 +292,7 @@ function FocusLayout({ t, ex, active, updateSet, completeSet }) {
 function Stepper({ t, label, value, unit, onMinus, onPlus }) {
   return (
     <div style={{
-      background: 'rgba(255,255,255,0.03)', borderRadius: 18,
+      background: 'rgba(255,255,255,0.03)', borderRadius: 16,
       padding: '14px 8px',
       display: 'flex', alignItems: 'center', gap: 8,
     }}>
@@ -315,7 +309,7 @@ function Stepper({ t, label, value, unit, onMinus, onPlus }) {
   );
 }
 const btnSq = (t) => ({
-  width: 48, height: 48, borderRadius: 14, padding: 0,
+  width: 48, height: 48, borderRadius: 16, padding: 0,
   background: t.surfaceHi, border: `1px solid ${t.line}`, cursor: 'pointer',
   display: 'flex', alignItems: 'center', justifyContent: 'center',
 });
@@ -355,7 +349,7 @@ function ListLayout({ t, ex, updateSet, completeSet }) {
               opacity: s.done ? 0.55 : 1,
             }}>
               <div style={{
-                width: 28, height: 28, borderRadius: 9,
+                width: 28, height: 28, borderRadius: 8,
                 background: s.done ? t.accent : 'rgba(255,255,255,0.06)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 margin: '0 auto',
@@ -386,19 +380,19 @@ function InlineStepper({ t, value, unit, onMinus, onPlus }) {
   return (
     <div style={{
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-      background: 'rgba(255,255,255,0.04)', borderRadius: 11, padding: '4px 6px',
+      background: 'rgba(255,255,255,0.04)', borderRadius: 12, padding: '4px 6px',
     }}>
-      <PressButton onClick={onMinus} style={miniBtn(t)}>{Icon.minus(t.textDim, 14)}</PressButton>
+      <PressButton onClick={onMinus} size="xs" iconOnly style={miniBtn(t)}>{Icon.minus(t.textDim, 14)}</PressButton>
       <div style={{ flex: 1, textAlign: 'center' }}>
         <span style={{ ...numStyle(18), color: t.text }}>{value}</span>
         <span style={{ fontSize: 10, color: t.textDim, marginLeft: 2, fontWeight: 600 }}>{unit}</span>
       </div>
-      <PressButton onClick={onPlus} style={miniBtn(t)}>{Icon.plus(t.textDim, 14)}</PressButton>
+      <PressButton onClick={onPlus} size="xs" iconOnly style={miniBtn(t)}>{Icon.plus(t.textDim, 14)}</PressButton>
     </div>
   );
 }
+// xs prop owns 32×32 sizing; this stays for color/background only.
 const miniBtn = (t) => ({
-  width: 28, height: 28, borderRadius: 8, padding: 0,
   background: 'transparent', border: 'none', cursor: 'pointer',
   display: 'flex', alignItems: 'center', justifyContent: 'center',
 });
@@ -432,15 +426,15 @@ function RestTimer({ t, time, goal, onAdd, onSkip, onSetGoal }) {
         <div style={{ fontSize: 11, fontWeight: 700, color: t.accent, letterSpacing: 1.2 }}>휴식 중</div>
         <div style={{ fontSize: 14, fontWeight: 600, color: t.text, marginTop: 2 }}>다음 세트까지</div>
         <div style={{ display: 'flex', gap: 6, marginTop: 8 }}>
-          <PressButton onClick={onAdd} style={pillBtn(t)}>+15초</PressButton>
-          <PressButton onClick={onSkip} style={pillBtn(t, true)}>건너뛰기</PressButton>
+          <PressButton onClick={onAdd} size="xs" style={pillBtn(t)}>+15초</PressButton>
+          <PressButton onClick={onSkip} size="xs" style={pillBtn(t, true)}>건너뛰기</PressButton>
         </div>
       </div>
     </div>
   );
 }
+// xs prop owns 32×32 sizing; this stays for color/background only.
 const pillBtn = (t, dim) => ({
-  height: 30, padding: '0 12px', borderRadius: 10,
   background: dim ? 'rgba(255,255,255,0.06)' : t.accent,
   color: dim ? t.text : t.accentInk,
   border: 'none', cursor: 'pointer',

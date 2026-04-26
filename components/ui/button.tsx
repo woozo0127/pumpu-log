@@ -13,7 +13,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { Text } from '#/components/ui/text';
-import { palette, theme } from '#/components/ui/theme';
+import { palette } from '#/components/ui/theme';
 
 type ButtonVariant =
   | 'default'
@@ -21,7 +21,7 @@ type ButtonVariant =
   | 'ghost'
   | 'outline'
   | 'destructive';
-type ButtonSize = 'default' | 'sm' | 'lg' | 'icon';
+type ButtonSize = 'xsmall' | 'small' | 'medium';
 
 type ButtonProps = PressableProps & {
   variant?: ButtonVariant;
@@ -33,22 +33,24 @@ type ButtonProps = PressableProps & {
 };
 
 const HEIGHT: Record<ButtonSize, number> = {
-  sm: 36,
-  default: 44,
-  lg: 60,
-  icon: 36,
+  xsmall: 32,
+  small: 40,
+  medium: 56,
 };
 const RADIUS: Record<ButtonSize, number> = {
-  sm: theme.radius.md,
-  default: theme.radius.lg,
-  lg: theme.radius['2xl'],
-  icon: theme.radius.md,
+  xsmall: 10,
+  small: 12,
+  medium: 18,
 };
 const PADDING_H: Record<ButtonSize, number> = {
-  sm: 12,
-  default: 16,
-  lg: 24,
-  icon: 0,
+  xsmall: 10,
+  small: 14,
+  medium: 22,
+};
+const FONT_SIZE: Record<ButtonSize, number> = {
+  xsmall: 12,
+  small: 13,
+  medium: 16,
 };
 
 const VARIANT_BG: Record<ButtonVariant, string> = {
@@ -73,7 +75,7 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 export function Button({
   variant = 'default',
-  size = 'default',
+  size = 'medium',
   loading,
   iconLeft,
   iconRight,
@@ -125,9 +127,6 @@ export function Button({
           borderColor:
             variant === 'outline' ? palette.alpha['white-7'] : 'transparent',
           opacity: isDisabled ? 0.5 : 1,
-          ...(variant === 'default' && size === 'lg'
-            ? theme.shadow.glow
-            : null),
         },
         typeof style === 'function' ? null : style,
         animatedStyle,
@@ -141,7 +140,10 @@ export function Button({
           <>
             {iconLeft}
             {typeof children === 'string' ? (
-              <Text typography="heading" color={fg}>
+              <Text
+                style={{ fontSize: FONT_SIZE[size], fontWeight: '700' }}
+                color={fg}
+              >
                 {children}
               </Text>
             ) : (

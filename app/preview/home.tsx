@@ -91,7 +91,7 @@ export default function HomePreview() {
           style={{ marginTop: theme.space.xl, flexDirection: 'row', gap: 8 }}
         >
           {STATS.map((s) => (
-            <Card key={s.label} padding="md" style={{ flex: 1 }}>
+            <Card key={s.label} style={{ flex: 1 }}>
               <Text typography="label" color={palette.alpha['white-55']}>
                 {s.label}
               </Text>
@@ -114,7 +114,7 @@ export default function HomePreview() {
           ))}
         </View>
 
-        <Card padding="lg" style={{ marginTop: theme.space.xl }}>
+        <Card style={{ marginTop: theme.space.xl }}>
           <View
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}
           >

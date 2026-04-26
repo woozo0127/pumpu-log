@@ -34,12 +34,8 @@ function ScreenAddProgram({ t, onBack, onPick }) {
   return (
     <div style={{ width: '100%', height: '100%', background: t.bg, color: t.text, overflow: 'auto' }}>
       <div style={{ padding: '60px 20px 8px' }}>
-        <PressButton onClick={onBack} style={{
-          width: 36, height: 36, borderRadius: 12, marginBottom: 18,
-          background: 'rgba(255,255,255,0.06)', border: 'none', cursor: 'pointer',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0,
-        }}>{Icon.chevL(t.text, 16)}</PressButton>
-        <div style={{ fontSize: 13, color: t.textDim, fontWeight: 600 }}>새 프로그램</div>
+        <BackButton t={t} onClick={onBack}/>
+        <div style={{ ...TYPE.bodySm, color: t.textDim }}>새 프로그램</div>
         <h1 style={{ fontSize: 30, fontWeight: 800, letterSpacing: -1.0, margin: '4px 0 8px', lineHeight: 1.15 }}>
           어떻게<br/>시작할까요?
         </h1>
@@ -51,7 +47,7 @@ function ScreenAddProgram({ t, onBack, onPick }) {
       <div style={{ padding: '24px 20px 40px', display: 'flex', flexDirection: 'column', gap: 12 }}>
         {methods.map((m) => (
           <PressRow key={m.id} onClick={() => onPick && onPick(m.id)} style={{
-            background: t.surface, borderRadius: 22, padding: 20,
+            background: t.surface, borderRadius: 24, padding: 20,
             border: `1px solid ${t.line}`, cursor: 'pointer',
             position: 'relative', overflow: 'hidden',
           }}>
@@ -113,13 +109,9 @@ function ScreenTemplates({ t, onBack, onPick }) {
   return (
     <div style={{ width: '100%', height: '100%', background: t.bg, color: t.text, overflow: 'auto', paddingBottom: 110 }}>
       <div style={{ padding: '60px 20px 8px' }}>
-        <PressButton onClick={onBack} style={{
-          width: 36, height: 36, borderRadius: 12, marginBottom: 18,
-          background: 'rgba(255,255,255,0.06)', border: 'none', cursor: 'pointer',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0,
-        }}>{Icon.chevL(t.text, 16)}</PressButton>
-        <div style={{ fontSize: 13, color: t.textDim, fontWeight: 600 }}>STEP 1 / 2 · 템플릿 선택</div>
-        <h1 style={{ fontSize: 28, fontWeight: 800, letterSpacing: -0.8, margin: '4px 0 0' }}>어떤 프로그램?</h1>
+        <BackButton t={t} onClick={onBack}/>
+        <div style={{ ...TYPE.bodySm, color: t.textDim }}>STEP 1 / 2 · 템플릿 선택</div>
+        <h1 style={{ ...TYPE.displayMd, margin: '4px 0 0' }}>어떤 프로그램?</h1>
       </div>
 
       {/* Filter chips */}
@@ -142,12 +134,12 @@ function ScreenTemplates({ t, onBack, onPick }) {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {g.items.map((p) => (
               <PressRow key={p.id} onClick={() => onPick && onPick(p)} style={{
-                background: t.surface, borderRadius: 18, padding: 16,
+                background: t.surface, borderRadius: 16, padding: 16,
                 border: `1px solid ${t.line}`, cursor: 'pointer',
                 display: 'flex', alignItems: 'center', gap: 14,
               }}>
                 <div style={{
-                  width: 44, height: 44, borderRadius: 13,
+                  width: 44, height: 44, borderRadius: 12,
                   background: 'rgba(255,255,255,0.06)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   flexShrink: 0,
@@ -210,11 +202,7 @@ function ScreenTemplatePreview({ t, onBack, onConfirm }) {
           position: 'absolute', right: -60, bottom: -60, width: 240, height: 240,
           borderRadius: '50%', background: 'rgba(255,255,255,0.15)', filter: 'blur(40px)',
         }}/>
-        <PressButton onClick={onBack} style={{
-          width: 36, height: 36, borderRadius: 12, marginBottom: 18,
-          background: 'rgba(0,0,0,0.15)', border: 'none', cursor: 'pointer',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0,
-        }}>{Icon.chevL(t.accentInk, 16)}</PressButton>
+        <BackButton t={t} onClick={onBack} onHero/>
         <div style={{ position: 'relative' }}>
           <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1.5, opacity: 0.7 }}>STEP 2 / 2 · 일정 설정</div>
           <h1 style={{ fontSize: 28, fontWeight: 800, letterSpacing: -0.9, margin: '6px 0 8px' }}>{program.name}</h1>
@@ -239,7 +227,7 @@ function ScreenTemplatePreview({ t, onBack, onConfirm }) {
               borderBottom: i < arr.length - 1 ? `1px solid ${t.line}` : 'none',
             }}>
               <div style={{
-                width: 36, height: 36, borderRadius: 10,
+                width: 36, height: 36, borderRadius: 12,
                 background: t.accent,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 flexShrink: 0,
@@ -275,7 +263,7 @@ function ScreenTemplatePreview({ t, onBack, onConfirm }) {
                 {routine ? (
                   <>
                     <div style={{
-                      width: 28, height: 28, borderRadius: 9, background: t.accent,
+                      width: 28, height: 28, borderRadius: 8, background: t.accent,
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       flexShrink: 0,
                     }}>
@@ -286,7 +274,7 @@ function ScreenTemplatePreview({ t, onBack, onConfirm }) {
                 ) : (
                   <>
                     <div style={{
-                      width: 28, height: 28, borderRadius: 9, background: 'rgba(255,255,255,0.05)',
+                      width: 28, height: 28, borderRadius: 8, background: 'rgba(255,255,255,0.05)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       flexShrink: 0,
                     }}>
@@ -308,11 +296,9 @@ function ScreenTemplatePreview({ t, onBack, onConfirm }) {
         padding: '14px 20px 26px',
         background: `linear-gradient(to top, ${t.bg}, ${t.bg}f8 70%, ${t.bg}00)`,
       }}>
-        <PressButton onClick={onConfirm} style={{
-          width: '100%', height: 56, borderRadius: 18, border: 'none', cursor: 'pointer',
+        <PressButton onClick={onConfirm} size="md" style={{
+          width: '100%', border: 'none', cursor: 'pointer', 
           background: t.accent, color: t.accentInk,
-          fontSize: 16, fontWeight: 800, letterSpacing: -0.2,
-          boxShadow: `0 8px 24px ${t.accent}55`,
         }}>프로그램 시작</PressButton>
       </div>
     </div>
@@ -339,13 +325,9 @@ function ScreenScratchProgram({ t, api, onBack, onConfirm, onEditRoutine }) {
   return (
     <div style={{ width: '100%', height: '100%', background: t.bg, color: t.text, overflow: 'auto', paddingBottom: 110 }}>
       <div style={{ padding: '60px 20px 8px' }}>
-        <PressButton onClick={onBack} style={{
-          width: 36, height: 36, borderRadius: 12, marginBottom: 18,
-          background: 'rgba(255,255,255,0.06)', border: 'none', cursor: 'pointer',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0,
-        }}>{Icon.chevL(t.text, 16)}</PressButton>
-        <div style={{ fontSize: 13, color: t.textDim, fontWeight: 600 }}>처음부터 만들기</div>
-        <h1 style={{ fontSize: 28, fontWeight: 800, letterSpacing: -0.8, margin: '4px 0 0' }}>새 프로그램</h1>
+        <BackButton t={t} onClick={onBack}/>
+        <div style={{ ...TYPE.bodySm, color: t.textDim }}>처음부터 만들기</div>
+        <h1 style={{ ...TYPE.displayMd, margin: '4px 0 0' }}>새 프로그램</h1>
       </div>
 
       {/* Name input */}
@@ -404,7 +386,7 @@ function ScreenScratchProgram({ t, api, onBack, onConfirm, onEditRoutine }) {
                 display: 'flex', alignItems: 'center', gap: 12,
               }}>
                 <div style={{
-                  width: 36, height: 36, borderRadius: 11,
+                  width: 36, height: 36, borderRadius: 12,
                   background: t.accent,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   flexShrink: 0,
@@ -475,11 +457,9 @@ function ScreenScratchProgram({ t, api, onBack, onConfirm, onEditRoutine }) {
         padding: '14px 20px 26px',
         background: `linear-gradient(to top, ${t.bg}, ${t.bg}f8 70%, ${t.bg}00)`,
       }}>
-        <PressButton onClick={onConfirm} style={{
-          width: '100%', height: 56, borderRadius: 18, border: 'none', cursor: 'pointer',
+        <PressButton onClick={onConfirm} size="md" style={{
+          width: '100%', border: 'none', cursor: 'pointer', 
           background: t.accent, color: t.accentInk,
-          fontSize: 16, fontWeight: 800, letterSpacing: -0.2,
-          boxShadow: `0 8px 24px ${t.accent}55`,
         }}>프로그램 만들기</PressButton>
       </div>
     </div>

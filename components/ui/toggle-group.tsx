@@ -58,7 +58,17 @@ function Root<T>(props: ToggleGroupProps<T>) {
         };
   return (
     <ToggleGroupContext.Provider value={ctx}>
-      <View style={{ flexDirection: 'row', gap: 6 }}>{props.children}</View>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignSelf: 'flex-start',
+          backgroundColor: palette.alpha['white-6'],
+          padding: 2,
+          borderRadius: theme.radius.md,
+        }}
+      >
+        {props.children}
+      </View>
     </ToggleGroupContext.Provider>
   );
 }
@@ -118,7 +128,7 @@ function Item<T>({ value, children }: ItemProps<T>) {
           paddingHorizontal: 14,
           paddingVertical: 8,
           borderRadius: theme.radius.md,
-          backgroundColor: active ? palette.lime[400] : palette.neutral[900],
+          backgroundColor: active ? palette.lime[400] : 'transparent',
         },
         animatedStyle,
       ]}

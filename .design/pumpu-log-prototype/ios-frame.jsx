@@ -143,7 +143,7 @@ function IOSListRow({ title, detail, icon, chevron = true, isLast = false, dark 
     }}>
       {icon && (
         <div style={{
-          width: 30, height: 30, borderRadius: 7, background: icon,
+          width: 30, height: 30, borderRadius: 8, background: icon,
           marginRight: 12, flexShrink: 0,
         }} />
       )}
@@ -177,7 +177,7 @@ function IOSList({ header, children, dark = false }) {
         }}>{header}</div>
       )}
       <div style={{
-        background: bg, borderRadius: 26,
+        background: bg, borderRadius: 28,
         margin: '0 16px', overflow: 'hidden',
       }}>{children}</div>
     </div>
@@ -246,7 +246,7 @@ function IOSKeyboard({ dark = false }) {
 
   const key = (content, { w, flex, ret, fs = 25, k } = {}) => (
     <div key={k} style={{
-      height: 42, borderRadius: 8.5,
+      height: 42, borderRadius: 8,
       flex: flex ? 1 : undefined, width: w, minWidth: 0,
       background: ret ? '#08f' : keyBg,
       boxShadow: '0 1px 0 rgba(0,0,0,0.075)',
@@ -264,7 +264,7 @@ function IOSKeyboard({ dark = false }) {
 
   return (
     <div style={{
-      position: 'relative', zIndex: 15, borderRadius: 27, overflow: 'hidden',
+      position: 'relative', zIndex: 15, borderRadius: 28, overflow: 'hidden',
       padding: '11px 0 2px',
       display: 'flex', flexDirection: 'column', alignItems: 'center',
       boxShadow: dark
@@ -273,13 +273,13 @@ function IOSKeyboard({ dark = false }) {
     }}>
       {/* liquid glass bg — same recipe as nav pills */}
       <div style={{
-        position: 'absolute', inset: 0, borderRadius: 27,
+        position: 'absolute', inset: 0, borderRadius: 28,
         backdropFilter: 'blur(12px) saturate(180%)',
         WebkitBackdropFilter: 'blur(12px) saturate(180%)',
         background: dark ? 'rgba(120,120,128,0.14)' : 'rgba(255,255,255,0.25)',
       }} />
       <div style={{
-        position: 'absolute', inset: 0, borderRadius: 27,
+        position: 'absolute', inset: 0, borderRadius: 28,
         boxShadow: dark
           ? 'inset 1.5px 1.5px 1px rgba(255,255,255,0.15)'
           : 'inset 1.5px 1.5px 1px rgba(255,255,255,0.7), inset -1px -1px 1px rgba(255,255,255,0.4)',

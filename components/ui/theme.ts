@@ -16,8 +16,12 @@ export const palette = {
   lime: { 300: '#E4FF66', 400: '#D4FF00', 500: '#B8E000' },
   orange: { 400: '#FF7A00' },
   red: { 400: '#FF3B5C' },
+  green: { 400: '#7AE0AA' },
   alpha: {
+    'white-3': 'rgba(255,255,255,0.04)',
+    'white-6': 'rgba(255,255,255,0.06)',
     'white-7': 'rgba(255,255,255,0.07)',
+    'white-12': 'rgba(255,255,255,0.12)',
     'white-32': 'rgba(255,255,255,0.32)',
     'white-55': 'rgba(255,255,255,0.55)',
     'black-15': 'rgba(0,0,0,0.15)',

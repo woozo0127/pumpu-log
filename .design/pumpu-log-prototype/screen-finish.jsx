@@ -54,14 +54,14 @@ function ScreenFinish({ t, onDone }) {
       {/* PR badge */}
       <div style={{ padding: '0 20px' }}>
         <div style={{
-          background: t.grad, borderRadius: 22,
+          background: t.grad, borderRadius: 24,
           padding: 16,
           display: 'flex', alignItems: 'center', gap: 14,
           color: t.accentInk,
           boxShadow: `0 12px 40px ${t.accent}44`,
         }}>
           <div style={{
-            width: 48, height: 48, borderRadius: 14,
+            width: 48, height: 48, borderRadius: 16,
             background: 'rgba(0,0,0,0.15)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}>
@@ -79,7 +79,7 @@ function ScreenFinish({ t, onDone }) {
         {/* Quick stats — duration + sets */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 10 }}>
           <div style={{
-            background: t.surface, borderRadius: 18,
+            background: t.surface, borderRadius: 16,
             border: `1px solid ${t.line}`, padding: '14px 16px',
           }}>
             <div style={{ fontSize: 10, fontWeight: 800, color: t.textDim, letterSpacing: 1.4 }}>운동 시간</div>
@@ -89,7 +89,7 @@ function ScreenFinish({ t, onDone }) {
             </div>
           </div>
           <div style={{
-            background: t.surface, borderRadius: 18,
+            background: t.surface, borderRadius: 16,
             border: `1px solid ${t.line}`, padding: '14px 16px',
           }}>
             <div style={{ fontSize: 10, fontWeight: 800, color: t.textDim, letterSpacing: 1.4 }}>완료 세트</div>
@@ -101,7 +101,7 @@ function ScreenFinish({ t, onDone }) {
         </div>
 
         <div style={{
-          background: t.surface, borderRadius: 22,
+          background: t.surface, borderRadius: 24,
           border: `1px solid ${t.line}`, padding: '20px 22px',
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 14 }}>
@@ -148,12 +148,10 @@ function ScreenFinish({ t, onDone }) {
 
       <div style={{ height: 20 }}/>
       <div style={{ padding: '0 20px 40px' }}>
-        <PressButton onClick={onDone} style={{
-          width: '100%', height: 60, borderRadius: 22,
+        <PressButton onClick={onDone} size="md" style={{
+          width: '100%', borderRadius: 24, 
           background: t.accent, color: t.accentInk,
           border: 'none', cursor: 'pointer',
-          fontSize: 17, fontWeight: 700, letterSpacing: -0.2,
-          boxShadow: `0 10px 40px ${t.accent}44`,
         }}>홈으로</PressButton>
       </div>
     </div>

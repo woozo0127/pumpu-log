@@ -10,6 +10,9 @@ const ENTRIES: { href: string; label: string }[] = [
   { href: '/preview/routine', label: 'Preview · Routine' },
   { href: '/preview/workout', label: 'Preview · Workout' },
   { href: '/preview/tabs/home', label: 'Preview · Native Tabs (Liquid Glass)' },
+  { href: '/preview/settings', label: 'Preview · Settings' },
+  { href: '/preview/finish', label: 'Preview · Finish' },
+  { href: '/preview/session', label: 'Preview · Session' },
 ];
 
 export default function PreviewIndex() {

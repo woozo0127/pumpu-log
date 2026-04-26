@@ -1,8 +1,12 @@
 // screen-home.jsx — Home / Dashboard
 
-function ScreenHome({ t, onStart, onTab, onRoutine }) {
+function ScreenHome({ t, onStart, onTab, onRoutine, onAddProgram, onSettings, empty = false }) {
   const today = '4월 25일 · 토요일';
-  const stats = [
+  const stats = empty ? [
+    { label: '이번 주', value: '0', unit: '/ 0회' },
+    { label: '연속', value: '0', unit: '일' },
+    { label: '총 볼륨', value: '0', unit: 'kg' },
+  ] : [
     { label: '이번 주', value: '4', unit: '/ 5회' },
     { label: '연속', value: '12', unit: '일' },
     { label: '총 볼륨', value: '8.2', unit: 'k kg' },
@@ -12,72 +16,114 @@ function ScreenHome({ t, onStart, onTab, onRoutine }) {
     <div style={{ width: '100%', height: '100%', background: t.bg, color: t.text, overflow: 'auto', paddingBottom: 110 }}>
       {/* Header */}
       <div style={{ padding: '60px 20px 16px' }}>
-        <div style={{ fontSize: 13, color: t.textDim, fontWeight: 600, letterSpacing: 0.2 }}>{today}</div>
+        <div style={{ ...TYPE.bodySm, color: t.textDim, letterSpacing: 0.2 }}>{today}</div>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 4 }}>
-          <h1 style={{ fontSize: 28, fontWeight: 800, letterSpacing: -0.8, margin: 0 }}>오늘의 운동</h1>
-          <PressButton style={{
-            width: 40, height: 40, borderRadius: 14,
+          <h1 style={{ ...TYPE.displayMd, margin: 0 }}>오늘의 운동</h1>
+          <PressButton onClick={onSettings} style={{
+            width: 40, height: 40, borderRadius: 16,
             background: t.surface, border: `1px solid ${t.line}`,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'pointer', padding: 0,
           }}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-              <path d="M15 17h5l-1.4-1.4A2 2 0 0118 14.2V11a6 6 0 00-5-5.9V4a1 1 0 10-2 0v1.1A6 6 0 006 11v3.2c0 .5-.2 1-.6 1.4L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke={t.text} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke={t.text} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33h0a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51h0a1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82v0a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" stroke={t.text} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </PressButton>
         </div>
       </div>
 
-      {/* Hero — Today's workout */}
+      {/* Hero — Today's workout (or empty state CTA) */}
       <div style={{ padding: '4px 20px 0' }}>
-        <PressRow onClick={onStart} style={{
-          background: t.grad, borderRadius: 28, padding: '22px 22px 24px',
-          position: 'relative', overflow: 'hidden', cursor: 'pointer',
-          boxShadow: `0 20px 50px -10px ${t.accent}55`,
-        }}>
-          {/* Decorative glow */}
-          <div style={{
-            position: 'absolute', right: -40, top: -40, width: 180, height: 180,
-            borderRadius: '50%', background: 'rgba(255,255,255,0.18)', filter: 'blur(20px)',
-          }}/>
-          <div style={{ position: 'relative' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 700, color: t.accentInk, letterSpacing: 1.2, opacity: 0.7 }}>
-              {Icon.flame(t.accentInk, 14)}
-              오늘의 운동 · DAY 4
-            </div>
-            <div style={{ marginTop: 12, fontSize: 26, fontWeight: 800, color: t.accentInk, letterSpacing: -0.8, lineHeight: 1.1 }}>
-              Push Day<br/>가슴 · 어깨 · 삼두
-            </div>
-            <div style={{ marginTop: 16, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <div style={{ display: 'flex', gap: 14, color: t.accentInk }}>
-                <div>
-                  <div style={{ fontSize: 10, fontWeight: 700, opacity: 0.6, letterSpacing: 1 }}>운동</div>
-                  <div style={{ ...numStyle(18, 800), marginTop: 2 }}>6</div>
-                </div>
-                <div style={{ width: 1, background: 'rgba(0,0,0,0.15)' }}/>
-                <div>
-                  <div style={{ fontSize: 10, fontWeight: 700, opacity: 0.6, letterSpacing: 1 }}>예상</div>
-                  <div style={{ ...numStyle(18, 800), marginTop: 2 }}>52<span style={{ fontSize: 11, marginLeft: 2 }}>분</span></div>
+        {empty ? (
+          <PressRow onClick={onAddProgram} style={{
+            background: t.surface, borderRadius: 28, padding: '26px 22px',
+            position: 'relative', overflow: 'hidden', cursor: 'pointer',
+            border: `1.5px dashed ${t.line}`,
+          }}>
+            {/* dotted grid background */}
+            <div style={{
+              position: 'absolute', inset: 0,
+              backgroundImage: `radial-gradient(circle, ${t.textFaint} 1px, transparent 1px)`,
+              backgroundSize: '14px 14px',
+              opacity: 0.25,
+              pointerEvents: 'none',
+            }}/>
+            <div style={{ position: 'relative' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 700, color: t.accent, letterSpacing: 1.2 }}>
+                {Icon.flame(t.accent, 14)}
+                시작하기
+              </div>
+              <div style={{ marginTop: 12, fontSize: 24, fontWeight: 800, color: t.text, letterSpacing: -0.6, lineHeight: 1.2 }}>
+                첫 프로그램을<br/>추가해보세요.
+              </div>
+              <div style={{ marginTop: 8, fontSize: 13, color: t.textDim, fontWeight: 500, lineHeight: 1.5 }}>
+                템플릿을 고르거나 직접 만들 수 있어요.
+              </div>
+              <div style={{ marginTop: 18, display: 'flex', alignItems: 'center', gap: 10 }}>
+                <div style={{
+                  height: 44, padding: '0 18px', borderRadius: 24,
+                  background: t.accent, color: t.accentInk,
+                  display: 'flex', alignItems: 'center', gap: 8,
+                  fontSize: 14, fontWeight: 700,
+                }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 5v14M5 12h14" stroke={t.accentInk} strokeWidth="2.4" strokeLinecap="round"/>
+                  </svg>
+                  프로그램 추가
                 </div>
               </div>
-              <div style={{
-                height: 44, padding: '0 18px', borderRadius: 22,
-                background: t.accentInk, color: t.accent,
-                display: 'flex', alignItems: 'center', gap: 8,
-                fontSize: 14, fontWeight: 700,
-              }}>
-                {Icon.play(t.accent, 14)} 시작
+            </div>
+          </PressRow>
+        ) : (
+          <PressRow onClick={onStart} style={{
+            background: t.grad, borderRadius: 28, padding: '22px 22px 24px',
+            position: 'relative', overflow: 'hidden', cursor: 'pointer',
+          }}>
+            {/* Decorative glow */}
+            <div style={{
+              position: 'absolute', right: -40, top: -40, width: 180, height: 180,
+              borderRadius: '50%', background: 'rgba(255,255,255,0.18)', filter: 'blur(20px)',
+            }}/>
+            <div style={{ position: 'relative' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 700, color: t.accentInk, letterSpacing: 1.2, opacity: 0.7 }}>
+                {Icon.flame(t.accentInk, 14)}
+                오늘의 운동 · DAY 4
+              </div>
+              <div style={{ marginTop: 12, fontSize: 26, fontWeight: 800, color: t.accentInk, letterSpacing: -0.8, lineHeight: 1.1 }}>
+                Push Day<br/>가슴 · 어깨 · 삼두
+              </div>
+              <div style={{ marginTop: 16, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', gap: 14, color: t.accentInk }}>
+                  <div>
+                    <div style={{ fontSize: 10, fontWeight: 700, opacity: 0.6, letterSpacing: 1 }}>운동</div>
+                    <div style={{ ...numStyle(18, 800), marginTop: 2 }}>6</div>
+                  </div>
+                  <div style={{ width: 1, background: 'rgba(0,0,0,0.15)' }}/>
+                  <div>
+                    <div style={{ fontSize: 10, fontWeight: 700, opacity: 0.6, letterSpacing: 1 }}>예상</div>
+                    <div style={{ ...numStyle(18, 800), marginTop: 2 }}>52<span style={{ fontSize: 11, marginLeft: 2 }}>분</span></div>
+                  </div>
+                </div>
+                <div style={{
+                  height: 44, padding: '0 18px', borderRadius: 24,
+                  background: t.accentInk, color: t.accent,
+                  display: 'flex', alignItems: 'center', gap: 8,
+                  fontSize: 14, fontWeight: 700,
+                }}>
+                  {Icon.play(t.accent, 14)} 시작
+                </div>
               </div>
             </div>
-          </div>
-        </PressRow>
+          </PressRow>
+        )}
       </div>
 
       {/* Stats row */}
       <div style={{ display: 'flex', gap: 8, padding: '20px 20px 0' }}>
         {stats.map((s, i) => (
           <div key={i} style={{
-            flex: 1, background: t.surface, borderRadius: 18,
+            flex: 1, background: t.surface, borderRadius: 16,
             padding: '14px 12px', border: `1px solid ${t.line}`,
           }}>
             <div style={{ fontSize: 10, fontWeight: 700, color: t.textDim, letterSpacing: 1, textTransform: 'uppercase' }}>{s.label}</div>
@@ -96,16 +142,18 @@ function ScreenHome({ t, onStart, onTab, onRoutine }) {
             <div>
               <div style={{ fontSize: 11, fontWeight: 700, color: t.textDim, letterSpacing: 1 }}>이번 주 볼륨</div>
               <div style={{ marginTop: 4, display: 'flex', alignItems: 'baseline', gap: 6 }}>
-                <span style={{ ...numStyle(28), color: t.text }}>8,240</span>
-                <span style={{ fontSize: 13, color: t.textDim, fontWeight: 600 }}>kg</span>
+                <span style={{ ...numStyle(28), color: empty ? t.textFaint : t.text }}>{empty ? '0' : '8,240'}</span>
+                <span style={{ ...TYPE.bodySm, color: t.textDim }}>kg</span>
               </div>
-              <div style={{ fontSize: 11, color: t.textFaint, fontWeight: 600, marginTop: 2 }}>
-                지난 주 7,360kg
-              </div>
+              {!empty && (
+                <div style={{ fontSize: 11, color: t.textFaint, fontWeight: 600, marginTop: 2 }}>
+                  지난 주 7,360kg
+                </div>
+              )}
             </div>
-            <Chip t={t} accent>+12%</Chip>
+            {!empty && <Chip t={t} accent>+12%</Chip>}
           </div>
-          <WeekChart t={t}/>
+          <WeekChart t={t} empty={empty}/>
         </Card>
       </div>
 
@@ -114,8 +162,16 @@ function ScreenHome({ t, onStart, onTab, onRoutine }) {
 }
 
 // Weekly volume bar chart.
-function WeekChart({ t }) {
-  const days = [
+function WeekChart({ t, empty = false }) {
+  const days = empty ? [
+    { d: '월', v: 0, rest: true },
+    { d: '화', v: 0, rest: true },
+    { d: '수', v: 0, rest: true },
+    { d: '목', v: 0, rest: true },
+    { d: '금', v: 0, rest: true },
+    { d: '토', v: 0, today: true },
+    { d: '일', v: 0, rest: true },
+  ] : [
     { d: '월', v: 1620, done: true },
     { d: '화', v: 1180, done: true },
     { d: '수', v: 0,    rest: true },
@@ -163,7 +219,7 @@ function WeekChart({ t }) {
                     : isToday
                       ? '100%'
                       : (shown ? `${pct}%` : '0%'),
-                  borderRadius: 6,
+                  borderRadius: 8,
                   background: isToday
                     ? 'transparent'
                     : isRest
@@ -194,12 +250,12 @@ function RoutineRow({ t, name, sub, days, badge, onClick }) {
   return (
     <PressRow onClick={onClick} style={{
       display: 'flex', alignItems: 'center', gap: 14,
-      padding: '14px 16px', borderRadius: 18,
+      padding: '14px 16px', borderRadius: 16,
       background: t.surface, border: `1px solid ${t.line}`,
       cursor: 'pointer',
     }}>
       <div style={{
-        width: 44, height: 44, borderRadius: 14,
+        width: 44, height: 44, borderRadius: 16,
         background: badge ? t.accent : 'rgba(255,255,255,0.06)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}>

@@ -1,6 +1,44 @@
 // screen-stats.jsx — Stats / History / Programs (Programs > Routines > Exercises)
 
-function ScreenStats({ t }) {
+function ScreenStats({ t, empty = false }) {
+  if (empty) {
+    return (
+      <div style={{ width: '100%', height: '100%', background: t.bg, color: t.text, overflow: 'auto', paddingBottom: 110 }}>
+        <div style={{ padding: '60px 20px 12px' }}>
+          <div style={{ ...TYPE.bodySm, color: t.textDim }}>최근 12주</div>
+          <h1 style={{ ...TYPE.displayMd, margin: '4px 0 0' }}>1RM 추이</h1>
+        </div>
+        <div style={{ padding: '14px 20px 0' }}>
+          <EmptyHero t={t}
+            eyebrow="아직 데이터가 없어요"
+            title={<>운동을 기록하면<br/>여기에 그래프가 그려져요.</>}
+            body="첫 세트를 완료하면 1RM과 부위별 볼륨이 자동으로 쌓여요."
+            icon={Icon.trend(t.accent, 14)}
+          />
+        </div>
+        <div style={{ padding: '20px 20px 0' }}>
+          <h2 style={{ fontSize: 13, fontWeight: 700, color: t.textDim, letterSpacing: 1.2, textTransform: 'uppercase', margin: '0 0 12px 4px' }}>
+            이번 달 부위별 볼륨
+          </h2>
+          <Card t={t} padding={18}>
+            {['가슴', '등', '하체', '어깨', '팔'].map((p, i, arr) => (
+              <div key={p} style={{
+                display: 'flex', alignItems: 'center', gap: 12, padding: '10px 0',
+                borderBottom: i < arr.length - 1 ? `1px solid ${t.line}` : 'none',
+              }}>
+                <span style={{ width: 48, fontSize: 13, fontWeight: 700, color: t.textDim }}>{p}</span>
+                <div style={{ flex: 1, height: 8, borderRadius: 4, background: 'rgba(255,255,255,0.04)' }}/>
+                <span style={{ ...numStyle(13), color: t.textFaint, minWidth: 56, textAlign: 'right' }}>
+                  0<span style={{ fontSize: 10, marginLeft: 2 }}>kg</span>
+                </span>
+              </div>
+            ))}
+          </Card>
+        </div>
+      </div>
+    );
+  }
+
   const exercises = [
     { name: '벤치 프레스', curr: 95, prev: 87.5, points: [70, 72.5, 75, 77.5, 80, 82.5, 85, 87.5, 90, 92.5, 92.5, 95] },
     { name: '스쿼트', curr: 130, prev: 120, points: [90, 95, 100, 105, 110, 110, 115, 120, 120, 125, 125, 130] },
@@ -12,14 +50,14 @@ function ScreenStats({ t }) {
   return (
     <div style={{ width: '100%', height: '100%', background: t.bg, color: t.text, overflow: 'auto', paddingBottom: 110 }}>
       <div style={{ padding: '60px 20px 12px' }}>
-        <div style={{ fontSize: 13, color: t.textDim, fontWeight: 600 }}>최근 12주</div>
-        <h1 style={{ fontSize: 28, fontWeight: 800, letterSpacing: -0.8, margin: '4px 0 0' }}>1RM 추이</h1>
+        <div style={{ ...TYPE.bodySm, color: t.textDim }}>최근 12주</div>
+        <h1 style={{ ...TYPE.displayMd, margin: '4px 0 0' }}>1RM 추이</h1>
       </div>
 
       <div style={{ padding: '6px 16px', display: 'flex', gap: 6, overflowX: 'auto' }}>
         {exercises.map((e, i) => (
           <PressButton key={i} onClick={() => setSel(i)} style={{
-            flexShrink: 0, padding: '10px 16px', borderRadius: 14, border: 'none', cursor: 'pointer',
+            flexShrink: 0, padding: '10px 16px', borderRadius: 16, border: 'none', cursor: 'pointer',
             background: i === sel ? t.accent : t.surface,
             color: i === sel ? t.accentInk : t.text,
             fontSize: 13, fontWeight: 700,
@@ -75,7 +113,7 @@ function HeatCell({ t, intensity, delay }) {
   const target = intensity > 0 ? 0.3 + intensity * 0.7 : 1;
   return (
     <div style={{
-      aspectRatio: '1', borderRadius: 6,
+      aspectRatio: '1', borderRadius: 8,
       background: intensity > 0 ? t.accent : 'rgba(255,255,255,0.04)',
       opacity: shown ? target : 0,
       transform: shown ? 'scale(1)' : 'scale(0.7)',
@@ -249,7 +287,50 @@ function BigChart({ t, points }) {  const W = 320, H = 160;
 }
 
 // ─── History screen ────────────────────────────────────────────────────────
-function ScreenHistory({ t, onPickSession }) {
+function ScreenHistory({ t, onPickSession, empty = false }) {
+  if (empty) {
+    return (
+      <div style={{ width: '100%', height: '100%', background: t.bg, color: t.text, overflow: 'auto', paddingBottom: 110 }}>
+        <div style={{ padding: '60px 20px 14px' }}>
+          <div style={{ ...TYPE.bodySm, color: t.textDim }}>총 0회</div>
+          <h1 style={{ ...TYPE.displayMd, margin: '4px 0 0' }}>운동 기록</h1>
+        </div>
+
+        {/* Empty heatmap */}
+        <div style={{ padding: '8px 20px 8px' }}>
+          <Card t={t} padding={14}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 4 }}>
+              {Array.from({ length: 28 }).map((_, i) => (
+                <div key={i} style={{
+                  aspectRatio: '1', borderRadius: 8,
+                  background: 'rgba(255,255,255,0.04)',
+                }}/>
+              ))}
+            </div>
+            <div style={{ marginTop: 12, display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: 10, color: t.textFaint, fontWeight: 600 }}>
+              <span>4주 전</span>
+              <span>이번주</span>
+            </div>
+          </Card>
+        </div>
+
+        <div style={{ padding: '12px 20px 0' }}>
+          <EmptyHero t={t}
+            eyebrow="아직 기록이 없어요"
+            title={<>첫 운동을 시작해보세요.</>}
+            body="완료한 운동은 자동으로 여기에 쌓여요."
+            icon={
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <rect x="4" y="4" width="16" height="16" rx="3" stroke={t.accent} strokeWidth="2"/>
+                <path d="M8 9h8M8 13h8M8 17h5" stroke={t.accent} strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+            }
+          />
+        </div>
+      </div>
+    );
+  }
+
   const items = [
     { date: '4월 23일 · 목', name: 'PPL · Push Day', vol: '3,000kg', sets: 18, dur: '48분', pr: 1 },
     { date: '4월 22일 · 수', name: 'PPL · Leg Day', vol: '5,200kg', sets: 21, dur: '64분' },
@@ -262,8 +343,8 @@ function ScreenHistory({ t, onPickSession }) {
   return (
     <div style={{ width: '100%', height: '100%', background: t.bg, color: t.text, overflow: 'auto', paddingBottom: 110 }}>
       <div style={{ padding: '60px 20px 14px' }}>
-        <div style={{ fontSize: 13, color: t.textDim, fontWeight: 600 }}>총 32회 · 4월</div>
-        <h1 style={{ fontSize: 28, fontWeight: 800, letterSpacing: -0.8, margin: '4px 0 0' }}>운동 기록</h1>
+        <div style={{ ...TYPE.bodySm, color: t.textDim }}>총 32회 · 4월</div>
+        <h1 style={{ ...TYPE.displayMd, margin: '4px 0 0' }}>운동 기록</h1>
       </div>
 
       <div style={{ padding: '8px 20px 8px' }}>
@@ -281,7 +362,7 @@ function ScreenHistory({ t, onPickSession }) {
             <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
               <span>적음</span>
               {[0.3, 0.5, 0.7, 1].map(o => (
-                <div key={o} style={{ width: 10, height: 10, borderRadius: 3, background: t.accent, opacity: o }}/>
+                <div key={o} style={{ width: 10, height: 10, borderRadius: 4, background: t.accent, opacity: o }}/>
               ))}
               <span>많음</span>
             </div>
@@ -327,7 +408,72 @@ function ScreenHistory({ t, onPickSession }) {
 }
 
 // ─── Programs screen — list of programs (each has multiple daily routines) ─
-function ScreenPrograms({ t, onPick, onAdd }) {
+function ScreenPrograms({ t, onPick, onAdd, empty = false }) {
+  if (empty) {
+    return (
+      <div style={{ width: '100%', height: '100%', background: t.bg, color: t.text, overflow: 'auto', paddingBottom: 110 }}>
+        <div style={{ padding: '60px 20px 14px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+          <div>
+            <div style={{ ...TYPE.bodySm, color: t.textDim }}>0개의 활성 프로그램</div>
+            <h1 style={{ ...TYPE.displayMd, margin: '4px 0 0' }}>프로그램</h1>
+          </div>
+          <PressButton onClick={onAdd} style={{
+            width: 44, height: 44, borderRadius: 16, padding: 0,
+            background: t.accent, color: t.accentInk, border: 'none', cursor: 'pointer',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>{Icon.plus(t.accentInk, 22)}</PressButton>
+        </div>
+
+        <div style={{ padding: '12px 20px 0' }}>
+          <h2 style={{ fontSize: 11, fontWeight: 700, color: t.textDim, letterSpacing: 1.5, textTransform: 'uppercase', margin: '8px 0 12px 4px' }}>
+            내 프로그램
+          </h2>
+          <EmptyHero t={t}
+            eyebrow="아직 프로그램이 없어요"
+            title={<>첫 프로그램을 만들거나<br/>템플릿에서 골라보세요.</>}
+            body="템플릿으로 빠르게 시작하거나, 처음부터 직접 만들 수 있어요."
+            ctaLabel="프로그램 추가"
+            onCta={onAdd}
+            icon={Icon.dumbbell(t.accent, 14)}
+          />
+        </div>
+
+        {/* Templates still shown — entry point for new users */}
+        <div style={{ padding: '24px 20px 0' }}>
+          <h2 style={{ fontSize: 11, fontWeight: 700, color: t.textDim, letterSpacing: 1.5, textTransform: 'uppercase', margin: '8px 0 12px 4px' }}>
+            템플릿
+          </h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {[
+              { id: '531', name: '5/3/1 BBB', sub: 'Strength · 빅3 중심', days: 4 },
+              { id: 'sl', name: 'StrongLifts 5×5', sub: '입문 · 풀바디', days: 3 },
+              { id: 'nsuns', name: 'nSuns 5/3/1', sub: 'Strength · 6일', days: 6 },
+            ].map((p) => (
+              <PressRow key={p.id} onClick={onAdd} style={{
+                background: t.surface, borderRadius: 16, padding: 14,
+                border: `1px solid ${t.line}`,
+                display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer',
+              }}>
+                <div style={{
+                  width: 40, height: 40, borderRadius: 12,
+                  background: 'rgba(255,255,255,0.06)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                }}>
+                  {Icon.dumbbell(t.text, 22)}
+                </div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: t.text }}>{p.name}</div>
+                  <div style={{ fontSize: 11, color: t.textDim, marginTop: 2 }}>{p.sub} · {p.days}일</div>
+                </div>
+                {Icon.chevR(t.textFaint, 14)}
+              </PressRow>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const myPrograms = [
     {
       id: 'ppl',
@@ -357,14 +503,13 @@ function ScreenPrograms({ t, onPick, onAdd }) {
     <div style={{ width: '100%', height: '100%', background: t.bg, color: t.text, overflow: 'auto', paddingBottom: 110 }}>
       <div style={{ padding: '60px 20px 14px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
         <div>
-          <div style={{ fontSize: 13, color: t.textDim, fontWeight: 600 }}>{myPrograms.length}개의 활성 프로그램</div>
-          <h1 style={{ fontSize: 28, fontWeight: 800, letterSpacing: -0.8, margin: '4px 0 0' }}>프로그램</h1>
+          <div style={{ ...TYPE.bodySm, color: t.textDim }}>{myPrograms.length}개의 활성 프로그램</div>
+          <h1 style={{ ...TYPE.displayMd, margin: '4px 0 0' }}>프로그램</h1>
         </div>
         <PressButton onClick={onAdd} style={{
-          width: 44, height: 44, borderRadius: 14, padding: 0,
+          width: 44, height: 44, borderRadius: 16, padding: 0,
           background: t.accent, color: t.accentInk, border: 'none', cursor: 'pointer',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          boxShadow: `0 6px 20px ${t.accent}55`,
         }}>{Icon.plus(t.accentInk, 22)}</PressButton>
       </div>
 
@@ -376,7 +521,7 @@ function ScreenPrograms({ t, onPick, onAdd }) {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           {myPrograms.map((p, i) => (
             <PressRow key={p.id} onClick={() => onPick && onPick(p.id)} style={{
-              borderRadius: 22, padding: 18, cursor: 'pointer',
+              borderRadius: 24, padding: 18, cursor: 'pointer',
               background: p.active ? t.surface : t.surface,
               border: `1px solid ${p.active ? t.accent + '55' : t.line}`,
               boxShadow: p.active ? `0 0 32px ${t.accent}1f` : 'none',
@@ -415,7 +560,7 @@ function ScreenPrograms({ t, onPick, onAdd }) {
               </div>
               {/* progress */}
               <div style={{ position: 'relative', marginTop: 14, display: 'flex', alignItems: 'center', gap: 10 }}>
-                <div style={{ flex: 1, height: 4, borderRadius: 2, background: 'rgba(255,255,255,0.06)', overflow: 'hidden' }}>
+                <div style={{ flex: 1, height: 4, borderRadius: 4, background: 'rgba(255,255,255,0.06)', overflow: 'hidden' }}>
                   <div style={{ width: `${p.progress * 100}%`, height: '100%', background: p.active ? t.accent : t.textFaint }}/>
                 </div>
                 <span style={{ fontSize: 10, fontWeight: 700, color: t.textDim, letterSpacing: 0.5 }}>
@@ -485,11 +630,7 @@ function ScreenProgram({ t, onBack, onPickRoutine }) {
           position: 'absolute', right: -60, bottom: -60, width: 240, height: 240,
           borderRadius: '50%', background: 'rgba(255,255,255,0.15)', filter: 'blur(40px)',
         }}/>
-        <PressButton onClick={onBack} style={{
-          width: 36, height: 36, borderRadius: 12, marginBottom: 18,
-          background: 'rgba(0,0,0,0.15)', border: 'none', cursor: 'pointer',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0,
-        }}>{Icon.chevL(t.accentInk, 16)}</PressButton>
+        <BackButton t={t} onClick={onBack} onHero/>
         <div style={{ position: 'relative' }}>
           <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1.5, opacity: 0.7 }}>PROGRAM</div>
           <h1 style={{ fontSize: 30, fontWeight: 800, letterSpacing: -1.0, margin: '6px 0 12px' }}>{program.name}</h1>
@@ -498,7 +639,7 @@ function ScreenProgram({ t, onBack, onPickRoutine }) {
           <div style={{ display: 'flex', gap: 4, marginTop: 14 }}>
             {Array.from({ length: program.totalWeeks }).map((_, i) => (
               <div key={i} style={{
-                flex: 1, height: 4, borderRadius: 2,
+                flex: 1, height: 4, borderRadius: 4,
                 background: i < program.week ? t.accentInk : 'rgba(0,0,0,0.15)',
               }}/>
             ))}
@@ -517,14 +658,14 @@ function ScreenProgram({ t, onBack, onPickRoutine }) {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           {program.routines.map((r, i) => (
             <PressRow key={r.id} onClick={() => onPickRoutine && onPickRoutine()} style={{
-              background: t.surface, borderRadius: 18, padding: 16,
+              background: t.surface, borderRadius: 16, padding: 16,
               border: `1px solid ${r.active ? t.accent + '55' : t.line}`,
               boxShadow: r.active ? `0 0 24px ${t.accent}22` : 'none',
               cursor: 'pointer',
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
                 <div style={{
-                  width: 44, height: 44, borderRadius: 13,
+                  width: 44, height: 44, borderRadius: 12,
                   background: r.active ? t.accent : 'rgba(255,255,255,0.06)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>

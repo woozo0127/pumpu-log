@@ -71,11 +71,7 @@ function ScreenSession({ t, onBack }) {
       {/* Header */}
       <div style={{ padding: '60px 20px 8px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18 }}>
-          <PressButton onClick={onBack} style={{
-            width: 36, height: 36, borderRadius: 12,
-            background: 'rgba(255,255,255,0.06)', border: 'none', cursor: 'pointer',
-            display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0,
-          }}>{Icon.chevL(t.text, 16)}</PressButton>
+          <BackButton t={t} onClick={onBack} mb={0}/>
           <PressButton style={{
             width: 36, height: 36, borderRadius: 12,
             background: 'rgba(255,255,255,0.06)', border: 'none', cursor: 'pointer',
@@ -89,13 +85,13 @@ function ScreenSession({ t, onBack }) {
           </PressButton>
         </div>
         <div style={{ fontSize: 12, color: t.textDim, fontWeight: 600 }}>{session.date} · {session.startedAt}</div>
-        <h1 style={{ fontSize: 28, fontWeight: 800, letterSpacing: -0.8, margin: '4px 0 4px' }}>{session.name}</h1>
+        <h1 style={{ ...TYPE.displayMd, margin: '4px 0 4px' }}>{session.name}</h1>
         <div style={{ fontSize: 12, color: t.textFaint, fontWeight: 600 }}>{session.program}</div>
       </div>
 
       {/* Stats grid */}
       <div style={{ padding: '20px 20px 0' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 1, background: t.line, borderRadius: 18, overflow: 'hidden', border: `1px solid ${t.line}` }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 1, background: t.line, borderRadius: 16, overflow: 'hidden', border: `1px solid ${t.line}` }}>
           {[
             { l: '시간', v: session.dur },
             { l: '볼륨', v: session.totalVol, u: 'kg' },
@@ -124,7 +120,7 @@ function ScreenSession({ t, onBack }) {
               boxShadow: `0 6px 20px ${t.accent}33`,
             }}>
               <div style={{
-                width: 36, height: 36, borderRadius: 11,
+                width: 36, height: 36, borderRadius: 12,
                 background: 'rgba(0,0,0,0.15)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
               }}>
@@ -190,7 +186,7 @@ function ScreenSession({ t, onBack }) {
               <Card key={ei} t={t} padding={0}>
                 <div style={{ padding: '14px 14px 10px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: `1px solid ${t.line}` }}>
                   <div style={{
-                    width: 30, height: 30, borderRadius: 9,
+                    width: 30, height: 30, borderRadius: 8,
                     background: 'rgba(255,255,255,0.06)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                   }}>
@@ -230,7 +226,7 @@ function ScreenSession({ t, onBack }) {
                         {s.pr && (
                           <span style={{
                             display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                            width: 18, height: 18, borderRadius: 6,
+                            width: 18, height: 18, borderRadius: 8,
                             background: t.accent, color: t.accentInk,
                             fontSize: 9, fontWeight: 800,
                           }}>PR</span>

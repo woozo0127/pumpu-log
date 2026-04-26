@@ -89,7 +89,7 @@ export default function WorkoutPreview() {
           subtitle="PUSH DAY"
           title={`${totalDone}/${totalSets} 세트`}
           onBack={() => setConfirmExit(true)}
-          right={<Button size="sm">완료</Button>}
+          right={<Button size="small">완료</Button>}
         />
       }
     >
@@ -162,7 +162,7 @@ export default function WorkoutPreview() {
 
           <View style={{ marginTop: theme.space.lg }}>
             <Button
-              size="lg"
+              size="medium"
               iconLeft={
                 <Icon name="check" color={palette.neutral[950]} size={18} />
               }
@@ -188,34 +188,40 @@ export default function WorkoutPreview() {
         </View>
       </View>
 
-      <BottomSheet open={confirmExit} onClose={() => setConfirmExit(false)}>
-        <BottomSheet.Header>
-          <BottomSheet.Eyebrow color={palette.red[400]}>
-            운동 중단
-          </BottomSheet.Eyebrow>
-          <BottomSheet.Title>정말 그만둘까요?</BottomSheet.Title>
-          <BottomSheet.Description>
-            완료하지 않은 세트는 저장되지 않아요. 지금까지의 진행이 모두
-            사라집니다.
-          </BottomSheet.Description>
-        </BottomSheet.Header>
-        <BottomSheet.Footer>
-          <Button
-            variant="destructive"
-            size="lg"
-            onPress={() => setConfirmExit(false)}
-          >
-            그만두기
-          </Button>
-          <Button
-            variant="secondary"
-            size="lg"
-            onPress={() => setConfirmExit(false)}
-          >
-            계속 운동하기
-          </Button>
-        </BottomSheet.Footer>
-      </BottomSheet>
+      <BottomSheet
+        open={confirmExit}
+        onClose={() => setConfirmExit(false)}
+        header={
+          <>
+            <BottomSheet.Eyebrow color={palette.red[400]}>
+              운동 중단
+            </BottomSheet.Eyebrow>
+            <BottomSheet.Title>정말 그만둘까요?</BottomSheet.Title>
+            <BottomSheet.Description>
+              완료하지 않은 세트는 저장되지 않아요. 지금까지의 진행이 모두
+              사라집니다.
+            </BottomSheet.Description>
+          </>
+        }
+        footer={
+          <>
+            <Button
+              variant="destructive"
+              size="medium"
+              onPress={() => setConfirmExit(false)}
+            >
+              그만두기
+            </Button>
+            <Button
+              variant="secondary"
+              size="medium"
+              onPress={() => setConfirmExit(false)}
+            >
+              계속 운동하기
+            </Button>
+          </>
+        }
+      />
     </ScreenContainer>
   );
 }

@@ -103,7 +103,7 @@ export default function RoutinePreview() {
 
       <View style={{ padding: 20 }}>
         <Button
-          size="lg"
+          size="medium"
           iconLeft={<Icon name="play" color={palette.neutral[950]} size={16} />}
         >
           운동 시작

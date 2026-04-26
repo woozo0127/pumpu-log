@@ -192,7 +192,7 @@ function TabBar({ t, current, onChange }) {
       <div style={{
         display: 'flex', justifyContent: 'space-around',
         background: t.surface,
-        borderRadius: 22,
+        borderRadius: 24,
         padding: '8px 4px',
         border: `1px solid ${t.line}`,
       }}>
@@ -218,4 +218,56 @@ function TabBar({ t, current, onChange }) {
   );
 }
 
-Object.assign(window, { T, FONT, Icon, Chip, Card, TopBar, TabBar, numStyle });
+// Empty-state hero card — matches Home's empty hero visual language.
+// Used across Programs/History/Stats so the empty look is consistent.
+function EmptyHero({ t, eyebrow, title, body, ctaLabel, onCta, icon }) {
+  return (
+    <div style={{
+      background: t.surface, borderRadius: 28, padding: '26px 22px',
+      position: 'relative', overflow: 'hidden',
+      border: `1.5px dashed ${t.line}`,
+    }}>
+      {/* dotted grid background */}
+      <div style={{
+        position: 'absolute', inset: 0,
+        backgroundImage: `radial-gradient(circle, ${t.textFaint} 1px, transparent 1px)`,
+        backgroundSize: '14px 14px',
+        opacity: 0.25,
+        pointerEvents: 'none',
+      }}/>
+      <div style={{ position: 'relative' }}>
+        {eyebrow && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 700, color: t.accent, letterSpacing: 1.2 }}>
+            {icon || Icon.flame(t.accent, 14)}
+            {eyebrow}
+          </div>
+        )}
+        <div style={{ marginTop: 12, fontSize: 22, fontWeight: 800, color: t.text, letterSpacing: -0.5, lineHeight: 1.25 }}>
+          {title}
+        </div>
+        {body && (
+          <div style={{ marginTop: 8, fontSize: 13, color: t.textDim, fontWeight: 500, lineHeight: 1.5 }}>
+            {body}
+          </div>
+        )}
+        {ctaLabel && (
+          <div style={{ marginTop: 18 }}>
+            <PressButton onClick={onCta} style={{
+              height: 44, padding: '0 18px', borderRadius: 24,
+              background: t.accent, color: t.accentInk,
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              fontSize: 14, fontWeight: 700, border: 'none', cursor: 'pointer',
+            }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M12 5v14M5 12h14" stroke={t.accentInk} strokeWidth="2.4" strokeLinecap="round"/>
+              </svg>
+              {ctaLabel}
+            </PressButton>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+Object.assign(window, { T, FONT, Icon, Chip, Card, TopBar, TabBar, numStyle, EmptyHero });
