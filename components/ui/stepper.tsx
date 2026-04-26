@@ -178,8 +178,8 @@ const stylesBig = StyleSheet.create({
     gap: 8,
     paddingVertical: 14,
     paddingHorizontal: 8,
-    borderRadius: theme.radius.xl,
-    backgroundColor: palette.alpha['white-7'],
+    borderRadius: theme.radius.lg,
+    backgroundColor: palette.alpha['white-3'],
   },
   valueRow: {
     marginTop: 4,

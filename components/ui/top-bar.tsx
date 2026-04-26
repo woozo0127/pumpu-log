@@ -38,7 +38,7 @@ export function TopBar({
   const backBg =
     variant === 'onGradient'
       ? palette.alpha['black-15']
-      : palette.alpha['white-7'];
+      : palette.alpha['white-6'];
 
   const insets = useSafeAreaInsets();
 

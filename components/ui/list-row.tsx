@@ -23,7 +23,10 @@ type ListRowProps = {
 
 function Title({ children }: { children: ReactNode }) {
   return (
-    <Text typography="body" weight="semibold" color={palette.neutral[0]}>
+    <Text
+      color={palette.neutral[0]}
+      style={{ fontSize: 14, fontWeight: '600', lineHeight: 20 }}
+    >
       {children}
     </Text>
   );
@@ -31,7 +34,10 @@ function Title({ children }: { children: ReactNode }) {
 
 function Subtitle({ children }: { children: ReactNode }) {
   return (
-    <Text typography="caption" color={palette.alpha['white-55']}>
+    <Text
+      color={palette.alpha['white-55']}
+      style={{ fontSize: 11, fontWeight: '500', lineHeight: 16 }}
+    >
       {children}
     </Text>
   );
@@ -86,7 +92,7 @@ function Root({
     backgroundColor: surface ? palette.neutral[900] : 'transparent',
     borderWidth: surface ? 1 : 0,
     borderColor: surface ? palette.alpha['white-7'] : 'transparent',
-    borderRadius: surface ? theme.radius.xl : 0,
+    borderRadius: surface ? theme.radius.lg : 0,
     borderBottomWidth: divider ? 1 : 0,
     borderBottomColor: divider ? palette.alpha['white-7'] : 'transparent',
   };

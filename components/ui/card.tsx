@@ -15,7 +15,7 @@ function Root({ header, footer, style, children, ...rest }: CardProps) {
       style={[
         {
           backgroundColor: palette.neutral[900],
-          borderRadius: theme.radius['2xl'],
+          borderRadius: theme.radius.xl,
           borderWidth: 1,
           borderColor: palette.alpha['white-7'],
           padding: theme.space.lg,

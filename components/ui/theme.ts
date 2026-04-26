@@ -38,8 +38,18 @@ export const theme = {
     '2xl': 24,
     '3xl': 32,
     '4xl': 40,
+    '5xl': 60,
   },
-  radius: { sm: 8, md: 12, lg: 16, xl: 18, '2xl': 22, '3xl': 28, pill: 9999 },
+  radius: {
+    xs: 4,
+    sm: 8,
+    md: 12,
+    lg: 16,
+    xl: 20,
+    '2xl': 24,
+    '3xl': 28,
+    pill: 9999,
+  },
   shadow: {
     none: { shadowColor: 'transparent' },
     glow: {

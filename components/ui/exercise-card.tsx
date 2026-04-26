@@ -66,7 +66,7 @@ export function ExerciseCard({
       style={[
         {
           backgroundColor: palette.neutral[900],
-          borderRadius: theme.radius.xl,
+          borderRadius: theme.radius.lg,
           borderWidth: 1,
           borderColor: palette.alpha['white-7'],
           padding: theme.space.lg,
@@ -90,11 +90,17 @@ export function ExerciseCard({
           </Text>
         </View>
         <View style={{ flex: 1 }}>
-          <Text typography="heading" color={palette.neutral[0]}>
+          <Text
+            color={palette.neutral[0]}
+            style={{ fontSize: 15, fontWeight: '700', lineHeight: 20 }}
+          >
             {title}
           </Text>
           {subtitle ? (
-            <Text typography="caption" color={palette.alpha['white-55']}>
+            <Text
+              color={palette.alpha['white-55']}
+              style={{ fontSize: 12, fontWeight: '500', lineHeight: 17 }}
+            >
               {subtitle}
               {sets ? ` · ${sets.length}세트` : null}
             </Text>

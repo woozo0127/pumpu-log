@@ -127,16 +127,15 @@ function Item<T>({ value, children }: ItemProps<T>) {
         {
           paddingHorizontal: 14,
           paddingVertical: 8,
-          borderRadius: theme.radius.md,
+          borderRadius: theme.radius.sm,
           backgroundColor: active ? palette.lime[400] : 'transparent',
         },
         animatedStyle,
       ]}
     >
       <Text
-        typography="caption"
         color={active ? palette.neutral[950] : palette.alpha['white-55']}
-        weight="semibold"
+        style={{ fontSize: 12, fontWeight: '700', lineHeight: 18 }}
       >
         {children}
       </Text>

@@ -38,7 +38,7 @@ function Title({ children }: { children: ReactNode }) {
 
 function Body({ children }: { children: ReactNode }) {
   return (
-    <Text typography="body" color={palette.alpha['white-55']}>
+    <Text typography="caption" color={palette.alpha['white-55']}>
       {children}
     </Text>
   );

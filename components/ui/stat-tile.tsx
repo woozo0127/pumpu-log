@@ -8,7 +8,16 @@ import type { TypographyToken } from '#/components/ui/typography';
 
 function Label({ children }: { children: ReactNode }) {
   return (
-    <Text typography="label" color={palette.alpha['white-55']}>
+    <Text
+      color={palette.alpha['white-55']}
+      style={{
+        fontSize: 10,
+        fontWeight: '700',
+        letterSpacing: 1,
+        lineHeight: 14,
+        textTransform: 'uppercase',
+      }}
+    >
       {children}
     </Text>
   );
@@ -82,8 +91,8 @@ function Root({
         backgroundColor: palette.neutral[900],
         borderWidth: 1,
         borderColor: palette.alpha['white-7'],
-        borderRadius: theme.radius.xl,
-        padding: theme.space.lg,
+        borderRadius: theme.radius.lg,
+        padding: 14,
       }
     : {
         backgroundColor: 'transparent',
