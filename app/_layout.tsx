@@ -1,13 +1,42 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Stack } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
+import { useEffect, useState } from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { palette } from '#/components/ui/theme';
+import { OnboardedContext } from './_onboarded-context';
+
+void SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const [ready, setReady] = useState(false);
+  const [onboarded, setOnboarded] = useState(false);
+
+  useEffect(() => {
+    AsyncStorage.getItem('pumpu-log:onboarded')
+      .then((v) => setOnboarded(v === '1'))
+      .catch(() => setOnboarded(false))
+      .finally(() => setReady(true));
+  }, []);
+
+  useEffect(() => {
+    if (ready) {
+      void SplashScreen.hideAsync();
+    }
+  }, [ready]);
+
+  if (!ready) return null;
+
   return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-        contentStyle: { backgroundColor: palette.neutral[950] },
-      }}
-    />
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <OnboardedContext.Provider value={{ onboarded, setOnboarded }}>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            contentStyle: { backgroundColor: palette.neutral[950] },
+          }}
+        />
+      </OnboardedContext.Provider>
+    </GestureHandlerRootView>
   );
 }

@@ -1,18 +1,27 @@
-import { Link } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Link, Redirect, router } from 'expo-router';
+import { useContext } from 'react';
 import { View } from 'react-native';
+import { Button } from '#/components/ui/button';
 import { ScreenContainer } from '#/components/ui/screen-container';
 import { Text } from '#/components/ui/text';
 import { palette, theme } from '#/components/ui/theme';
-
-const ENTRIES: { href: string; label: string }[] = [
-  { href: '/preview/gallery', label: 'UI Kit Gallery' },
-  { href: '/preview/home', label: 'Preview · Home' },
-  { href: '/preview/routine', label: 'Preview · Routine' },
-  { href: '/preview/workout', label: 'Preview · Workout' },
-  { href: '/preview/tabs/home', label: 'Preview · Native Tabs (Liquid Glass)' },
-];
+import { OnboardedContext } from './_onboarded-context';
 
 export default function Index() {
+  const { onboarded, setOnboarded } = useContext(OnboardedContext);
+  if (!onboarded) return <Redirect href="/onboarding" />;
+
+  const resetOnboarding = async () => {
+    try {
+      await AsyncStorage.removeItem('pumpu-log:onboarded');
+    } catch {
+      // 무시. context 갱신만으로도 다음 진입에 onboarding이 다시 뜬다
+    }
+    setOnboarded(false);
+    router.replace('/');
+  };
+
   return (
     <ScreenContainer>
       <View
@@ -24,26 +33,16 @@ export default function Index() {
         }}
       >
         <Text typography="title" color={palette.neutral[0]}>
-          Pumpu Log · 진입
+          Pumpu Log · 홈 (준비 중)
         </Text>
-        <View style={{ gap: 8, marginTop: theme.space.md }}>
-          {ENTRIES.map((e) => (
-            <Link
-              key={e.href}
-              href={e.href as never}
-              style={{
-                padding: theme.space.lg,
-                backgroundColor: palette.neutral[900],
-                borderRadius: theme.radius.lg,
-                borderWidth: 1,
-                borderColor: palette.alpha['white-7'],
-                color: palette.neutral[0],
-              }}
-            >
-              {e.label}
-            </Link>
-          ))}
-        </View>
+        <Link href="/preview" style={{ color: palette.alpha['white-55'] }}>
+          (개발) Preview 진열장
+        </Link>
+        {__DEV__ ? (
+          <Button variant="outline" size="sm" onPress={resetOnboarding}>
+            (개발) 온보딩 리셋
+          </Button>
+        ) : null}
       </View>
     </ScreenContainer>
   );
