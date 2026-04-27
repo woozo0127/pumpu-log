@@ -4,6 +4,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useState } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { palette } from '#/components/ui/theme';
+import { ActiveSessionProvider } from '#/domains/training';
 import { OnboardedContext } from './_onboarded-context';
 
 void SplashScreen.preventAutoHideAsync();
@@ -30,12 +31,14 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <OnboardedContext.Provider value={{ onboarded, setOnboarded }}>
-        <Stack
-          screenOptions={{
-            headerShown: false,
-            contentStyle: { backgroundColor: palette.neutral[950] },
-          }}
-        />
+        <ActiveSessionProvider>
+          <Stack
+            screenOptions={{
+              headerShown: false,
+              contentStyle: { backgroundColor: palette.neutral[950] },
+            }}
+          />
+        </ActiveSessionProvider>
       </OnboardedContext.Provider>
     </GestureHandlerRootView>
   );
